@@ -41,5 +41,21 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Lato-Black.ttf</string>
+		<string>Lato-Regular.ttf</string>
+	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Need Camera access to upload profile picture </string>
+	<key>NSCameraUsageDescription</key>
+	<string>Need Camera access to upload profile picture </string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>When in use permissions</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>always permissions</string>
+    <key>NSLocationAlwaysAndWhenInUsageDescription</key>
+    <string>Always and in usage permissions</string>
+
 </dict>
 </plist>

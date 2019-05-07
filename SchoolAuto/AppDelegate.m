@@ -7,7 +7,36 @@
 //
 
 #import "AppDelegate.h"
+#import "Utils.h"
+#import "Common.h"
 
+@implementation UILabel (Helper)
+
+- (void)setSubstituteFontName:(NSString *)name UI_APPEARANCE_SELECTOR {
+    // NSLog(@"%@",name);
+    //NSLog(@"%@-%@",self.font.fontName,self.font.fontDescriptor.fontAttributes);
+    if(isBold(self.font.fontDescriptor)){
+        //  NSString *str =[NSString stringWithFormat:@"%@-Bold",name];
+        self.font = [UIFont fontWithName:@"Lato-Black" size:self.font.pointSize];
+        
+    }else{
+        self.font = [UIFont fontWithName:@"Lato-Regular" size:self.font.pointSize];
+    }
+    
+}
+BOOL isBold(UIFontDescriptor * fontDescriptor)
+{
+    return (fontDescriptor.symbolicTraits & UIFontDescriptorTraitBold) != 0;
+}
+
+@end
+@implementation UITextView (Helper)
+- (void)setSubstituteFontName:(NSString *)name UI_APPEARANCE_SELECTOR {
+    // NSLog(@"%@",name);
+    self.font = [UIFont fontWithName:name size:self.font.pointSize];
+    
+}
+@end
 @interface AppDelegate ()
 
 @end
