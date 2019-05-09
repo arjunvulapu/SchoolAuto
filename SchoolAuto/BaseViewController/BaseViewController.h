@@ -59,5 +59,5 @@
 - (void) popVC;
 -(void) cornerRadiusFor:(UIView *)view;
 -(void) cornerRadiusForB:(UIButton *)view;
-
+- (void) PushToVc:(UIViewController *)vc;
 @end

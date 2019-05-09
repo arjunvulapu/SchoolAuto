@@ -7,7 +7,8 @@
 //
 
 #import "HomeViewController.h"
-
+#import "ParentLoginVC.h"
+#import "DriverLoginVC.h"
 @interface HomeViewController ()
 
 @end
@@ -38,8 +39,13 @@
 */
 
 - (IBAction)parentBtnAction:(id)sender {
+    ParentLoginVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"ParentLoginVC"];
+    [self PushToVc:vc];
+
 }
 
 - (IBAction)driverbtnAction:(id)sender {
+    DriverLoginVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"DriverLoginVC"];
+    [self PushToVc:vc];
 }
 @end

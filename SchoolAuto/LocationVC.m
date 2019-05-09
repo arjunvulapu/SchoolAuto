@@ -141,7 +141,27 @@ annotationViewCoordinate = CLLocationCoordinate2DMake(15.584049, 79.114021);
 {
     MKPlacemark *aPlcSource = [[MKPlacemark alloc] initWithCoordinate:self.locationMapView.userLocation.coordinate addressDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"17.690474",@"83.231049", nil]];
     
+    
+    
+    MKCoordinateRegion region;
+    //Set Zoom level using Span
+    MKCoordinateSpan span;
+    region.center = self.locationMapView.userLocation.coordinate;
+    
+    span.latitudeDelta = 1;
+    span.longitudeDelta = 1;
+    region.span=span;
+    [_locationMapView setRegion:region animated:TRUE];
+    
+    
     MKPlacemark *aPlcDest = [[MKPlacemark alloc] initWithCoordinate:locationCoordinate addressDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"15.584049",@"79.114021", nil]];
+    
+    MKPointAnnotation *annotation1 = [[MKPointAnnotation alloc] init];
+    annotation1.coordinate = locationCoordinate;
+    annotation1.title = @"Cumbum";
+    [self.locationMapView addAnnotation:annotation1];
+    
+    
     
     MKMapItem *mpItemSource = [[MKMapItem alloc] initWithPlacemark:aPlcSource];
     [mpItemSource setName:@"Source"];
@@ -153,7 +173,8 @@ annotationViewCoordinate = CLLocationCoordinate2DMake(15.584049, 79.114021);
     [aDirectReq setSource:mpItemSource];
     [aDirectReq setDestination:mpItemDest];
     [aDirectReq setTransportType:MKDirectionsTransportTypeAutomobile];
-    
+    [aDirectReq setRequestsAlternateRoutes:YES];
+
     MKDirections *aDirections = [[MKDirections alloc] initWithRequest:aDirectReq];
     [aDirections calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error) {
         if (error) {
@@ -190,5 +211,26 @@ annotationViewCoordinate = CLLocationCoordinate2DMake(15.584049, 79.114021);
 {
     [self GetDirections:annotationViewCoordinate];
 }
-
+- (MKAnnotationView *)mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>)annotation
+{
+    static NSString *SFAnnotationIdentifier = @"SFAnnotationIdentifier";
+    MKPinAnnotationView *pinView =
+    (MKPinAnnotationView *)[_locationMapView dequeueReusableAnnotationViewWithIdentifier:SFAnnotationIdentifier];
+    
+    
+    if (!pinView)
+    {
+        MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation
+                                                                         reuseIdentifier:SFAnnotationIdentifier];
+        UIImage *flagImage = [UIImage imageNamed:@"location.jpeg"];
+        // You may need to resize the image here.
+        annotationView.image = flagImage;
+        return annotationView;
+    }
+    else
+    {
+        pinView.annotation = annotation;
+    }
+    return pinView;
+}
 @end

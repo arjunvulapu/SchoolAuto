@@ -14,6 +14,7 @@
 #import "PECropViewController.h"
 #import <ImageIO/ImageIO.h>
 #import <CoreLocation/CoreLocation.h>
+#import "TrackVC.h"
 @interface ParentLoginVC ()<CLLocationManagerDelegate>
 {
     CLLocationManager *locationManager;
@@ -152,6 +153,8 @@
 */
 
 - (IBAction)submitBtnAction:(id)sender {
+    TrackVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"TrackVC"];
+    [self PushToVc:vc];
 }
 
 - (IBAction)forgotPasswordbtnAction:(id)sender {

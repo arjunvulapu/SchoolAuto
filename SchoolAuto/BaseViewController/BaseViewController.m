@@ -50,7 +50,9 @@
 
 @end
 @interface BaseViewController () <UIGestureRecognizerDelegate>
-
+{
+    UIButton *rightbutton;
+}
 @end
 
 @implementation BaseViewController
@@ -195,7 +197,34 @@ BOOL isRTL_app()
     
     self.dismissProgress = YES;
     
+    rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+    //    [buttonUser setImage:[UIImage imageNamed:@"leftarrow-black90"] forState:UIControlStateNormal];
+    
+    [rightbutton setImage:[UIImage imageNamed:@"left-arrow"] forState:UIControlStateNormal];
+    
+    rightbutton.frame = CGRectMake(0, 0, 20, 20);
+    [rightbutton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *customBarRightBtn = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
+    customBarRightBtn.tintColor=[UIColor blueColor];
+    
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    [negativeSpacer setWidth:0];
+    
+    //    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:negativeSpacer,customBarRightBtn,nil];
+    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(5, 5, 30, 30)];
+    
+    backButtonView.bounds = CGRectOffset(backButtonView.bounds, 10, 0);
+    
+    [backButtonView addSubview:rightbutton];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
 }
+-(void)back{
+//    [self.navigationController popViewControllerAnimated:YES];
+    [self popVC];
+}
+
 -(void)viewWillAppear:(BOOL)animated{
 //    [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:
@@ -626,6 +655,15 @@ gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:0.0/255.0
     transition.subtype = kCATransitionFromBottom;
     [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
     [self.navigationController popViewControllerAnimated:NO];
+}
+- (void) PushToVc:(UIViewController *)vc {
+    CATransition* transition = [CATransition animation];
+    transition.duration = 1.0;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionPush;
+    transition.subtype = kCATransitionFromRight;
+    [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 + (UIColor *) colorFromHexString:(NSString *)hexString {
     NSString *cleanString = [hexString stringByReplacingOccurrencesOfString:@"#" withString:@""];
