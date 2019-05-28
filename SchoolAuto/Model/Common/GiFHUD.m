@@ -12,7 +12,7 @@
 #import <ImageIO/ImageIO.h>
 
 
-#define Size            200
+#define Size            100
 #define FadeDuration    0.3
 #define GifSpeed        0.3
 

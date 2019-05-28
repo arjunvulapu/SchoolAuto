@@ -10,8 +10,6 @@
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 @implementation SBSliderView {
     NSArray *imagesArray;
-    NSArray *commissionsArray;
-    NSArray *namesArray;
     BOOL autoSrcollEnabled;
     
     NSTimer *activeTimer;
@@ -51,7 +49,7 @@
 
 - (void)createSliderWithImages:(NSArray *)images WithAutoScroll:(BOOL)isAutoScrollEnabled inView:(UIView *)parentView {
 //    self.backgroundColor = [UIColor blackColor];
-    self.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    self.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, _sliderHeight.constant);
     
     imagesArray = [NSArray arrayWithArray:images];
     autoSrcollEnabled = isAutoScrollEnabled;
@@ -59,7 +57,7 @@
     _sliderMainScroller.pagingEnabled = YES;
     _sliderMainScroller.delegate = self;
     _pageIndicator.numberOfPages = [imagesArray count];
-    _sliderMainScroller.contentSize = CGSizeMake(([UIScreen mainScreen].bounds.size.width * [imagesArray count] * 3), _sliderMainScroller.frame.size.height);
+    _sliderMainScroller.contentSize = CGSizeMake(([UIScreen mainScreen].bounds.size.width * [imagesArray count] * 3), _sliderHeight.constant);
     
     int mainCount = 0;
     for (int x = 0; x < 3; x++) {
@@ -70,20 +68,16 @@
             CGRect frameRect;
             frameRect.origin.y = 0.0f;
             frameRect.size.width = [UIScreen mainScreen].bounds.size.width;
-            frameRect.size.height = _sliderMainScroller.frame.size.height;
+            frameRect.size.height =_sliderHeight.constant;
             frameRect.origin.x = (frameRect.size.width * mainCount);
             imageV.frame = frameRect;
             imageV.contentMode = UIViewContentModeScaleAspectFit;
 //            imageV.image = [UIImage imageNamed:(NSString *)[imagesArray objectAtIndex:i]];
-            [imageV setImageWithURL:[imagesArray objectAtIndex:i] placeholderImage:[UIImage imageNamed:@"no-image.png"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-            UILabel *first = [[UILabel alloc] init];
-            first.frame = CGRectMake(20, 20, 100, 30);
-            first.text =[NSString stringWithFormat:@"add %d",i];
-            //[imageV addSubview:first];
+            [imageV setImageWithURL:[imagesArray objectAtIndex:i] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
             [_sliderMainScroller addSubview:imageV];
             imageV.clipsToBounds = YES;
             imageV.userInteractionEnabled = YES;
-            imageV.tag=i;
+            
             UITapGestureRecognizer *tapOnImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOnImage:)];
             tapOnImage.delegate = self;
             tapOnImage.numberOfTapsRequired = 1;
@@ -107,14 +101,11 @@
 
 #pragma mark - GestureRecognizer delegate
 
-- (void)tapOnImage:(UITapGestureRecognizer *)gesture
-{
+- (void)tapOnImage:(UITapGestureRecognizer *)gesture {
     
-UIImageView *view = gesture.view; //cast pointer to the derived class if needed
-NSLog(@"%ld", (long)view.tag);
-UIImageView *targetView = (UIImageView *)gesture.view;
-[_delegate sbslider:self didTapOnImage:targetView.image andParentView:targetView withTag:targetView.tag];
-
+    UIImageView *targetView = (UIImageView *)gesture.view;
+    [_delegate sbslider:self didTapOnImage:targetView.image andParentView:targetView];
+    
 }
 
 #pragma mark end -

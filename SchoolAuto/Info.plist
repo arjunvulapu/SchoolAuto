@@ -21,15 +21,15 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Need Camera access to upload profile picture </string>
+	<string>Need Camera To take image of childrens</string>
 	<key>NSLocationAlwaysAndWhenInUsageDescription</key>
-	<string>Always and in usage permissions</string>
+	<string>Acess to get CurrentLocation of the Driver&amp;Parent</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>always permissions</string>
+	<string>Acess to get CurrentLocation of the Driver&amp;Parent</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>When in use permissions</string>
+	<string>Acess to get CurrentLocation of the Driver&amp;Parent</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Need Camera access to upload profile picture </string>
+	<string>Need Camera To take image of childrens</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Lato-Black.ttf</string>
@@ -54,5 +54,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

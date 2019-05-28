@@ -157,7 +157,7 @@ BOOL isRTL_app()
 //    self.navigationController.navigationBar.shadowImage = [UIImage new];////UIImageNamed:@"transparent.png"
 //    self.navigationController.navigationBar.translucent = YES;
 //    self.navigationController.view.backgroundColor = [UIColor clearColor];
-   // [GiFHUD setGifWithImageName:@"loader.gif"];
+   // [GiFHUD setGifWithImageName:@"schoolloader.gif"];
 
  self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
@@ -177,6 +177,10 @@ BOOL isRTL_app()
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.hidden=NO;
 
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    [self.navigationController.navigationBar setTranslucent:YES];
+    
     //self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     //self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
   
@@ -199,10 +203,13 @@ BOOL isRTL_app()
     
     rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
     //    [buttonUser setImage:[UIImage imageNamed:@"leftarrow-black90"] forState:UIControlStateNormal];
-    
+//    UIButton *innerBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+//    [innerBtn setImage:[UIImage imageNamed:@"left-arrow"] forState:UIControlStateNormal];
+//    innerBtn.frame = CGRectMake(5, 5, 20, 20);
+
     [rightbutton setImage:[UIImage imageNamed:@"left-arrow"] forState:UIControlStateNormal];
     
-    rightbutton.frame = CGRectMake(0, 0, 20, 20);
+    rightbutton.frame = CGRectMake(0, 0, 30, 30);
     [rightbutton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *customBarRightBtn = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
     customBarRightBtn.tintColor=[UIColor blueColor];
@@ -211,7 +218,7 @@ BOOL isRTL_app()
     [negativeSpacer setWidth:0];
     
     //    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:negativeSpacer,customBarRightBtn,nil];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(5, 5, 30, 30)];
+    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     
     backButtonView.bounds = CGRectOffset(backButtonView.bounds, 10, 0);
     
@@ -227,8 +234,8 @@ BOOL isRTL_app()
 
 -(void)viewWillAppear:(BOOL)animated{
 //    [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
-    [[UINavigationBar appearance] setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+//    [[UINavigationBar appearance] setTitleTextAttributes:
+//     @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
 }
 -(UITextField *)addBottomBoreder:(UITextField *)textField{
@@ -387,8 +394,8 @@ textField.layer.masksToBounds = YES;
     
     [self performSelectorOnMainThread:@selector(showHUD:) withObject:nil waitUntilDone:YES];
     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithDictionary:params];
-    [dictionary setValue:[[MCLocalization sharedInstance] language] forKey:@"lang"];
-    [dictionary setValue:@"iPhone" forKey:@"device_type"];
+//    [dictionary setValue:[[MCLocalization sharedInstance] language] forKey:@"lang"];
+//    [dictionary setValue:@"iPhone" forKey:@"device_type"];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager POST:[[Utils createURLForPage:page withParameters:dictionary] absoluteString] parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
         [self parseResult:responseObject withCode:requestCode];
@@ -398,6 +405,147 @@ textField.layer.masksToBounds = YES;
         });
     } failure:^(NSURLSessionTask *operation, NSError *error) {
         if (self.dismissProgress) [self hideHUD];
+        NSLog(@"Error: %@", error);
+    }];
+}
+- (void) makePostCallForPageNEWNoProgess:(NSString *)page
+                     withParams:(NSDictionary *)params
+                withRequestCode:(int)code {
+    
+    if (![Utils isOnline]) {
+        [Utils showErrorAlertWithMessage:[MCLocalization stringForKey:@"internet_error"]];
+        return;
+    }
+    
+    requestCode = code;
+    
+   // [self performSelectorOnMainThread:@selector(showHUD:) withObject:nil waitUntilDone:YES];
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithDictionary:params];
+    //    [dictionary setValue:[[MCLocalization sharedInstance] language] forKey:@"lang"];
+    //    [dictionary setValue:@"iPhone" forKey:@"device_type"];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    [manager POST:[Utils createURLForPage:page] parameters:dictionary progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+        [self parseResult:responseObject withCode:requestCode];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.refreshControl endRefreshing];
+          //  if (self.dismissProgress) [self hideHUD];
+        });
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
+        //if (self.dismissProgress) [self hideHUD];
+        NSLog(@"Error: %@", error);
+    }];
+}
+- (void) makePostCallForPageNEWFormData:(NSString *)page
+                     withParams:(NSDictionary *)params
+                withRequestCode:(int)code {
+    
+    if (![Utils isOnline]) {
+        [Utils showErrorAlertWithMessage:[MCLocalization stringForKey:@"internet_error"]];
+        return;
+    }
+    
+    requestCode = code;
+    
+    [self performSelectorOnMainThread:@selector(showHUD:) withObject:nil waitUntilDone:YES];
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithDictionary:params];
+    //    [dictionary setValue:[[MCLocalization sharedInstance] language] forKey:@"lang"];
+    //    [dictionary setValue:@"iPhone" forKey:@"device_type"];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
+    
+    [manager POST:[Utils createURLForPage:page] parameters:dictionary progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+        [self parseResult:responseObject withCode:requestCode];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.refreshControl endRefreshing];
+            if (self.dismissProgress) [self hideHUD];
+        });
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
+        if (self.dismissProgress) [self hideHUD];
+        NSLog(@"Error: %@", error);
+    }];
+}
+- (void) makePostCallForPageNEW:(NSString *)page
+                  withParams:(NSDictionary *)params
+             withRequestCode:(int)code {
+    
+    if (![Utils isOnline]) {
+        [Utils showErrorAlertWithMessage:[MCLocalization stringForKey:@"internet_error"]];
+        return;
+    }
+    
+    requestCode = code;
+    
+    [self performSelectorOnMainThread:@selector(showHUD:) withObject:nil waitUntilDone:YES];
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithDictionary:params];
+    //    [dictionary setValue:[[MCLocalization sharedInstance] language] forKey:@"lang"];
+    //    [dictionary setValue:@"iPhone" forKey:@"device_type"];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+
+    [manager POST:[Utils createURLForPage:page] parameters:dictionary progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+        [self parseResult:responseObject withCode:requestCode];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.refreshControl endRefreshing];
+            if (self.dismissProgress) [self hideHUD];
+        });
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
+        if (self.dismissProgress) [self hideHUD];
+        NSLog(@"Error: %@", error);
+    }];
+}
+- (void) makePostCallForPageNEWGET:(NSString *)page
+                     withParams:(NSDictionary *)params
+                withRequestCode:(int)code {
+    
+    if (![Utils isOnline]) {
+        [Utils showErrorAlertWithMessage:[MCLocalization stringForKey:@"internet_error"]];
+        return;
+    }
+    
+    requestCode = code;
+    
+    [self performSelectorOnMainThread:@selector(showHUD:) withObject:nil waitUntilDone:YES];
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithDictionary:params];
+    //    [dictionary setValue:[[MCLocalization sharedInstance] language] forKey:@"lang"];
+    //    [dictionary setValue:@"iPhone" forKey:@"device_type"];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager GET:[[Utils createURLForPage:page withParameters:dictionary] absoluteString] parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+        [self parseResult:responseObject withCode:requestCode];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.refreshControl endRefreshing];
+            if (self.dismissProgress) [self hideHUD];
+        });
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
+        if (self.dismissProgress) [self hideHUD];
+        NSLog(@"Error: %@", error);
+    }];
+}
+- (void) makePostCallForPageNEWGETNoProgess:(NSString *)page
+                        withParams:(NSDictionary *)params
+                   withRequestCode:(int)code {
+    
+    if (![Utils isOnline]) {
+        [Utils showErrorAlertWithMessage:[MCLocalization stringForKey:@"internet_error"]];
+        return;
+    }
+    
+    requestCode = code;
+    
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithDictionary:params];
+    //    [dictionary setValue:[[MCLocalization sharedInstance] language] forKey:@"lang"];
+    //    [dictionary setValue:@"iPhone" forKey:@"device_type"];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager GET:[[Utils createURLForPage:page withParameters:dictionary] absoluteString] parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+        [self parseResult:responseObject withCode:requestCode];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.refreshControl endRefreshing];
+        });
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
 }
@@ -504,7 +652,7 @@ textField.layer.masksToBounds = YES;
 
 - (void) showHUD:(NSString *)labelText {
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-   // [GiFHUD show];
+    //[GiFHUD show];
     //[AMShimmer startFor:self.view except:@[] isToLastView:YES];
    // AMShimmer.start(for: tableView)
     self.view.userInteractionEnabled=NO;
@@ -649,7 +797,7 @@ gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:0.0/255.0
 }
 - (void) popVC {
     CATransition* transition = [CATransition animation];
-    transition.duration = 1.0;
+    transition.duration = 0.5;
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     transition.type = kCATransitionReveal;
     transition.subtype = kCATransitionFromBottom;
@@ -658,7 +806,7 @@ gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:0.0/255.0
 }
 - (void) PushToVc:(UIViewController *)vc {
     CATransition* transition = [CATransition animation];
-    transition.duration = 1.0;
+    transition.duration = 0.5;
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     transition.type = kCATransitionPush;
     transition.subtype = kCATransitionFromRight;

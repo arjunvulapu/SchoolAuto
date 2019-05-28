@@ -29,14 +29,33 @@
 
 
 //#define SERVER_URL @"http://products.yellowsoft.in/homeworkers/api/"
-#define SERVER_URL @"http://tieproperty.in/shelternshelter/api/"
+#define SERVER_URL @"http://projects.yellowsoft.in/schoolauto/api"
 
-#define LOGIN @"login"
-#define REGISTER @"register"
-#define CATEGORIES @"categories"
-#define AREAS @"areas"
-#define SETTINGS @"property_settings"
-#define ADD_PROPERTY @"add_property"
+#define LOGIN @"parents/login.php"
+#define REGISTER @"parents/register.php"
+#define FORGOTPASSWORD @"parents/forgotpassword.php"
+#define TARRIFS @"parents/subscription_prices.php"
+#define SCHOOLSLIST @"schools/register.php"
+#define PACKAGESLIST @"autos/register.php"
+#define SAHRING_OPTIONS @"parents/sharing_options.php"
+#define ADDSUBSCRIPTIONS @"parents/subscriptions.php"
+#define CHANGE_PASSWORD @"parents/change_password.php"
+//#define SUBSCRIPTIONSLIST @"parents/subscriptions.php"
+#define BANNERS @"banners-offers/register.php"
+
+#define AUTOLOGIN @"autos/login.php"
+#define TRIPSLIST @"trips/register.php"
+
+#define AUTOINFO @"autos/register.php"
+#define UPDATEAUTOINFO @"autos/auto_location.php"
+#define GETAUTOINFO @"autos/status_list.php"
+#define STATUSLIST @"autos/status_list.php"
+
+#define TRIP_STATUS @"dailytrips/register.php"
+#define GETTRIPSTATUS @"kid-daily-trips/register.php"
+#define TRIP_EXIST_MESSAGES @"dts_status/register.php"
+
+
 #define UICOLOR_FROM_HEX_ALPHA(RGBValue, Alpha) [UIColor \
 colorWithRed:((float)((RGBValue & 0xFF0000) >> 16))/255.0 \
 green:((float)((RGBValue & 0xFF00) >> 8))/255.0 \

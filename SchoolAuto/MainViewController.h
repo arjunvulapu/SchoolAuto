@@ -14,8 +14,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MainViewController : BaseViewController
-@property (weak, nonatomic) SBSliderView *slider2;
-@property (weak, nonatomic) IBOutlet SBSliderView *bannerView;
+@property (weak, nonatomic) IBOutlet SBSliderView *slider2;
+@property (weak, nonatomic) IBOutlet UIView *bannerView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewheight;
+@property (weak, nonatomic) IBOutlet UICollectionView *homemainCollectionView;
+@property (weak, nonatomic) IBOutlet UICollectionView *adsCollectionView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *adsCollectionViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *sliderHeight;
 
 @end
 

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "BaseViewController/BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -18,7 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (IBAction)forgotPasswordbtnAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *signupBtn;
 - (IBAction)signupBtnAction:(id)sender;
+@property (weak, nonatomic) IBOutlet JVFloatLabeledTextField *emialTxtField;
+@property (weak, nonatomic) IBOutlet JVFloatLabeledTextField *passwordTxtField;
 
+- (IBAction)forgotPasswordbtnAction:(id)sender;
 
 
 @property (weak, nonatomic) IBOutlet UIImageView *user_image;

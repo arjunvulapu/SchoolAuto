@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *submitBtn;
 - (IBAction)submitBtnAction:(id)sender;
 - (IBAction)forgotPasswordbtnAction:(id)sender;
+@property (weak, nonatomic) IBOutlet JVFloatLabeledTextField *emialTxtField;
+@property (weak, nonatomic) IBOutlet JVFloatLabeledTextField *passwordTxtField;
 
 @end
 

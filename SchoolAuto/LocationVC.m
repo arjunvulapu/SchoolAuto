@@ -210,6 +210,8 @@ annotationViewCoordinate = CLLocationCoordinate2DMake(15.584049, 79.114021);
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
     [self GetDirections:annotationViewCoordinate];
+    MKAnnotationView *userLocationView = [mapView viewForAnnotation:userLocation];
+    userLocationView.hidden = YES;
 }
 - (MKAnnotationView *)mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>)annotation
 {

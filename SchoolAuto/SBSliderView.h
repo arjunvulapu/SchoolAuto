@@ -13,7 +13,7 @@
 @protocol SBSliderDelegate <NSObject>
 
 @optional
-- (void)sbslider:(SBSliderDelegate *)sbslider didTapOnImage:(UIImage *)targetImage andParentView:(UIImageView *)targetView withTag:(NSInteger)Number;
+- (void)sbslider:(SBSliderDelegate *)sbslider didTapOnImage:(UIImage *)targetImage andParentView:(UIImageView *)targetView;
 
 @end
 

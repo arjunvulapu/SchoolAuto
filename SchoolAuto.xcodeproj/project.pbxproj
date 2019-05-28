@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18186072228BF95E0015EA70 /* SubScriptionDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18186071228BF95E0015EA70 /* SubScriptionDetailVC.m */; };
+		18186075228C3A020015EA70 /* TripsListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18186074228C3A020015EA70 /* TripsListVC.m */; };
+		18186078228C44F70015EA70 /* pingreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 18186076228C44F60015EA70 /* pingreen.png */; };
+		18186079228C44F70015EA70 /* pinorange.png in Resources */ = {isa = PBXBuildFile; fileRef = 18186077228C44F70015EA70 /* pinorange.png */; };
+		1818607E228D4D0C0015EA70 /* DriverMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818607D228D4D080015EA70 /* DriverMainViewController.m */; };
+		18186081228D51A30015EA70 /* DriverCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818607F228D51A10015EA70 /* DriverCardVC.m */; };
+		18186084228D69910015EA70 /* ChangePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18186082228D698E0015EA70 /* ChangePasswordVC.m */; };
+		18304DEC22968D750058E4F8 /* SBSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18304DEB22968D720058E4F8 /* SBSliderView.xib */; };
 		184232E4227C3C5D009CB080 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 184232E3227C3C5D009CB080 /* AppDelegate.m */; };
 		184232E7227C3C5D009CB080 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184232E6227C3C5D009CB080 /* ViewController.m */; };
 		184232EA227C3C5D009CB080 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184232E8227C3C5D009CB080 /* Main.storyboard */; };
@@ -136,7 +144,6 @@
 		18423475227C57DC009CB080 /* JVFloatLabeledTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18423472227C57DC009CB080 /* JVFloatLabeledTextView.m */; };
 		18423478227C592D009CB080 /* ParentLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18423477227C592D009CB080 /* ParentLoginVC.m */; };
 		1842347C227C76F1009CB080 /* SBSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18423479227C76F0009CB080 /* SBSliderView.m */; };
-		1842347D227C76F1009CB080 /* SBSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1842347A227C76F0009CB080 /* SBSliderView.xib */; };
 		18423480227C77C7009CB080 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842347F227C77C7009CB080 /* MainViewController.m */; };
 		1851E9342280085C00EBC7D5 /* PEPhotoCropEditor.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1851E9282280085B00EBC7D5 /* PEPhotoCropEditor.bundle */; };
 		1851E9352280085C00EBC7D5 /* UIImage+PECrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 1851E92B2280085B00EBC7D5 /* UIImage+PECrop.m */; };
@@ -145,7 +152,20 @@
 		1851E9382280085C00EBC7D5 /* PECropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1851E92E2280085B00EBC7D5 /* PECropView.m */; };
 		1851E9392280085C00EBC7D5 /* PECropRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1851E92F2280085B00EBC7D5 /* PECropRectView.m */; };
 		1851E93C22804AEA00EBC7D5 /* LocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1851E93B22804AEA00EBC7D5 /* LocationVC.m */; };
+		185E8CC4228932FD00E0D1A3 /* AddChildVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E8CC3228932FD00E0D1A3 /* AddChildVC.m */; };
+		185E8CC72289332000E0D1A3 /* TrackListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E8CC62289332000E0D1A3 /* TrackListVC.m */; };
+		185E8CCA228938C200E0D1A3 /* ChildrenTC.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E8CC9228938C200E0D1A3 /* ChildrenTC.m */; };
 		18851FCF2282A34F0082CC5B /* man.png in Resources */ = {isa = PBXBuildFile; fileRef = 18851FCE2282A34F0082CC5B /* man.png */; };
+		188A21CF2289930E006ECC2A /* SubScriptionList.m in Sources */ = {isa = PBXBuildFile; fileRef = 188A21CE2289930E006ECC2A /* SubScriptionList.m */; };
+		188A21D2228A82FF006ECC2A /* MyAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 188A21D1228A82FF006ECC2A /* MyAccountVC.m */; };
+		188A21D5228A89FD006ECC2A /* AccountCC.m in Sources */ = {isa = PBXBuildFile; fileRef = 188A21D4228A89FD006ECC2A /* AccountCC.m */; };
+		188A21D8228AAC65006ECC2A /* TripVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 188A21D7228AAC63006ECC2A /* TripVC.m */; };
+		188A21DB228AAC8E006ECC2A /* TripCC.m in Sources */ = {isa = PBXBuildFile; fileRef = 188A21DA228AAC8E006ECC2A /* TripCC.m */; };
+		188A21DE228AC6F0006ECC2A /* MyAccountTC.m in Sources */ = {isa = PBXBuildFile; fileRef = 188A21DD228AC6F0006ECC2A /* MyAccountTC.m */; };
+		189D9B4D22980F0100BC57F6 /* TripInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 189D9B4B22980F0000BC57F6 /* TripInfo.m */; };
+		189D9B502298128C00BC57F6 /* TripInfoTC.m in Sources */ = {isa = PBXBuildFile; fileRef = 189D9B4F2298128C00BC57F6 /* TripInfoTC.m */; };
+		18ED7AEB2293CA0600F18622 /* StartTripTC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED7AEA2293CA0600F18622 /* StartTripTC.m */; };
+		18ED7AEE22940D7600F18622 /* SubSucessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED7AEC22940D7400F18622 /* SubSucessVC.m */; };
 		18F3B2EB22841CE500E848D5 /* IQTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F3B2CA22841CE500E848D5 /* IQTextView.m */; };
 		18F3B2EC22841CE500E848D5 /* IQToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F3B2CE22841CE500E848D5 /* IQToolbar.m */; };
 		18F3B2ED22841CE500E848D5 /* IQTitleBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F3B2D022841CE500E848D5 /* IQTitleBarButtonItem.m */; };
@@ -160,8 +180,19 @@
 		18F3B2F622841CE500E848D5 /* IQUIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F3B2E422841CE500E848D5 /* IQUIView+Hierarchy.m */; };
 		18F3B2F722841CE500E848D5 /* IQUIViewController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F3B2E822841CE500E848D5 /* IQUIViewController+Additions.m */; };
 		18F3B2F822841CE500E848D5 /* IQKeyboardReturnKeyHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F3B2EA22841CE500E848D5 /* IQKeyboardReturnKeyHandler.m */; };
+		18F3B2FB22843B7600E848D5 /* ParentSignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F3B2FA22843B7600E848D5 /* ParentSignUpVC.m */; };
+		18F3B2FE228444C900E848D5 /* ForgotPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F3B2FD228444C900E848D5 /* ForgotPasswordVC.m */; };
+		18F48010229524CC004D2EF0 /* schoolloader.gif in Resources */ = {isa = PBXBuildFile; fileRef = 18F4800F229524CB004D2EF0 /* schoolloader.gif */; };
 		18FCBA93228165F600B79A86 /* location.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 18FCBA92228165F600B79A86 /* location.jpeg */; };
 		18FCBA96228171E900B79A86 /* TrackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCBA95228171E900B79A86 /* TrackVC.m */; };
+		18FCE0292285830700DD55D5 /* HomeMainCC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCE0282285830700DD55D5 /* HomeMainCC.m */; };
+		18FCE02C22858EFF00DD55D5 /* AdsCC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCE02B22858EFF00DD55D5 /* AdsCC.m */; };
+		18FCE02F22859BDC00DD55D5 /* TarrifsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCE02E22859BDC00DD55D5 /* TarrifsVC.m */; };
+		18FCE0322285AE3C00DD55D5 /* PriceTC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCE0312285AE3C00DD55D5 /* PriceTC.m */; };
+		18FCE0352285AE5000DD55D5 /* PlanTC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCE0342285AE5000DD55D5 /* PlanTC.m */; };
+		1D2DFBB2EA971EDD4C0189C9 /* libPods-SchoolAuto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDBB17A96A46522D3EF50839 /* libPods-SchoolAuto.a */; };
+		66234D259C8A5D1794ADFBA0 /* libPods-SchoolAutoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30A909A4D2CFAC8759AB12D1 /* libPods-SchoolAutoUITests.a */; };
+		C4A649138F62517634241339 /* libPods-SchoolAutoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE7B79E2E1E1CCF9CE1629E /* libPods-SchoolAutoTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +213,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C14DE0492D635B06A4B07A1 /* Pods-SchoolAuto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchoolAuto.release.xcconfig"; path = "Target Support Files/Pods-SchoolAuto/Pods-SchoolAuto.release.xcconfig"; sourceTree = "<group>"; };
+		119140A5A07CCB927EA7D13A /* Pods-SchoolAutoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchoolAutoTests.debug.xcconfig"; path = "Target Support Files/Pods-SchoolAutoTests/Pods-SchoolAutoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		18186070228BF95E0015EA70 /* SubScriptionDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubScriptionDetailVC.h; sourceTree = "<group>"; };
+		18186071228BF95E0015EA70 /* SubScriptionDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubScriptionDetailVC.m; sourceTree = "<group>"; };
+		18186073228C3A020015EA70 /* TripsListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripsListVC.h; sourceTree = "<group>"; };
+		18186074228C3A020015EA70 /* TripsListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripsListVC.m; sourceTree = "<group>"; };
+		18186076228C44F60015EA70 /* pingreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pingreen.png; sourceTree = "<group>"; };
+		18186077228C44F70015EA70 /* pinorange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinorange.png; sourceTree = "<group>"; };
+		1818607C228D4D010015EA70 /* DriverMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriverMainViewController.h; sourceTree = "<group>"; };
+		1818607D228D4D080015EA70 /* DriverMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriverMainViewController.m; sourceTree = "<group>"; };
+		1818607F228D51A10015EA70 /* DriverCardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriverCardVC.m; sourceTree = "<group>"; };
+		18186080228D51A20015EA70 /* DriverCardVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriverCardVC.h; sourceTree = "<group>"; };
+		18186082228D698E0015EA70 /* ChangePasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordVC.m; sourceTree = "<group>"; };
+		18186083228D69900015EA70 /* ChangePasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordVC.h; sourceTree = "<group>"; };
+		18304DEB22968D720058E4F8 /* SBSliderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBSliderView.xib; sourceTree = "<group>"; };
 		184232DF227C3C5D009CB080 /* SchoolAuto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SchoolAuto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		184232E2227C3C5D009CB080 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		184232E3227C3C5D009CB080 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -412,7 +458,6 @@
 		18423476227C592D009CB080 /* ParentLoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentLoginVC.h; sourceTree = "<group>"; };
 		18423477227C592D009CB080 /* ParentLoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParentLoginVC.m; sourceTree = "<group>"; };
 		18423479227C76F0009CB080 /* SBSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSliderView.m; sourceTree = "<group>"; };
-		1842347A227C76F0009CB080 /* SBSliderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBSliderView.xib; sourceTree = "<group>"; };
 		1842347B227C76F1009CB080 /* SBSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSliderView.h; sourceTree = "<group>"; };
 		1842347E227C77C7009CB080 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		1842347F227C77C7009CB080 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
@@ -429,7 +474,33 @@
 		1851E9332280085B00EBC7D5 /* PECropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PECropViewController.h; sourceTree = "<group>"; };
 		1851E93A22804AEA00EBC7D5 /* LocationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationVC.h; sourceTree = "<group>"; };
 		1851E93B22804AEA00EBC7D5 /* LocationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationVC.m; sourceTree = "<group>"; };
+		185E8CC2228932FD00E0D1A3 /* AddChildVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddChildVC.h; sourceTree = "<group>"; };
+		185E8CC3228932FD00E0D1A3 /* AddChildVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddChildVC.m; sourceTree = "<group>"; };
+		185E8CC52289332000E0D1A3 /* TrackListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrackListVC.h; sourceTree = "<group>"; };
+		185E8CC62289332000E0D1A3 /* TrackListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackListVC.m; sourceTree = "<group>"; };
+		185E8CC8228938C200E0D1A3 /* ChildrenTC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChildrenTC.h; sourceTree = "<group>"; };
+		185E8CC9228938C200E0D1A3 /* ChildrenTC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChildrenTC.m; sourceTree = "<group>"; };
 		18851FCE2282A34F0082CC5B /* man.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = man.png; sourceTree = "<group>"; };
+		188A21CD2289930E006ECC2A /* SubScriptionList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubScriptionList.h; sourceTree = "<group>"; };
+		188A21CE2289930E006ECC2A /* SubScriptionList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubScriptionList.m; sourceTree = "<group>"; };
+		188A21D0228A82FE006ECC2A /* MyAccountVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyAccountVC.h; sourceTree = "<group>"; };
+		188A21D1228A82FF006ECC2A /* MyAccountVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyAccountVC.m; sourceTree = "<group>"; };
+		188A21D3228A89FD006ECC2A /* AccountCC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountCC.h; sourceTree = "<group>"; };
+		188A21D4228A89FD006ECC2A /* AccountCC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountCC.m; sourceTree = "<group>"; };
+		188A21D6228AAC62006ECC2A /* TripVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripVC.h; sourceTree = "<group>"; };
+		188A21D7228AAC63006ECC2A /* TripVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripVC.m; sourceTree = "<group>"; };
+		188A21D9228AAC8E006ECC2A /* TripCC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripCC.h; sourceTree = "<group>"; };
+		188A21DA228AAC8E006ECC2A /* TripCC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripCC.m; sourceTree = "<group>"; };
+		188A21DC228AC6F0006ECC2A /* MyAccountTC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyAccountTC.h; sourceTree = "<group>"; };
+		188A21DD228AC6F0006ECC2A /* MyAccountTC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyAccountTC.m; sourceTree = "<group>"; };
+		189D9B4B22980F0000BC57F6 /* TripInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripInfo.m; sourceTree = "<group>"; };
+		189D9B4C22980F0100BC57F6 /* TripInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripInfo.h; sourceTree = "<group>"; };
+		189D9B4E2298128C00BC57F6 /* TripInfoTC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripInfoTC.h; sourceTree = "<group>"; };
+		189D9B4F2298128C00BC57F6 /* TripInfoTC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripInfoTC.m; sourceTree = "<group>"; };
+		18ED7AE92293CA0600F18622 /* StartTripTC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartTripTC.h; sourceTree = "<group>"; };
+		18ED7AEA2293CA0600F18622 /* StartTripTC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartTripTC.m; sourceTree = "<group>"; };
+		18ED7AEC22940D7400F18622 /* SubSucessVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubSucessVC.m; sourceTree = "<group>"; };
+		18ED7AED22940D7500F18622 /* SubSucessVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubSucessVC.h; sourceTree = "<group>"; };
 		18F3B2CA22841CE500E848D5 /* IQTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQTextView.m; sourceTree = "<group>"; };
 		18F3B2CB22841CE500E848D5 /* IQTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQTextView.h; sourceTree = "<group>"; };
 		18F3B2CD22841CE500E848D5 /* IQUIView+IQKeyboardToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIView+IQKeyboardToolbar.h"; sourceTree = "<group>"; };
@@ -459,9 +530,31 @@
 		18F3B2E822841CE500E848D5 /* IQUIViewController+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQUIViewController+Additions.m"; sourceTree = "<group>"; };
 		18F3B2E922841CE500E848D5 /* IQUIView+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIView+Hierarchy.h"; sourceTree = "<group>"; };
 		18F3B2EA22841CE500E848D5 /* IQKeyboardReturnKeyHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQKeyboardReturnKeyHandler.m; sourceTree = "<group>"; };
+		18F3B2F922843B7600E848D5 /* ParentSignUpVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParentSignUpVC.h; sourceTree = "<group>"; };
+		18F3B2FA22843B7600E848D5 /* ParentSignUpVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParentSignUpVC.m; sourceTree = "<group>"; };
+		18F3B2FC228444C900E848D5 /* ForgotPasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordVC.h; sourceTree = "<group>"; };
+		18F3B2FD228444C900E848D5 /* ForgotPasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordVC.m; sourceTree = "<group>"; };
+		18F4800F229524CB004D2EF0 /* schoolloader.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = schoolloader.gif; sourceTree = "<group>"; };
 		18FCBA92228165F600B79A86 /* location.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = location.jpeg; sourceTree = "<group>"; };
 		18FCBA94228171E900B79A86 /* TrackVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrackVC.h; sourceTree = "<group>"; };
 		18FCBA95228171E900B79A86 /* TrackVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackVC.m; sourceTree = "<group>"; };
+		18FCE0272285830700DD55D5 /* HomeMainCC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeMainCC.h; sourceTree = "<group>"; };
+		18FCE0282285830700DD55D5 /* HomeMainCC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeMainCC.m; sourceTree = "<group>"; };
+		18FCE02A22858EFF00DD55D5 /* AdsCC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdsCC.h; sourceTree = "<group>"; };
+		18FCE02B22858EFF00DD55D5 /* AdsCC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdsCC.m; sourceTree = "<group>"; };
+		18FCE02D22859BDC00DD55D5 /* TarrifsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TarrifsVC.h; sourceTree = "<group>"; };
+		18FCE02E22859BDC00DD55D5 /* TarrifsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TarrifsVC.m; sourceTree = "<group>"; };
+		18FCE0302285AE3C00DD55D5 /* PriceTC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceTC.h; sourceTree = "<group>"; };
+		18FCE0312285AE3C00DD55D5 /* PriceTC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceTC.m; sourceTree = "<group>"; };
+		18FCE0332285AE5000DD55D5 /* PlanTC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlanTC.h; sourceTree = "<group>"; };
+		18FCE0342285AE5000DD55D5 /* PlanTC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlanTC.m; sourceTree = "<group>"; };
+		30A909A4D2CFAC8759AB12D1 /* libPods-SchoolAutoUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SchoolAutoUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C2E0CADBEB71AFC636F38CA /* Pods-SchoolAuto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchoolAuto.debug.xcconfig"; path = "Target Support Files/Pods-SchoolAuto/Pods-SchoolAuto.debug.xcconfig"; sourceTree = "<group>"; };
+		6AB0019C56726BD9AA5EF11F /* Pods-SchoolAutoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchoolAutoUITests.release.xcconfig"; path = "Target Support Files/Pods-SchoolAutoUITests/Pods-SchoolAutoUITests.release.xcconfig"; sourceTree = "<group>"; };
+		9F0A6D9661E9E165549AC34C /* Pods-SchoolAutoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchoolAutoTests.release.xcconfig"; path = "Target Support Files/Pods-SchoolAutoTests/Pods-SchoolAutoTests.release.xcconfig"; sourceTree = "<group>"; };
+		ABE7B79E2E1E1CCF9CE1629E /* libPods-SchoolAutoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SchoolAutoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E485C67C1DBA8F6806C49006 /* Pods-SchoolAutoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchoolAutoUITests.debug.xcconfig"; path = "Target Support Files/Pods-SchoolAutoUITests/Pods-SchoolAutoUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		EDBB17A96A46522D3EF50839 /* libPods-SchoolAuto.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SchoolAuto.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -469,6 +562,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D2DFBB2EA971EDD4C0189C9 /* libPods-SchoolAuto.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,6 +570,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4A649138F62517634241339 /* libPods-SchoolAutoTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +578,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66234D259C8A5D1794ADFBA0 /* libPods-SchoolAutoUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +592,8 @@
 				184232FA227C3C7F009CB080 /* SchoolAutoTests */,
 				18423305227C3C7F009CB080 /* SchoolAutoUITests */,
 				184232E0227C3C5D009CB080 /* Products */,
+				FA58F8B4B95EFAEDB8ECAFBE /* Pods */,
+				190F49DCC73ED32346530AE6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -517,7 +615,11 @@
 				1842331E227C4844009CB080 /* Model */,
 				1842347B227C76F1009CB080 /* SBSliderView.h */,
 				18423479227C76F0009CB080 /* SBSliderView.m */,
-				1842347A227C76F0009CB080 /* SBSliderView.xib */,
+				18304DEB22968D720058E4F8 /* SBSliderView.xib */,
+				18186076228C44F60015EA70 /* pingreen.png */,
+				18186077228C44F70015EA70 /* pinorange.png */,
+				18ED7AED22940D7500F18622 /* SubSucessVC.h */,
+				18ED7AEC22940D7400F18622 /* SubSucessVC.m */,
 				184232E2227C3C5D009CB080 /* AppDelegate.h */,
 				184232E3227C3C5D009CB080 /* AppDelegate.m */,
 				184232E5227C3C5D009CB080 /* ViewController.h */,
@@ -528,14 +630,63 @@
 				18423466227C4F59009CB080 /* DriverLoginVC.m */,
 				18423476227C592D009CB080 /* ParentLoginVC.h */,
 				18423477227C592D009CB080 /* ParentLoginVC.m */,
+				18F3B2F922843B7600E848D5 /* ParentSignUpVC.h */,
+				18F3B2FA22843B7600E848D5 /* ParentSignUpVC.m */,
+				18186083228D69900015EA70 /* ChangePasswordVC.h */,
+				18186082228D698E0015EA70 /* ChangePasswordVC.m */,
 				1842347E227C77C7009CB080 /* MainViewController.h */,
 				1842347F227C77C7009CB080 /* MainViewController.m */,
+				1818607C228D4D010015EA70 /* DriverMainViewController.h */,
+				1818607D228D4D080015EA70 /* DriverMainViewController.m */,
+				18F3B2FC228444C900E848D5 /* ForgotPasswordVC.h */,
+				18F3B2FD228444C900E848D5 /* ForgotPasswordVC.m */,
 				1851E93A22804AEA00EBC7D5 /* LocationVC.h */,
 				1851E93B22804AEA00EBC7D5 /* LocationVC.m */,
+				18FCE0272285830700DD55D5 /* HomeMainCC.h */,
+				18FCE0282285830700DD55D5 /* HomeMainCC.m */,
+				185E8CC2228932FD00E0D1A3 /* AddChildVC.h */,
+				185E8CC3228932FD00E0D1A3 /* AddChildVC.m */,
+				188A21CD2289930E006ECC2A /* SubScriptionList.h */,
+				188A21CE2289930E006ECC2A /* SubScriptionList.m */,
+				189D9B4C22980F0100BC57F6 /* TripInfo.h */,
+				189D9B4B22980F0000BC57F6 /* TripInfo.m */,
+				18186070228BF95E0015EA70 /* SubScriptionDetailVC.h */,
+				18186071228BF95E0015EA70 /* SubScriptionDetailVC.m */,
+				188A21D0228A82FE006ECC2A /* MyAccountVC.h */,
+				188A21D1228A82FF006ECC2A /* MyAccountVC.m */,
+				188A21DC228AC6F0006ECC2A /* MyAccountTC.h */,
+				188A21DD228AC6F0006ECC2A /* MyAccountTC.m */,
+				188A21D3228A89FD006ECC2A /* AccountCC.h */,
+				188A21D4228A89FD006ECC2A /* AccountCC.m */,
+				185E8CC52289332000E0D1A3 /* TrackListVC.h */,
+				185E8CC62289332000E0D1A3 /* TrackListVC.m */,
+				18ED7AE92293CA0600F18622 /* StartTripTC.h */,
+				18ED7AEA2293CA0600F18622 /* StartTripTC.m */,
+				185E8CC8228938C200E0D1A3 /* ChildrenTC.h */,
+				185E8CC9228938C200E0D1A3 /* ChildrenTC.m */,
+				189D9B4E2298128C00BC57F6 /* TripInfoTC.h */,
+				189D9B4F2298128C00BC57F6 /* TripInfoTC.m */,
+				18FCE02D22859BDC00DD55D5 /* TarrifsVC.h */,
+				18FCE02E22859BDC00DD55D5 /* TarrifsVC.m */,
+				18FCE02A22858EFF00DD55D5 /* AdsCC.h */,
+				18FCE02B22858EFF00DD55D5 /* AdsCC.m */,
 				18FCBA94228171E900B79A86 /* TrackVC.h */,
-				18851FCE2282A34F0082CC5B /* man.png */,
 				18FCBA95228171E900B79A86 /* TrackVC.m */,
+				18186080228D51A20015EA70 /* DriverCardVC.h */,
+				1818607F228D51A10015EA70 /* DriverCardVC.m */,
+				18FCE0302285AE3C00DD55D5 /* PriceTC.h */,
+				18FCE0312285AE3C00DD55D5 /* PriceTC.m */,
+				18FCE0332285AE5000DD55D5 /* PlanTC.h */,
+				18FCE0342285AE5000DD55D5 /* PlanTC.m */,
+				188A21D6228AAC62006ECC2A /* TripVC.h */,
+				188A21D7228AAC63006ECC2A /* TripVC.m */,
+				18186073228C3A020015EA70 /* TripsListVC.h */,
+				18186074228C3A020015EA70 /* TripsListVC.m */,
+				188A21D9228AAC8E006ECC2A /* TripCC.h */,
+				188A21DA228AAC8E006ECC2A /* TripCC.m */,
+				18851FCE2282A34F0082CC5B /* man.png */,
 				18FCBA92228165F600B79A86 /* location.jpeg */,
+				18F4800F229524CB004D2EF0 /* schoolloader.gif */,
 				184232E8227C3C5D009CB080 /* Main.storyboard */,
 				184232EB227C3C7D009CB080 /* Assets.xcassets */,
 				184232ED227C3C7D009CB080 /* LaunchScreen.storyboard */,
@@ -942,8 +1093,8 @@
 		18423468227C579E009CB080 /* BaseViewController */ = {
 			isa = PBXGroup;
 			children = (
-				18423469227C579E009CB080 /* BaseViewController.m */,
 				1842346A227C579E009CB080 /* BaseViewController.h */,
+				18423469227C579E009CB080 /* BaseViewController.m */,
 			);
 			path = BaseViewController;
 			sourceTree = "<group>";
@@ -1071,6 +1222,29 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
+		190F49DCC73ED32346530AE6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EDBB17A96A46522D3EF50839 /* libPods-SchoolAuto.a */,
+				ABE7B79E2E1E1CCF9CE1629E /* libPods-SchoolAutoTests.a */,
+				30A909A4D2CFAC8759AB12D1 /* libPods-SchoolAutoUITests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA58F8B4B95EFAEDB8ECAFBE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4C2E0CADBEB71AFC636F38CA /* Pods-SchoolAuto.debug.xcconfig */,
+				0C14DE0492D635B06A4B07A1 /* Pods-SchoolAuto.release.xcconfig */,
+				119140A5A07CCB927EA7D13A /* Pods-SchoolAutoTests.debug.xcconfig */,
+				9F0A6D9661E9E165549AC34C /* Pods-SchoolAutoTests.release.xcconfig */,
+				E485C67C1DBA8F6806C49006 /* Pods-SchoolAutoUITests.debug.xcconfig */,
+				6AB0019C56726BD9AA5EF11F /* Pods-SchoolAutoUITests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1078,9 +1252,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1842330B227C3C7F009CB080 /* Build configuration list for PBXNativeTarget "SchoolAuto" */;
 			buildPhases = (
+				72D8F749C2E6A94B214BE48B /* [CP] Check Pods Manifest.lock */,
 				184232DB227C3C5D009CB080 /* Sources */,
 				184232DC227C3C5D009CB080 /* Frameworks */,
 				184232DD227C3C5D009CB080 /* Resources */,
+				5AED1CE10B18BBABE6886E2A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1095,6 +1271,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1842330E227C3C7F009CB080 /* Build configuration list for PBXNativeTarget "SchoolAutoTests" */;
 			buildPhases = (
+				CF4C9B6050F55E84ACA4DD4B /* [CP] Check Pods Manifest.lock */,
 				184232F3227C3C7F009CB080 /* Sources */,
 				184232F4227C3C7F009CB080 /* Frameworks */,
 				184232F5227C3C7F009CB080 /* Resources */,
@@ -1113,6 +1290,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 18423311227C3C7F009CB080 /* Build configuration list for PBXNativeTarget "SchoolAutoUITests" */;
 			buildPhases = (
+				10BEC43D7ABFCDBEAD541AF4 /* [CP] Check Pods Manifest.lock */,
 				184232FE227C3C7F009CB080 /* Sources */,
 				184232FF227C3C7F009CB080 /* Frameworks */,
 				18423300227C3C7F009CB080 /* Resources */,
@@ -1156,6 +1334,43 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
+				he,
+				ar,
+				el,
+				ja,
+				uk,
+				zh_CN,
+				"zh-Hans",
+				nb,
+				es,
+				da,
+				it,
+				sk,
+				pt_PT,
+				"pt-PT",
+				ms,
+				sv,
+				cs,
+				ko,
+				hu,
+				tr,
+				pl,
+				zh_TW,
+				"zh-Hant",
+				en_GB,
+				"en-GB",
+				vi,
+				ru,
+				fr,
+				fi,
+				id,
+				nl,
+				th,
+				pt,
+				ro,
+				hr,
+				ca,
 			);
 			mainGroup = 184232D6227C3C5C009CB080;
 			productRefGroup = 184232E0227C3C5D009CB080 /* Products */;
@@ -1184,6 +1399,7 @@
 				18423422227C4845009CB080 /* ImageSelectedOn@3x.png in Resources */,
 				18423420227C4845009CB080 /* ImageSelectedSmallOn@3x.png in Resources */,
 				18423413227C4845009CB080 /* VideoOverlay@3x.png in Resources */,
+				18F48010229524CC004D2EF0 /* schoolloader.gif in Resources */,
 				1842340F227C4845009CB080 /* PlayButtonOverlayLargeTap.png in Resources */,
 				18423417227C4845009CB080 /* PlayButtonOverlayLarge@2x.png in Resources */,
 				18423412227C4845009CB080 /* UIBarButtonItemArrowRight.png in Resources */,
@@ -1209,16 +1425,18 @@
 				1842341A227C4845009CB080 /* VideoOverlay.png in Resources */,
 				18423421227C4845009CB080 /* PlayButtonOverlayLarge.png in Resources */,
 				18851FCF2282A34F0082CC5B /* man.png in Resources */,
+				18304DEC22968D750058E4F8 /* SBSliderView.xib in Resources */,
+				18186079228C44F70015EA70 /* pinorange.png in Resources */,
 				18F3B2F122841CE500E848D5 /* IQKeyboardManager.bundle in Resources */,
 				184232EA227C3C5D009CB080 /* Main.storyboard in Resources */,
 				18423419227C4845009CB080 /* UIBarButtonItemArrowLeft@2x.png in Resources */,
 				1842341D227C4845009CB080 /* ImageSelectedOff@3x.png in Resources */,
-				1842347D227C76F1009CB080 /* SBSliderView.xib in Resources */,
 				18423429227C4845009CB080 /* SVProgressHUD.bundle in Resources */,
 				1842341F227C4845009CB080 /* UIBarButtonItemArrowRight@2x.png in Resources */,
 				1842331C227C47B3009CB080 /* Lato-Black.ttf in Resources */,
 				18423407227C4845009CB080 /* UIBarButtonItemGrid.png in Resources */,
 				1842331B227C47B3009CB080 /* Lato-Regular.ttf in Resources */,
+				18186078228C44F70015EA70 /* pingreen.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1238,6 +1456,97 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		10BEC43D7ABFCDBEAD541AF4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SchoolAutoUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5AED1CE10B18BBABE6886E2A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SchoolAuto/Pods-SchoolAuto-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SchoolAuto/Pods-SchoolAuto-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		72D8F749C2E6A94B214BE48B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SchoolAuto-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF4C9B6050F55E84ACA4DD4B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SchoolAutoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		184232DB227C3C5D009CB080 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1254,19 +1563,27 @@
 				18423446227C4845009CB080 /* FSCalendarAppearance.m in Sources */,
 				18423425227C4845009CB080 /* SVRadialGradientLayer.m in Sources */,
 				18423433227C4845009CB080 /* AFAutoPurgingImageCache.m in Sources */,
+				189D9B502298128C00BC57F6 /* TripInfoTC.m in Sources */,
 				18423457227C4845009CB080 /* SDWebImagePrefetcher.m in Sources */,
 				1842344D227C4845009CB080 /* UIViewController+MJPopupViewController.m in Sources */,
 				18F3B2F822841CE500E848D5 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				18423480227C77C7009CB080 /* MainViewController.m in Sources */,
 				1842347C227C76F1009CB080 /* SBSliderView.m in Sources */,
+				18FCE0352285AE5000DD55D5 /* PlanTC.m in Sources */,
+				185E8CCA228938C200E0D1A3 /* ChildrenTC.m in Sources */,
 				1842343A227C4845009CB080 /* FSCalendarCell.m in Sources */,
 				18F3B2F522841CE500E848D5 /* IQUIScrollView+Additions.m in Sources */,
+				189D9B4D22980F0100BC57F6 /* TripInfo.m in Sources */,
 				184232E7227C3C5D009CB080 /* ViewController.m in Sources */,
 				18423434227C4845009CB080 /* AFImageDownloader.m in Sources */,
+				18FCE0292285830700DD55D5 /* HomeMainCC.m in Sources */,
+				188A21D5228A89FD006ECC2A /* AccountCC.m in Sources */,
 				18423453227C4845009CB080 /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
 				184233FF227C4845009CB080 /* MWTapDetectingImageView.m in Sources */,
+				18F3B2FE228444C900E848D5 /* ForgotPasswordVC.m in Sources */,
 				184233F8227C4845009CB080 /* MBProgressHUD.m in Sources */,
 				18423428227C4845009CB080 /* SVIndefiniteAnimatedView.m in Sources */,
+				188A21D2228A82FF006ECC2A /* MyAccountVC.m in Sources */,
 				1842345E227C4845009CB080 /* MCLocalization.m in Sources */,
 				1842343D227C4845009CB080 /* FSCalendarCollectionViewLayout.m in Sources */,
 				18423461227C4845009CB080 /* MCLocalizationDummyDataSource.m in Sources */,
@@ -1277,6 +1594,7 @@
 				18423440227C4845009CB080 /* FSCalendarExtensions.m in Sources */,
 				18F3B2ED22841CE500E848D5 /* IQTitleBarButtonItem.m in Sources */,
 				18423462227C4845009CB080 /* FTPopOverMenu.m in Sources */,
+				18186081228D51A30015EA70 /* DriverCardVC.m in Sources */,
 				18F3B2EF22841CE500E848D5 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				18423442227C4845009CB080 /* FSCalendarConstants.m in Sources */,
 				18423473227C57DC009CB080 /* NSString+TextDirectionality.m in Sources */,
@@ -1289,6 +1607,7 @@
 				1851E93C22804AEA00EBC7D5 /* LocationVC.m in Sources */,
 				1842345B227C4845009CB080 /* UIImageView+WebCache.m in Sources */,
 				18423403227C4845009CB080 /* MWGridCell.m in Sources */,
+				185E8CC72289332000E0D1A3 /* TrackListVC.m in Sources */,
 				1842343B227C4845009CB080 /* FSCalendarStickyHeader.m in Sources */,
 				18423426227C4845009CB080 /* SVProgressAnimatedView.m in Sources */,
 				1842344A227C4845009CB080 /* AFURLRequestSerialization.m in Sources */,
@@ -1299,6 +1618,7 @@
 				184233FD227C4845009CB080 /* MWZoomingScrollView.m in Sources */,
 				18423402227C4845009CB080 /* MWGridViewController.m in Sources */,
 				18423475227C57DC009CB080 /* JVFloatLabeledTextView.m in Sources */,
+				18ED7AEE22940D7600F18622 /* SubSucessVC.m in Sources */,
 				1842344E227C4845009CB080 /* MJPopupBackgroundView.m in Sources */,
 				1842343F227C4845009CB080 /* FSCalendarWeekdayView.m in Sources */,
 				1842342F227C4845009CB080 /* UIImageView+AFNetworking.m in Sources */,
@@ -1319,27 +1639,41 @@
 				18F3B2F722841CE500E848D5 /* IQUIViewController+Additions.m in Sources */,
 				18423431227C4845009CB080 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				18423474227C57DC009CB080 /* JVFloatLabeledTextField.m in Sources */,
+				18FCE0322285AE3C00DD55D5 /* PriceTC.m in Sources */,
 				18423444227C4845009CB080 /* FSCalendarHeaderView.m in Sources */,
+				188A21CF2289930E006ECC2A /* SubScriptionList.m in Sources */,
+				185E8CC4228932FD00E0D1A3 /* AddChildVC.m in Sources */,
+				18186075228C3A020015EA70 /* TripsListVC.m in Sources */,
 				18423455227C4845009CB080 /* UIImage+MultiFormat.m in Sources */,
+				18FCE02C22858EFF00DD55D5 /* AdsCC.m in Sources */,
+				188A21DB228AAC8E006ECC2A /* TripCC.m in Sources */,
+				188A21DE228AC6F0006ECC2A /* MyAccountTC.m in Sources */,
 				18FCBA96228171E900B79A86 /* TrackVC.m in Sources */,
 				18423478227C592D009CB080 /* ParentLoginVC.m in Sources */,
 				18F3B2F622841CE500E848D5 /* IQUIView+Hierarchy.m in Sources */,
+				18186072228BF95E0015EA70 /* SubScriptionDetailVC.m in Sources */,
 				1842342B227C4845009CB080 /* GiFHUD.m in Sources */,
 				1842343C227C4845009CB080 /* FSCalendar.m in Sources */,
 				18423456227C4845009CB080 /* SDWebImageCompat.m in Sources */,
 				18423427227C4845009CB080 /* SVProgressHUD.m in Sources */,
+				1818607E228D4D0C0015EA70 /* DriverMainViewController.m in Sources */,
 				18423463227C4845009CB080 /* SRAlertView.m in Sources */,
 				18F3B2EC22841CE500E848D5 /* IQToolbar.m in Sources */,
 				1842342E227C4845009CB080 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				18423450227C4845009CB080 /* SDWebImageDecoder.m in Sources */,
 				1851E9352280085C00EBC7D5 /* UIImage+PECrop.m in Sources */,
 				1842345A227C4845009CB080 /* NSData+ImageContentType.m in Sources */,
+				18F3B2FB22843B7600E848D5 /* ParentSignUpVC.m in Sources */,
 				1842344F227C4845009CB080 /* SDWebImageManager.m in Sources */,
 				18423447227C4845009CB080 /* AFURLResponseSerialization.m in Sources */,
 				1851E9382280085C00EBC7D5 /* PECropView.m in Sources */,
 				18423460227C4845009CB080 /* MCLocalizationSingleJSONFileDataSource.m in Sources */,
+				188A21D8228AAC65006ECC2A /* TripVC.m in Sources */,
+				18ED7AEB2293CA0600F18622 /* StartTripTC.m in Sources */,
 				1842345D227C4845009CB080 /* UIButton+WebCache.m in Sources */,
+				18FCE02F22859BDC00DD55D5 /* TarrifsVC.m in Sources */,
 				18423445227C4845009CB080 /* FSCalendarTransitionCoordinator.m in Sources */,
+				18186084228D69910015EA70 /* ChangePasswordVC.m in Sources */,
 				18423459227C4845009CB080 /* SDWebImageDownloaderOperation.m in Sources */,
 				18F3B2F422841CE500E848D5 /* IQUITextFieldView+Additions.m in Sources */,
 				18423467227C4F59009CB080 /* DriverLoginVC.m in Sources */,
@@ -1519,10 +1853,16 @@
 		};
 		1842330C227C3C7F009CB080 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C2E0CADBEB71AFC636F38CA /* Pods-SchoolAuto.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2BWZ5B88Y7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SchoolAuto/GoogleMaps/Maps/Frameworks",
+					"$(PROJECT_DIR)/SchoolAuto/GoogleMaps/Base/Frameworks",
+				);
 				INFOPLIST_FILE = SchoolAuto/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1536,10 +1876,16 @@
 		};
 		1842330D227C3C7F009CB080 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C14DE0492D635B06A4B07A1 /* Pods-SchoolAuto.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2BWZ5B88Y7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SchoolAuto/GoogleMaps/Maps/Frameworks",
+					"$(PROJECT_DIR)/SchoolAuto/GoogleMaps/Base/Frameworks",
+				);
 				INFOPLIST_FILE = SchoolAuto/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1553,6 +1899,7 @@
 		};
 		1842330F227C3C7F009CB080 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 119140A5A07CCB927EA7D13A /* Pods-SchoolAutoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1571,6 +1918,7 @@
 		};
 		18423310227C3C7F009CB080 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F0A6D9661E9E165549AC34C /* Pods-SchoolAutoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1589,6 +1937,7 @@
 		};
 		18423312227C3C7F009CB080 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E485C67C1DBA8F6806C49006 /* Pods-SchoolAutoUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = SchoolAutoUITests/Info.plist;
@@ -1606,6 +1955,7 @@
 		};
 		18423313227C3C7F009CB080 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6AB0019C56726BD9AA5EF11F /* Pods-SchoolAutoUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = SchoolAutoUITests/Info.plist;

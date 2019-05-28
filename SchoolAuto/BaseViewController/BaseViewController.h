@@ -60,4 +60,20 @@
 -(void) cornerRadiusFor:(UIView *)view;
 -(void) cornerRadiusForB:(UIButton *)view;
 - (void) PushToVc:(UIViewController *)vc;
+
+- (void) makePostCallForPageNEWNoProgess:(NSString *)page
+                              withParams:(NSDictionary *)params
+                         withRequestCode:(int)code ;
+- (void) makePostCallForPageNEWGETNoProgess:(NSString *)page
+                              withParams:(NSDictionary *)params
+                         withRequestCode:(int)code ;
+- (void) makePostCallForPageNEW:(NSString *)page
+                  withParams:(NSDictionary *)params
+                withRequestCode:(int)code;
+- (void) makePostCallForPageNEWFormData:(NSString *)page
+                     withParams:(NSDictionary *)params
+                withRequestCode:(int)code;
+- (void) makePostCallForPageNEWGET:(NSString *)page
+                        withParams:(NSDictionary *)params
+                   withRequestCode:(int)code;
 @end

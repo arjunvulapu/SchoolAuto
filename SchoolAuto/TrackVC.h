@@ -23,7 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *locationView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIView *detailsView;
+@property (weak, nonatomic) IBOutlet UIImageView *manImage;
+@property (weak, nonatomic) IBOutlet UIView *imgBgView;
 
+@property(strong,nonatomic)NSDictionary *resultDic;
 @end
 
 NS_ASSUME_NONNULL_END

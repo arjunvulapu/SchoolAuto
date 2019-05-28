@@ -50,8 +50,43 @@
 */
 
 - (IBAction)submitBtnAction:(id)sender {
+    if(_emialTxtField.text.length == 0){
+        [self showErrorAlertWithMessage:Localized(@"Please Enter Email")];
+    }else if(_passwordTxtField.text.length == 0){
+        [self showErrorAlertWithMessage:Localized(@"Please Enter Password")];
+    }
+    else{
+        [self makePostCallForPageNEW:AUTOLOGIN withParams:@{@"phone":_emialTxtField.text,@"password":_passwordTxtField.text} withRequestCode:110];
+    }
 }
-
+-(void)parseResult:(id)result withCode:(int)reqeustCode{
+    NSLog(@"%@",result);
+    
+    if (reqeustCode == 110) {
+        if ([[result valueForKey:@"status"] isEqual:@0]) {
+            NSString *str=[result valueForKey:@"message"];
+            [self showErrorAlertWithMessage:Localized(str)];
+        } else {
+            NSString *str=[result valueForKey:@"message"];
+            [self showSuccessMessage:str];
+            //            [self.navigationController popViewControllerAnimated:YES];
+            
+            
+            NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[result valueForKey:@"data"]];
+            [currentDefaults setObject:data forKey:@"USERINFO"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            
+            
+            [Utils loginUserWithMemberId:[[result valueForKey:@"data"] valueForKey:@"auto_id"] withType:@"Driver"];
+            
+            
+            [APP_DELEGATE afterDriverLoginSucess];
+            
+        }
+    }
+}
 - (IBAction)forgotPasswordbtnAction:(id)sender {
 }
 @end
