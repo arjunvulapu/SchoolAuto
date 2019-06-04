@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "BaseViewController/BaseViewController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TrackVC : BaseViewController
@@ -25,8 +27,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *detailsView;
 @property (weak, nonatomic) IBOutlet UIImageView *manImage;
 @property (weak, nonatomic) IBOutlet UIView *imgBgView;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView2;
 
 @property(strong,nonatomic)NSDictionary *resultDic;
+
+@property (strong, nonatomic) IBOutlet UIView *locationFullScreen;
+@property (weak, nonatomic) IBOutlet UIButton *fullscreenBtn;
+@property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
+- (IBAction)closeBtnAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *imagesViewBtn;
+- (IBAction)imagesViewBtnAction:(id)sender;
+@property (nonatomic, strong) NSMutableArray *assets;
+
+@property (nonatomic, strong) ALAssetsLibrary *ALAssetsLibrary;
+
 @end
 
 NS_ASSUME_NONNULL_END

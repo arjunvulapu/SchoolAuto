@@ -38,7 +38,11 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if(_kidorNot==0){
     return 7;
+    }else{
+        return 6;
+    }
 }
 
 
@@ -64,7 +68,11 @@
     }else if(indexPath.row==4){
         cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"pickup_address"]];
     }else if(indexPath.row==5){
+        if(_kidorNot==0){
         cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"share_count"]];
+        }else{
+              cell.statusLbl.text=[NSString stringWithFormat:@"%.2f",[[_subResult valueForKey:@"distance"] floatValue]];
+        }
     }else if(indexPath.row==6){
         cell.statusLbl.text=[NSString stringWithFormat:@"%.2f",[[_subResult valueForKey:@"distance"] floatValue]];
     }

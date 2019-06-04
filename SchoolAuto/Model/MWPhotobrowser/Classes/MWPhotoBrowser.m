@@ -58,6 +58,8 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     } else {
         _isVCBasedStatusBarAppearance = YES; // default
     }
+    self.navigationController.navigationBar.hidden=NO;
+
     self.hidesBottomBarWhenPushed = YES;
     _hasBelongedToViewController = NO;
     _photoCount = NSNotFound;

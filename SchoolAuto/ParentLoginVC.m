@@ -53,6 +53,13 @@
     _signupBtn.layer.cornerRadius=10;
     _signupBtn.clipsToBounds=YES;
 
+//    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+//    [defaults setObject:nil forKey:@"USERINFO"];
+//    [defaults synchronize];
+//    
+//    NSString *deviceToken = [[NSUserDefaults standardUserDefaults] valueForKey:@"TOKEN"]?[[NSUserDefaults standardUserDefaults] valueForKey:@"TOKEN"]:@"";
+//    NSString *playerID = [[NSUserDefaults standardUserDefaults] valueForKey:@"player_id"]?[[NSUserDefaults standardUserDefaults] valueForKey:@"player_id"]:@"";
+//    [self makePostCallForPageNEW:PAGE_REGISTER_TOKEN withParams:@{@"device_token":deviceToken,@"player_id":playerID,@"dev_type":@"ios",@"type":@"",@"member_id":[Utils loggedInUserIdStr]} withRequestCode:1001];
     
   
 }
@@ -104,10 +111,17 @@
             
                         [Utils loginUserWithMemberId:[[result valueForKey:@"data"] valueForKey:@"pa_id"] withType:@"User"];
             
-
+            NSString *deviceToken = [[NSUserDefaults standardUserDefaults] valueForKey:@"TOKEN"]?[[NSUserDefaults standardUserDefaults] valueForKey:@"TOKEN"]:@"";
+            NSString *playerID = [[NSUserDefaults standardUserDefaults] valueForKey:@"player_id"]?[[NSUserDefaults standardUserDefaults] valueForKey:@"player_id"]:@"";
+            
+                [self makePostCallForPageNEWNoProgess:PAGE_REGISTER_TOKEN withParams:@{@"device_token":deviceToken,@"player_id":playerID,@"dev_type":@"ios",@"type":@"lunchbox",@"member_id":[Utils loggedInUserIdStr]}
+                             withRequestCode:1001];
+            
                         [APP_DELEGATE afterLoginSucess];
             
         }
+    }else if(reqeustCode==1001){
+        NSLog(@"Push Register%@",result);
     }
 }
 

@@ -14,6 +14,8 @@
 		1818607E228D4D0C0015EA70 /* DriverMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818607D228D4D080015EA70 /* DriverMainViewController.m */; };
 		18186081228D51A30015EA70 /* DriverCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818607F228D51A10015EA70 /* DriverCardVC.m */; };
 		18186084228D69910015EA70 /* ChangePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18186082228D698E0015EA70 /* ChangePasswordVC.m */; };
+		182ABA0222A1503600C5BA31 /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 182ABA0122A1503600C5BA31 /* NotificationService.m */; };
+		182ABA0622A1503600C5BA31 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 182AB9FE22A1503600C5BA31 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		18304DEC22968D750058E4F8 /* SBSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18304DEB22968D720058E4F8 /* SBSliderView.xib */; };
 		184232E4227C3C5D009CB080 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 184232E3227C3C5D009CB080 /* AppDelegate.m */; };
 		184232E7227C3C5D009CB080 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184232E6227C3C5D009CB080 /* ViewController.m */; };
@@ -21,8 +23,6 @@
 		184232EC227C3C7D009CB080 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184232EB227C3C7D009CB080 /* Assets.xcassets */; };
 		184232EF227C3C7D009CB080 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184232ED227C3C7D009CB080 /* LaunchScreen.storyboard */; };
 		184232F2227C3C7D009CB080 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 184232F1227C3C7D009CB080 /* main.m */; };
-		184232FC227C3C7F009CB080 /* SchoolAutoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 184232FB227C3C7F009CB080 /* SchoolAutoTests.m */; };
-		18423307227C3C7F009CB080 /* SchoolAutoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18423306227C3C7F009CB080 /* SchoolAutoUITests.m */; };
 		18423316227C40E9009CB080 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18423315227C40E9009CB080 /* HomeViewController.m */; };
 		1842331B227C47B3009CB080 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18423318227C47B2009CB080 /* Lato-Regular.ttf */; };
 		1842331C227C47B3009CB080 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18423319227C47B2009CB080 /* Lato-Black.ttf */; };
@@ -155,6 +155,7 @@
 		185E8CC4228932FD00E0D1A3 /* AddChildVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E8CC3228932FD00E0D1A3 /* AddChildVC.m */; };
 		185E8CC72289332000E0D1A3 /* TrackListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E8CC62289332000E0D1A3 /* TrackListVC.m */; };
 		185E8CCA228938C200E0D1A3 /* ChildrenTC.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E8CC9228938C200E0D1A3 /* ChildrenTC.m */; };
+		1879B2E922A513270019176C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1879B2E822A513270019176C /* MapKit.framework */; };
 		18851FCF2282A34F0082CC5B /* man.png in Resources */ = {isa = PBXBuildFile; fileRef = 18851FCE2282A34F0082CC5B /* man.png */; };
 		188A21CF2289930E006ECC2A /* SubScriptionList.m in Sources */ = {isa = PBXBuildFile; fileRef = 188A21CE2289930E006ECC2A /* SubScriptionList.m */; };
 		188A21D2228A82FF006ECC2A /* MyAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 188A21D1228A82FF006ECC2A /* MyAccountVC.m */; };
@@ -162,6 +163,14 @@
 		188A21D8228AAC65006ECC2A /* TripVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 188A21D7228AAC63006ECC2A /* TripVC.m */; };
 		188A21DB228AAC8E006ECC2A /* TripCC.m in Sources */ = {isa = PBXBuildFile; fileRef = 188A21DA228AAC8E006ECC2A /* TripCC.m */; };
 		188A21DE228AC6F0006ECC2A /* MyAccountTC.m in Sources */ = {isa = PBXBuildFile; fileRef = 188A21DD228AC6F0006ECC2A /* MyAccountTC.m */; };
+		189947A2229E8D360011B370 /* AnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1899479E229E8D350011B370 /* AnnotationView.m */; };
+		189947A3229E8D360011B370 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1899479F229E8D350011B370 /* MapAnnotation.m */; };
+		189947A8229FA5FB0011B370 /* LunchBoxLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 189947A7229FA5FB0011B370 /* LunchBoxLoginVC.m */; };
+		189947AB229FACCE0011B370 /* LunchBoxListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 189947A9229FACCD0011B370 /* LunchBoxListVC.m */; };
+		189947AE229FADD80011B370 /* LunchBoxTripVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 189947AD229FADD70011B370 /* LunchBoxTripVC.m */; };
+		189947B1229FD6AA0011B370 /* AddLunchBoxVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 189947B0229FD6AA0011B370 /* AddLunchBoxVC.m */; };
+		189947B422A0010F0011B370 /* LunchBoxSucessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 189947B322A0010E0011B370 /* LunchBoxSucessVC.m */; };
+		189947B722A009650011B370 /* LunchBoxTripsListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 189947B622A009640011B370 /* LunchBoxTripsListVC.m */; };
 		189D9B4D22980F0100BC57F6 /* TripInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 189D9B4B22980F0000BC57F6 /* TripInfo.m */; };
 		189D9B502298128C00BC57F6 /* TripInfoTC.m in Sources */ = {isa = PBXBuildFile; fileRef = 189D9B4F2298128C00BC57F6 /* TripInfoTC.m */; };
 		18ED7AEB2293CA0600F18622 /* StartTripTC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED7AEA2293CA0600F18622 /* StartTripTC.m */; };
@@ -191,26 +200,32 @@
 		18FCE0322285AE3C00DD55D5 /* PriceTC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCE0312285AE3C00DD55D5 /* PriceTC.m */; };
 		18FCE0352285AE5000DD55D5 /* PlanTC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCE0342285AE5000DD55D5 /* PlanTC.m */; };
 		1D2DFBB2EA971EDD4C0189C9 /* libPods-SchoolAuto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDBB17A96A46522D3EF50839 /* libPods-SchoolAuto.a */; };
-		66234D259C8A5D1794ADFBA0 /* libPods-SchoolAutoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30A909A4D2CFAC8759AB12D1 /* libPods-SchoolAutoUITests.a */; };
-		C4A649138F62517634241339 /* libPods-SchoolAutoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE7B79E2E1E1CCF9CE1629E /* libPods-SchoolAutoTests.a */; };
+		1EA2D7819A89082661C1E36B /* libPods-SchoolAuto-OneSignalNotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC7019640DB7C7128D7E7D3B /* libPods-SchoolAuto-OneSignalNotificationServiceExtension.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		184232F8227C3C7F009CB080 /* PBXContainerItemProxy */ = {
+		182ABA0422A1503600C5BA31 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 184232D7227C3C5D009CB080 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 184232DE227C3C5D009CB080;
-			remoteInfo = SchoolAuto;
-		};
-		18423303227C3C7F009CB080 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 184232D7227C3C5D009CB080 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 184232DE227C3C5D009CB080;
-			remoteInfo = SchoolAuto;
+			remoteGlobalIDString = 182AB9FD22A1503600C5BA31;
+			remoteInfo = OneSignalNotificationServiceExtension;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		182ABA0A22A1503600C5BA31 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				182ABA0622A1503600C5BA31 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0C14DE0492D635B06A4B07A1 /* Pods-SchoolAuto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchoolAuto.release.xcconfig"; path = "Target Support Files/Pods-SchoolAuto/Pods-SchoolAuto.release.xcconfig"; sourceTree = "<group>"; };
@@ -227,6 +242,11 @@
 		18186080228D51A20015EA70 /* DriverCardVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriverCardVC.h; sourceTree = "<group>"; };
 		18186082228D698E0015EA70 /* ChangePasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordVC.m; sourceTree = "<group>"; };
 		18186083228D69900015EA70 /* ChangePasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordVC.h; sourceTree = "<group>"; };
+		182AB9ED22A13FEC00C5BA31 /* SchoolAuto.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SchoolAuto.entitlements; sourceTree = "<group>"; };
+		182AB9FE22A1503600C5BA31 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		182ABA0022A1503600C5BA31 /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
+		182ABA0122A1503600C5BA31 /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
+		182ABA0322A1503600C5BA31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18304DEB22968D720058E4F8 /* SBSliderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBSliderView.xib; sourceTree = "<group>"; };
 		184232DF227C3C5D009CB080 /* SchoolAuto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SchoolAuto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		184232E2227C3C5D009CB080 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -238,10 +258,8 @@
 		184232EE227C3C7D009CB080 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		184232F0227C3C7D009CB080 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		184232F1227C3C7D009CB080 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		184232F7227C3C7F009CB080 /* SchoolAutoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchoolAutoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		184232FB227C3C7F009CB080 /* SchoolAutoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SchoolAutoTests.m; sourceTree = "<group>"; };
 		184232FD227C3C7F009CB080 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		18423302227C3C7F009CB080 /* SchoolAutoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchoolAutoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18423306227C3C7F009CB080 /* SchoolAutoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SchoolAutoUITests.m; sourceTree = "<group>"; };
 		18423308227C3C7F009CB080 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18423314227C40E9009CB080 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
@@ -480,6 +498,7 @@
 		185E8CC62289332000E0D1A3 /* TrackListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackListVC.m; sourceTree = "<group>"; };
 		185E8CC8228938C200E0D1A3 /* ChildrenTC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChildrenTC.h; sourceTree = "<group>"; };
 		185E8CC9228938C200E0D1A3 /* ChildrenTC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChildrenTC.m; sourceTree = "<group>"; };
+		1879B2E822A513270019176C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		18851FCE2282A34F0082CC5B /* man.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = man.png; sourceTree = "<group>"; };
 		188A21CD2289930E006ECC2A /* SubScriptionList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubScriptionList.h; sourceTree = "<group>"; };
 		188A21CE2289930E006ECC2A /* SubScriptionList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubScriptionList.m; sourceTree = "<group>"; };
@@ -493,6 +512,22 @@
 		188A21DA228AAC8E006ECC2A /* TripCC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripCC.m; sourceTree = "<group>"; };
 		188A21DC228AC6F0006ECC2A /* MyAccountTC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyAccountTC.h; sourceTree = "<group>"; };
 		188A21DD228AC6F0006ECC2A /* MyAccountTC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyAccountTC.m; sourceTree = "<group>"; };
+		1899479E229E8D350011B370 /* AnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnotationView.m; sourceTree = "<group>"; };
+		1899479F229E8D350011B370 /* MapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
+		189947A0229E8D350011B370 /* MapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotation.h; sourceTree = "<group>"; };
+		189947A1229E8D360011B370 /* AnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnotationView.h; sourceTree = "<group>"; };
+		189947A6229FA5FA0011B370 /* LunchBoxLoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LunchBoxLoginVC.h; sourceTree = "<group>"; };
+		189947A7229FA5FB0011B370 /* LunchBoxLoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LunchBoxLoginVC.m; sourceTree = "<group>"; };
+		189947A9229FACCD0011B370 /* LunchBoxListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LunchBoxListVC.m; sourceTree = "<group>"; };
+		189947AA229FACCD0011B370 /* LunchBoxListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LunchBoxListVC.h; sourceTree = "<group>"; };
+		189947AC229FADD70011B370 /* LunchBoxTripVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LunchBoxTripVC.h; sourceTree = "<group>"; };
+		189947AD229FADD70011B370 /* LunchBoxTripVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LunchBoxTripVC.m; sourceTree = "<group>"; };
+		189947AF229FD6A90011B370 /* AddLunchBoxVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddLunchBoxVC.h; sourceTree = "<group>"; };
+		189947B0229FD6AA0011B370 /* AddLunchBoxVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddLunchBoxVC.m; sourceTree = "<group>"; };
+		189947B222A0010D0011B370 /* LunchBoxSucessVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LunchBoxSucessVC.h; sourceTree = "<group>"; };
+		189947B322A0010E0011B370 /* LunchBoxSucessVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LunchBoxSucessVC.m; sourceTree = "<group>"; };
+		189947B522A009640011B370 /* LunchBoxTripsListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LunchBoxTripsListVC.h; sourceTree = "<group>"; };
+		189947B622A009640011B370 /* LunchBoxTripsListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LunchBoxTripsListVC.m; sourceTree = "<group>"; };
 		189D9B4B22980F0000BC57F6 /* TripInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripInfo.m; sourceTree = "<group>"; };
 		189D9B4C22980F0100BC57F6 /* TripInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripInfo.h; sourceTree = "<group>"; };
 		189D9B4E2298128C00BC57F6 /* TripInfoTC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripInfoTC.h; sourceTree = "<group>"; };
@@ -550,47 +585,54 @@
 		18FCE0342285AE5000DD55D5 /* PlanTC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlanTC.m; sourceTree = "<group>"; };
 		30A909A4D2CFAC8759AB12D1 /* libPods-SchoolAutoUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SchoolAutoUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C2E0CADBEB71AFC636F38CA /* Pods-SchoolAuto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchoolAuto.debug.xcconfig"; path = "Target Support Files/Pods-SchoolAuto/Pods-SchoolAuto.debug.xcconfig"; sourceTree = "<group>"; };
+		587A5DFDAB522BAC2012010B /* Pods-SchoolAuto-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchoolAuto-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-SchoolAuto-OneSignalNotificationServiceExtension/Pods-SchoolAuto-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		6AB0019C56726BD9AA5EF11F /* Pods-SchoolAutoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchoolAutoUITests.release.xcconfig"; path = "Target Support Files/Pods-SchoolAutoUITests/Pods-SchoolAutoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9F0A6D9661E9E165549AC34C /* Pods-SchoolAutoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchoolAutoTests.release.xcconfig"; path = "Target Support Files/Pods-SchoolAutoTests/Pods-SchoolAutoTests.release.xcconfig"; sourceTree = "<group>"; };
 		ABE7B79E2E1E1CCF9CE1629E /* libPods-SchoolAutoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SchoolAutoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC7019640DB7C7128D7E7D3B /* libPods-SchoolAuto-OneSignalNotificationServiceExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SchoolAuto-OneSignalNotificationServiceExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6819CE94C84332983C56E16 /* Pods-SchoolAuto-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchoolAuto-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-SchoolAuto-OneSignalNotificationServiceExtension/Pods-SchoolAuto-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		E485C67C1DBA8F6806C49006 /* Pods-SchoolAutoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchoolAutoUITests.debug.xcconfig"; path = "Target Support Files/Pods-SchoolAutoUITests/Pods-SchoolAutoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EDBB17A96A46522D3EF50839 /* libPods-SchoolAuto.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SchoolAuto.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		182AB9FB22A1503600C5BA31 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1EA2D7819A89082661C1E36B /* libPods-SchoolAuto-OneSignalNotificationServiceExtension.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		184232DC227C3C5D009CB080 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1879B2E922A513270019176C /* MapKit.framework in Frameworks */,
 				1D2DFBB2EA971EDD4C0189C9 /* libPods-SchoolAuto.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		184232F4227C3C7F009CB080 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C4A649138F62517634241339 /* libPods-SchoolAutoTests.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		184232FF227C3C7F009CB080 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				66234D259C8A5D1794ADFBA0 /* libPods-SchoolAutoUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		182AB9FF22A1503600C5BA31 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				182ABA0022A1503600C5BA31 /* NotificationService.h */,
+				182ABA0122A1503600C5BA31 /* NotificationService.m */,
+				182ABA0322A1503600C5BA31 /* Info.plist */,
+			);
+			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
 		184232D6227C3C5C009CB080 = {
 			isa = PBXGroup;
 			children = (
 				184232E1227C3C5D009CB080 /* SchoolAuto */,
 				184232FA227C3C7F009CB080 /* SchoolAutoTests */,
 				18423305227C3C7F009CB080 /* SchoolAutoUITests */,
+				182AB9FF22A1503600C5BA31 /* OneSignalNotificationServiceExtension */,
 				184232E0227C3C5D009CB080 /* Products */,
 				FA58F8B4B95EFAEDB8ECAFBE /* Pods */,
 				190F49DCC73ED32346530AE6 /* Frameworks */,
@@ -601,8 +643,7 @@
 			isa = PBXGroup;
 			children = (
 				184232DF227C3C5D009CB080 /* SchoolAuto.app */,
-				184232F7227C3C7F009CB080 /* SchoolAutoTests.xctest */,
-				18423302227C3C7F009CB080 /* SchoolAutoUITests.xctest */,
+				182AB9FE22A1503600C5BA31 /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -610,6 +651,7 @@
 		184232E1227C3C5D009CB080 /* SchoolAuto */ = {
 			isa = PBXGroup;
 			children = (
+				182AB9ED22A13FEC00C5BA31 /* SchoolAuto.entitlements */,
 				18423468227C579E009CB080 /* BaseViewController */,
 				18423317227C479D009CB080 /* Font */,
 				1842331E227C4844009CB080 /* Model */,
@@ -620,12 +662,22 @@
 				18186077228C44F70015EA70 /* pinorange.png */,
 				18ED7AED22940D7500F18622 /* SubSucessVC.h */,
 				18ED7AEC22940D7400F18622 /* SubSucessVC.m */,
+				189947B222A0010D0011B370 /* LunchBoxSucessVC.h */,
+				189947B322A0010E0011B370 /* LunchBoxSucessVC.m */,
 				184232E2227C3C5D009CB080 /* AppDelegate.h */,
 				184232E3227C3C5D009CB080 /* AppDelegate.m */,
 				184232E5227C3C5D009CB080 /* ViewController.h */,
 				184232E6227C3C5D009CB080 /* ViewController.m */,
 				18423314227C40E9009CB080 /* HomeViewController.h */,
 				18423315227C40E9009CB080 /* HomeViewController.m */,
+				189947A6229FA5FA0011B370 /* LunchBoxLoginVC.h */,
+				189947A7229FA5FB0011B370 /* LunchBoxLoginVC.m */,
+				189947B522A009640011B370 /* LunchBoxTripsListVC.h */,
+				189947B622A009640011B370 /* LunchBoxTripsListVC.m */,
+				189947AF229FD6A90011B370 /* AddLunchBoxVC.h */,
+				189947B0229FD6AA0011B370 /* AddLunchBoxVC.m */,
+				189947AC229FADD70011B370 /* LunchBoxTripVC.h */,
+				189947AD229FADD70011B370 /* LunchBoxTripVC.m */,
 				18423465227C4F59009CB080 /* DriverLoginVC.h */,
 				18423466227C4F59009CB080 /* DriverLoginVC.m */,
 				18423476227C592D009CB080 /* ParentLoginVC.h */,
@@ -660,6 +712,8 @@
 				188A21D4228A89FD006ECC2A /* AccountCC.m */,
 				185E8CC52289332000E0D1A3 /* TrackListVC.h */,
 				185E8CC62289332000E0D1A3 /* TrackListVC.m */,
+				189947AA229FACCD0011B370 /* LunchBoxListVC.h */,
+				189947A9229FACCD0011B370 /* LunchBoxListVC.m */,
 				18ED7AE92293CA0600F18622 /* StartTripTC.h */,
 				18ED7AEA2293CA0600F18622 /* StartTripTC.m */,
 				185E8CC8228938C200E0D1A3 /* ChildrenTC.h */,
@@ -727,6 +781,10 @@
 		1842331E227C4844009CB080 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				189947A1229E8D360011B370 /* AnnotationView.h */,
+				1899479E229E8D350011B370 /* AnnotationView.m */,
+				189947A0229E8D350011B370 /* MapAnnotation.h */,
+				1899479F229E8D350011B370 /* MapAnnotation.m */,
 				18F3B2C822841CE500E848D5 /* IQKeyboardManager */,
 				1851E9262280085B00EBC7D5 /* PEPhotoCropEditor */,
 				1842346C227C57DC009CB080 /* JVFloatLabeledTextField */,
@@ -1225,9 +1283,11 @@
 		190F49DCC73ED32346530AE6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1879B2E822A513270019176C /* MapKit.framework */,
 				EDBB17A96A46522D3EF50839 /* libPods-SchoolAuto.a */,
 				ABE7B79E2E1E1CCF9CE1629E /* libPods-SchoolAutoTests.a */,
 				30A909A4D2CFAC8759AB12D1 /* libPods-SchoolAutoUITests.a */,
+				AC7019640DB7C7128D7E7D3B /* libPods-SchoolAuto-OneSignalNotificationServiceExtension.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1241,6 +1301,8 @@
 				9F0A6D9661E9E165549AC34C /* Pods-SchoolAutoTests.release.xcconfig */,
 				E485C67C1DBA8F6806C49006 /* Pods-SchoolAutoUITests.debug.xcconfig */,
 				6AB0019C56726BD9AA5EF11F /* Pods-SchoolAutoUITests.release.xcconfig */,
+				587A5DFDAB522BAC2012010B /* Pods-SchoolAuto-OneSignalNotificationServiceExtension.debug.xcconfig */,
+				B6819CE94C84332983C56E16 /* Pods-SchoolAuto-OneSignalNotificationServiceExtension.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1248,6 +1310,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		182AB9FD22A1503600C5BA31 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 182ABA0722A1503600C5BA31 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
+			buildPhases = (
+				F3FB93592E8D5DD989BADA9D /* [CP] Check Pods Manifest.lock */,
+				182AB9FA22A1503600C5BA31 /* Sources */,
+				182AB9FB22A1503600C5BA31 /* Frameworks */,
+				182AB9FC22A1503600C5BA31 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneSignalNotificationServiceExtension;
+			productName = OneSignalNotificationServiceExtension;
+			productReference = 182AB9FE22A1503600C5BA31 /* OneSignalNotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		184232DE227C3C5D009CB080 /* SchoolAuto */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1842330B227C3C7F009CB080 /* Build configuration list for PBXNativeTarget "SchoolAuto" */;
@@ -1256,54 +1336,17 @@
 				184232DB227C3C5D009CB080 /* Sources */,
 				184232DC227C3C5D009CB080 /* Frameworks */,
 				184232DD227C3C5D009CB080 /* Resources */,
-				5AED1CE10B18BBABE6886E2A /* [CP] Copy Pods Resources */,
+				182ABA0A22A1503600C5BA31 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				182ABA0522A1503600C5BA31 /* PBXTargetDependency */,
 			);
 			name = SchoolAuto;
 			productName = SchoolAuto;
 			productReference = 184232DF227C3C5D009CB080 /* SchoolAuto.app */;
 			productType = "com.apple.product-type.application";
-		};
-		184232F6227C3C7F009CB080 /* SchoolAutoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1842330E227C3C7F009CB080 /* Build configuration list for PBXNativeTarget "SchoolAutoTests" */;
-			buildPhases = (
-				CF4C9B6050F55E84ACA4DD4B /* [CP] Check Pods Manifest.lock */,
-				184232F3227C3C7F009CB080 /* Sources */,
-				184232F4227C3C7F009CB080 /* Frameworks */,
-				184232F5227C3C7F009CB080 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				184232F9227C3C7F009CB080 /* PBXTargetDependency */,
-			);
-			name = SchoolAutoTests;
-			productName = SchoolAutoTests;
-			productReference = 184232F7227C3C7F009CB080 /* SchoolAutoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		18423301227C3C7F009CB080 /* SchoolAutoUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 18423311227C3C7F009CB080 /* Build configuration list for PBXNativeTarget "SchoolAutoUITests" */;
-			buildPhases = (
-				10BEC43D7ABFCDBEAD541AF4 /* [CP] Check Pods Manifest.lock */,
-				184232FE227C3C7F009CB080 /* Sources */,
-				184232FF227C3C7F009CB080 /* Frameworks */,
-				18423300227C3C7F009CB080 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				18423304227C3C7F009CB080 /* PBXTargetDependency */,
-			);
-			name = SchoolAutoUITests;
-			productName = SchoolAutoUITests;
-			productReference = 18423302227C3C7F009CB080 /* SchoolAutoUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -1314,16 +1357,22 @@
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = Apple;
 				TargetAttributes = {
+					182AB9FD22A1503600C5BA31 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
 					184232DE227C3C5D009CB080 = {
 						CreatedOnToolsVersion = 10.2.1;
-					};
-					184232F6227C3C7F009CB080 = {
-						CreatedOnToolsVersion = 10.2.1;
-						TestTargetID = 184232DE227C3C5D009CB080;
-					};
-					18423301227C3C7F009CB080 = {
-						CreatedOnToolsVersion = 10.2.1;
-						TestTargetID = 184232DE227C3C5D009CB080;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -1378,13 +1427,19 @@
 			projectRoot = "";
 			targets = (
 				184232DE227C3C5D009CB080 /* SchoolAuto */,
-				184232F6227C3C7F009CB080 /* SchoolAutoTests */,
-				18423301227C3C7F009CB080 /* SchoolAutoUITests */,
+				182AB9FD22A1503600C5BA31 /* OneSignalNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		182AB9FC22A1503600C5BA31 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		184232DD227C3C5D009CB080 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1440,67 +1495,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		184232F5227C3C7F009CB080 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		18423300227C3C7F009CB080 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		10BEC43D7ABFCDBEAD541AF4 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SchoolAutoUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5AED1CE10B18BBABE6886E2A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SchoolAuto/Pods-SchoolAuto-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SchoolAuto/Pods-SchoolAuto-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		72D8F749C2E6A94B214BE48B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1523,7 +1520,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CF4C9B6050F55E84ACA4DD4B /* [CP] Check Pods Manifest.lock */ = {
+		F3FB93592E8D5DD989BADA9D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1538,7 +1535,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SchoolAutoTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-SchoolAuto-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1548,6 +1545,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		182AB9FA22A1503600C5BA31 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				182ABA0222A1503600C5BA31 /* NotificationService.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		184232DB227C3C5D009CB080 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1555,6 +1560,7 @@
 				18F3B2F222841CE500E848D5 /* IQKeyboardManager.m in Sources */,
 				18423449227C4845009CB080 /* AFURLSessionManager.m in Sources */,
 				18F3B2EB22841CE500E848D5 /* IQTextView.m in Sources */,
+				189947B722A009650011B370 /* LunchBoxTripsListVC.m in Sources */,
 				184233FB227C4845009CB080 /* MWPhotoBrowser.m in Sources */,
 				1842342A227C4845009CB080 /* Utils.m in Sources */,
 				18423451227C4845009CB080 /* UIImageView+HighlightedWebCache.m in Sources */,
@@ -1581,6 +1587,7 @@
 				18423453227C4845009CB080 /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
 				184233FF227C4845009CB080 /* MWTapDetectingImageView.m in Sources */,
 				18F3B2FE228444C900E848D5 /* ForgotPasswordVC.m in Sources */,
+				189947A3229E8D360011B370 /* MapAnnotation.m in Sources */,
 				184233F8227C4845009CB080 /* MBProgressHUD.m in Sources */,
 				18423428227C4845009CB080 /* SVIndefiniteAnimatedView.m in Sources */,
 				188A21D2228A82FF006ECC2A /* MyAccountVC.m in Sources */,
@@ -1592,6 +1599,7 @@
 				184233F7227C4845009CB080 /* SWRevealViewController.m in Sources */,
 				18423441227C4845009CB080 /* FSCalendar+Deprecated.m in Sources */,
 				18423440227C4845009CB080 /* FSCalendarExtensions.m in Sources */,
+				189947A8229FA5FB0011B370 /* LunchBoxLoginVC.m in Sources */,
 				18F3B2ED22841CE500E848D5 /* IQTitleBarButtonItem.m in Sources */,
 				18423462227C4845009CB080 /* FTPopOverMenu.m in Sources */,
 				18186081228D51A30015EA70 /* DriverCardVC.m in Sources */,
@@ -1612,6 +1620,7 @@
 				18423426227C4845009CB080 /* SVProgressAnimatedView.m in Sources */,
 				1842344A227C4845009CB080 /* AFURLRequestSerialization.m in Sources */,
 				18423464227C4845009CB080 /* FXBlurView.m in Sources */,
+				189947AE229FADD80011B370 /* LunchBoxTripVC.m in Sources */,
 				1842344C227C4845009CB080 /* AFSecurityPolicy.m in Sources */,
 				184233F9227C4845009CB080 /* DALabeledCircularProgressView.m in Sources */,
 				1842343E227C4845009CB080 /* FSCalendarScopeHandle.m in Sources */,
@@ -1623,6 +1632,7 @@
 				1842343F227C4845009CB080 /* FSCalendarWeekdayView.m in Sources */,
 				1842342F227C4845009CB080 /* UIImageView+AFNetworking.m in Sources */,
 				1842342C227C4845009CB080 /* UIProgressView+AFNetworking.m in Sources */,
+				189947AB229FACCE0011B370 /* LunchBoxListVC.m in Sources */,
 				18423437227C4845009CB080 /* FSCalendarCollectionView.m in Sources */,
 				1851E9362280085C00EBC7D5 /* PEResizeControl.m in Sources */,
 				18423454227C4845009CB080 /* UIImage+GIF.m in Sources */,
@@ -1635,10 +1645,12 @@
 				18423435227C4845009CB080 /* Reachability.m in Sources */,
 				1842345F227C4845009CB080 /* MCLocalizationOneJSONFilePerLanguageDataSource.m in Sources */,
 				1842344B227C4845009CB080 /* AFNetworkReachabilityManager.m in Sources */,
+				189947B422A0010F0011B370 /* LunchBoxSucessVC.m in Sources */,
 				1842345C227C4845009CB080 /* UIView+WebCacheOperation.m in Sources */,
 				18F3B2F722841CE500E848D5 /* IQUIViewController+Additions.m in Sources */,
 				18423431227C4845009CB080 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				18423474227C57DC009CB080 /* JVFloatLabeledTextField.m in Sources */,
+				189947B1229FD6AA0011B370 /* AddLunchBoxVC.m in Sources */,
 				18FCE0322285AE3C00DD55D5 /* PriceTC.m in Sources */,
 				18423444227C4845009CB080 /* FSCalendarHeaderView.m in Sources */,
 				188A21CF2289930E006ECC2A /* SubScriptionList.m in Sources */,
@@ -1669,6 +1681,7 @@
 				1851E9382280085C00EBC7D5 /* PECropView.m in Sources */,
 				18423460227C4845009CB080 /* MCLocalizationSingleJSONFileDataSource.m in Sources */,
 				188A21D8228AAC65006ECC2A /* TripVC.m in Sources */,
+				189947A2229E8D360011B370 /* AnnotationView.m in Sources */,
 				18ED7AEB2293CA0600F18622 /* StartTripTC.m in Sources */,
 				1842345D227C4845009CB080 /* UIButton+WebCache.m in Sources */,
 				18FCE02F22859BDC00DD55D5 /* TarrifsVC.m in Sources */,
@@ -1688,34 +1701,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		184232F3227C3C7F009CB080 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				184232FC227C3C7F009CB080 /* SchoolAutoTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		184232FE227C3C7F009CB080 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				18423307227C3C7F009CB080 /* SchoolAutoUITests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		184232F9227C3C7F009CB080 /* PBXTargetDependency */ = {
+		182ABA0522A1503600C5BA31 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 184232DE227C3C5D009CB080 /* SchoolAuto */;
-			targetProxy = 184232F8227C3C7F009CB080 /* PBXContainerItemProxy */;
-		};
-		18423304227C3C7F009CB080 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 184232DE227C3C5D009CB080 /* SchoolAuto */;
-			targetProxy = 18423303227C3C7F009CB080 /* PBXContainerItemProxy */;
+			target = 182AB9FD22A1503600C5BA31 /* OneSignalNotificationServiceExtension */;
+			targetProxy = 182ABA0422A1503600C5BA31 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1739,6 +1731,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		182ABA0822A1503600C5BA31 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 587A5DFDAB522BAC2012010B /* Pods-SchoolAuto-OneSignalNotificationServiceExtension.debug.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2BWZ5B88Y7;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Develapp.SchoolAuto.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		182ABA0922A1503600C5BA31 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6819CE94C84332983C56E16 /* Pods-SchoolAuto-OneSignalNotificationServiceExtension.release.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2BWZ5B88Y7;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Develapp.SchoolAuto.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		18423309227C3C7F009CB080 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1855,7 +1887,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4C2E0CADBEB71AFC636F38CA /* Pods-SchoolAuto.debug.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SchoolAuto/SchoolAuto.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2BWZ5B88Y7;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1868,7 +1902,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Develapps.SchoolAuto;
+				PRODUCT_BUNDLE_IDENTIFIER = Develapp.SchoolAuto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1878,7 +1912,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0C14DE0492D635B06A4B07A1 /* Pods-SchoolAuto.release.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SchoolAuto/SchoolAuto.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2BWZ5B88Y7;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1891,89 +1927,24 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Develapps.SchoolAuto;
+				PRODUCT_BUNDLE_IDENTIFIER = Develapp.SchoolAuto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		1842330F227C3C7F009CB080 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 119140A5A07CCB927EA7D13A /* Pods-SchoolAutoTests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = SchoolAutoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = Develapps.SchoolAutoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SchoolAuto.app/SchoolAuto";
-			};
-			name = Debug;
-		};
-		18423310227C3C7F009CB080 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9F0A6D9661E9E165549AC34C /* Pods-SchoolAutoTests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = SchoolAutoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = Develapps.SchoolAutoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SchoolAuto.app/SchoolAuto";
-			};
-			name = Release;
-		};
-		18423312227C3C7F009CB080 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E485C67C1DBA8F6806C49006 /* Pods-SchoolAutoUITests.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = SchoolAutoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = Develapps.SchoolAutoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SchoolAuto;
-			};
-			name = Debug;
-		};
-		18423313227C3C7F009CB080 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6AB0019C56726BD9AA5EF11F /* Pods-SchoolAutoUITests.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = SchoolAutoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = Develapps.SchoolAutoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SchoolAuto;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		182ABA0722A1503600C5BA31 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				182ABA0822A1503600C5BA31 /* Debug */,
+				182ABA0922A1503600C5BA31 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		184232DA227C3C5D009CB080 /* Build configuration list for PBXProject "SchoolAuto" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1988,24 +1959,6 @@
 			buildConfigurations = (
 				1842330C227C3C7F009CB080 /* Debug */,
 				1842330D227C3C7F009CB080 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1842330E227C3C7F009CB080 /* Build configuration list for PBXNativeTarget "SchoolAutoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1842330F227C3C7F009CB080 /* Debug */,
-				18423310227C3C7F009CB080 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		18423311227C3C7F009CB080 /* Build configuration list for PBXNativeTarget "SchoolAutoUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				18423312227C3C7F009CB080 /* Debug */,
-				18423313227C3C7F009CB080 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

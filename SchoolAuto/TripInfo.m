@@ -8,6 +8,7 @@
 
 #import "TripInfo.h"
 #import "TripInfoTC.h"
+#import "Utils.h"
 @interface TripInfo ()
 {
     UIButton *addButton;
@@ -24,6 +25,8 @@
     self.navigationItem.title=@"TRIP INFO";
     _emptyImage.hidden=YES;
     _addNewBtn.hidden=YES;
+    _emptyLbl.hidden=YES;
+
     
     
 
@@ -33,7 +36,13 @@
     _emptyImage.hidden=YES;
     _addNewBtn.hidden=YES;
     _listTableView.hidden = NO;
-    [self makePostCallForPageNEWGET:GETTRIPSTATUS withParams:@{@"id":[NSString stringWithFormat:@"%@",_student_id]} withRequestCode:109];
+    _emptyLbl.hidden=YES;
+
+    if([_from isEqualToString:@"Lunchbox"]){
+    [self makePostCallForPageNEWGET:LUNCHBOX_GETTRIPSTATUS withParams:@{@"id":[NSString stringWithFormat:@"%@",_student_id]} withRequestCode:109];
+    }else{
+        [self makePostCallForPageNEWGET:GETTRIPSTATUS withParams:@{@"id":[NSString stringWithFormat:@"%@",_student_id]} withRequestCode:109];
+    }
 }
 -(void)parseResult:(id)result withCode:(int)reqeustCode{
     if(reqeustCode==109){
@@ -45,11 +54,18 @@
         subList=[result valueForKey:@"data"];
         [_listTableView reloadData];
         }
-//        if(subList.count==0){
-//            _emptyImage.hidden=NO;
-//            _addNewBtn.hidden=NO;
-//            _listTableView.hidden = YES;
-//        }
+        if(subList.count==0){
+            _emptyImage.hidden=NO;
+            _addNewBtn.hidden=NO;
+            _emptyLbl.hidden=NO;
+
+            _listTableView.hidden = YES;
+        }else{
+            _emptyImage.hidden=YES;
+            _addNewBtn.hidden=YES;
+            _emptyLbl.hidden=YES;
+            _listTableView.hidden = NO;
+        }
     }
 }
 
@@ -102,7 +118,7 @@
         if([[dic valueForKey:@"start"]  isEqual: @"true"]){
             cell.tripInfoLbl.text= @"Trip Started";
             cell.createdDateInfoLbl.text= [dic valueForKey:@"created"];
-        }else if([[dic valueForKey:@"End"]  isEqual: @"true"]){
+        }else if([[dic valueForKey:@"end"]  isEqual: @"true"]){
             cell.tripInfoLbl.text= @"Trip Ended";
             cell.createdDateInfoLbl.text= [dic valueForKey:@"created"];
         }else{
@@ -134,7 +150,7 @@
     /* Section header is in 0th index... */
     [label setText:[sdic valueForKey:@"date"]];
     [view addSubview:label];
-    [view setBackgroundColor:[UIColor colorWithRed:166/255.0 green:177/255.0 blue:186/255.0 alpha:1.0]]; //your background color...
+    [view setBackgroundColor:[UIColor clearColor]]; //your background color...
     return view;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;

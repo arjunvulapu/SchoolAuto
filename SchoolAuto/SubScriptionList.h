@@ -16,6 +16,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIImageView *emptyImage;
 @property (weak, nonatomic) IBOutlet UIButton *addNewBtn;
 - (IBAction)addNewBtnAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *subSegement;
+- (IBAction)subSegmentAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *addChildBtn;
+- (IBAction)addchildBtnAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *addLunchBoxBtn;
+- (IBAction)addLunchBoxBtnAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *emptyLbl;
 
 @end
 

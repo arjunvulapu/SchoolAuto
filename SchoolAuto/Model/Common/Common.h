@@ -31,6 +31,8 @@
 //#define SERVER_URL @"http://products.yellowsoft.in/homeworkers/api/"
 #define SERVER_URL @"http://projects.yellowsoft.in/schoolauto/api"
 
+#define PAGE_REGISTER_TOKEN @"push/register.php"
+
 #define LOGIN @"parents/login.php"
 #define REGISTER @"parents/register.php"
 #define FORGOTPASSWORD @"parents/forgotpassword.php"
@@ -54,6 +56,13 @@
 #define TRIP_STATUS @"dailytrips/register.php"
 #define GETTRIPSTATUS @"kid-daily-trips/register.php"
 #define TRIP_EXIST_MESSAGES @"dts_status/register.php"
+
+#define ADD_LUNCHBOX_SUBSCRIPTIONS @"carriages/subscriptions.php"
+#define LUNCHBOX_TRIPSLIST @"carriage_trips/register.php"
+#define LUNCHBOX_TRIP_STATUS @"carriage_dailytrips/register.php"
+#define LUNCHBOX_STATUSLIST @"carriage_status/register.php"
+#define LUNCHBOX_GETTRIPSTATUS @"carriage-daily-trips/register.php"
+#define LUNCHBOX_SAHRING_OPTIONS @"parents/carriage_sharing_options.php"
 
 
 #define UICOLOR_FROM_HEX_ALPHA(RGBValue, Alpha) [UIColor \

@@ -21,7 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UICollectionView *adsCollectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *adsCollectionViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sliderheight;
-
+@property (weak, nonatomic) IBOutlet UIView *mainBg;
+@property (weak, nonatomic) IBOutlet UIButton *poweredBtn;
+- (IBAction)poweredbyBtnAction:(id)sender;
 @end
 
 NS_ASSUME_NONNULL_END

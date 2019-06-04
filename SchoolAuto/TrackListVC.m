@@ -99,6 +99,8 @@
     cell.infoBtnPressed = ^{
         TripInfo *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"TripInfo"];
         vc.student_id=[dic valueForKey:@"subscription_id"];
+        vc.from = @"Driver";
+
         [self PushToVc:vc];
     };
             return cell;

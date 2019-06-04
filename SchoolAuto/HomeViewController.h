@@ -15,6 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *driverBtn;
 - (IBAction)parentBtnAction:(id)sender;
 - (IBAction)driverbtnAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *lunchBoxBtn;
+- (IBAction)lunchboxBtnAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *poweredBtn;
+- (IBAction)poweredbyBtnAction:(id)sender;
 
 @end
 

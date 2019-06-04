@@ -18,6 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (IBAction)forgotPasswordbtnAction:(id)sender;
 @property (weak, nonatomic) IBOutlet JVFloatLabeledTextField *emialTxtField;
 @property (weak, nonatomic) IBOutlet JVFloatLabeledTextField *passwordTxtField;
+@property (weak, nonatomic) IBOutlet UIButton *driverRadiobtn;
+- (IBAction)driverradioBtnAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *lunchboxRadioBtn;
+- (IBAction)lunchboxRadioBtnAction:(id)sender;
 
 @end
 

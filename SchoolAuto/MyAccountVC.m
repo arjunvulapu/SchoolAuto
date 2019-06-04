@@ -10,6 +10,7 @@
 #import "MyAccountTC.h"
 #import "SubScriptionList.h"
 #import "ChangePasswordVC.h"
+#import "TarrifsVC.h"
 @interface MyAccountVC ()
 {
     NSMutableArray *menuList;
@@ -28,8 +29,8 @@
     NSData *data = [currentDefaults objectForKey:@"BANNERS"];
     NSDictionary *bannersDict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     offersList =[bannersDict valueForKey:@"offers"];
-    menuList=[[NSMutableArray alloc] initWithObjects:@"MY PROFILE",@"SUBSCRIPTIONS",@"CHANGE PASSWORD",@"LOGOUT", nil];
-    menuImages=[[NSMutableArray alloc] initWithObjects:@"muser",@"mcalendar",@"changepass",@"mlogout", nil];
+    menuList=[[NSMutableArray alloc] initWithObjects:@"MY PROFILE",@"SUBSCRIPTIONS",@"TARRIFS",@"CHANGE PASSWORD",@"LOGOUT", nil];
+    menuImages=[[NSMutableArray alloc] initWithObjects:@"muser",@"mcalendar",@"india-rupee-currency-symbol",@"changepass",@"mlogout", nil];
 
 }
 
@@ -40,7 +41,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return menuList.count;
 }
 
 
@@ -65,15 +66,19 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row==3){
+    if(indexPath.row==4){
         [self logoutButtonPressed];
     } else  if(indexPath.row==1){
         SubScriptionList *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"SubScriptionList"];
         [self PushToVc:vc];
     }else  if(indexPath.row==2){
+        TarrifsVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"TarrifsVC"];
+        [self PushToVc:vc];
+    }else  if(indexPath.row==3){
         ChangePasswordVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"ChangePasswordVC"];
         [self PushToVc:vc];
-    }else  if(indexPath.row==0){
+    }
+    else  if(indexPath.row==0){
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
     
@@ -109,8 +114,21 @@
     
     [self presentViewController:alert animated:YES completion:nil];
 }
+-(void)parseResult:(id)result withCode:(int)reqeustCode{
+    if(reqeustCode==1001){
+        NSLog(@"push registered:%@",result);
+    }
+}
 -(void)clearAllData{
     [Utils logoutUser];
+
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    [defaults setObject:nil forKey:@"USERINFO"];
+    [defaults synchronize];
+    
+    NSString *deviceToken = [[NSUserDefaults standardUserDefaults] valueForKey:@"TOKEN"]?[[NSUserDefaults standardUserDefaults] valueForKey:@"TOKEN"]:@"";
+    NSString *playerID = [[NSUserDefaults standardUserDefaults] valueForKey:@"player_id"]?[[NSUserDefaults standardUserDefaults] valueForKey:@"player_id"]:@"";
+    [self makePostCallForPageNEW:PAGE_REGISTER_TOKEN withParams:@{@"device_token":deviceToken,@"player_id":playerID,@"dev_type":@"ios",@"type":@"",@"member_id":[Utils loggedInUserIdStr]} withRequestCode:1001];
     [APP_DELEGATE afterLoginLogOut];
 }
 

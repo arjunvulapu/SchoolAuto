@@ -14,6 +14,8 @@
 #import "SVProgressHUD.h"
 #import "Utils.h"
 #import "Common.h"
+#import <OneSignal/OneSignal.h>
+
 @implementation UILabel (Helper)
 
 - (void)setSubstituteFontName:(NSString *)name UI_APPEARANCE_SELECTOR {
@@ -56,22 +58,84 @@ BOOL isBold(UIFontDescriptor * fontDescriptor)
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self downloadBanners];
+    [OneSignal initWithLaunchOptions:launchOptions
+                               appId:@"a9eb3689-17ab-4d68-8275-2b9119f7ce4c"
+            handleNotificationAction:nil
+                            settings:@{kOSSettingsKeyAutoPrompt: @false}];
+    OneSignal.inFocusDisplayType = OSNotificationDisplayTypeNotification;
     
+    // Recommend moving the below line to prompt for push after informing the user about
+    //   how your app will use them.
+    [OneSignal promptForPushNotificationsWithUserResponse:^(BOOL accepted) {
+        NSLog(@"User accepted notifications: %d", accepted);
+    }];
+    [OneSignal addSubscriptionObserver:self];
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+   
+    
+    [self->locationManager requestAlwaysAuthorization];
+
+    if ([self->locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+        [self->locationManager requestAlwaysAuthorization];
+        
+    }
+    [self->locationManager requestWhenInUseAuthorization];
+    if ([self->locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self->locationManager requestWhenInUseAuthorization];
+    }
+    UIAlertView * alert;
+
+    //We have to make sure that the Background App Refresh is enable for the Location updates to work in the background.
+    if ([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusDenied) {
+        
+        alert = [[UIAlertView alloc]initWithTitle:@""
+                                          message:@"The app doesn't work without the Background App Refresh enabled. To turn it on, go to Settings > General > Background App Refresh"
+                                         delegate:nil
+                                cancelButtonTitle:@"Ok"
+                                otherButtonTitles:nil, nil];
+        [alert show];
+        
+    } else if ([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusRestricted) {
+        
+        alert = [[UIAlertView alloc]initWithTitle:@""
+                                          message:@"The functions of this app are limited because the Background App Refresh is disable."
+                                         delegate:nil
+                                cancelButtonTitle:@"Ok"
+                                otherButtonTitles:nil, nil];
+        [alert show];
+        
+    } else {
+        
+        // When there is a significant changes of the location,
+        // The key UIApplicationLaunchOptionsLocationKey will be returned from didFinishLaunchingWithOptions
+        // When the app is receiving the key, it must reinitiate the locationManager and get
+        // the latest location updates
+        
+        // This UIApplicationLaunchOptionsLocationKey key enables the location update even when
+        // the app has been killed/terminated (Not in th background) by iOS or the user.
+        
+        NSLog(@"UIApplicationLaunchOptionsLocationKey : %@" , [launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey]);
+        if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey]) {
+            
+            // This "afterResume" flag is just to show that he receiving location updates
+            // are actually from the key "UIApplicationLaunchOptionsLocationKey"
+            [locationManager startUpdatingLocation];
+            
+        }
+    }
     if([Utils loggedInUserId] != -1){
-        if([[Utils loggedInUserType]  isEqual: @"Driver"]){
+        if([[Utils loggedInUserType]  isEqual: @"Driver"]||[[Utils loggedInUserType]  isEqual: @"Lunchbox"]){
             [self afterDriverLoginSucess];
             //create new CLLocationManager
-            locationManager = [[CLLocationManager alloc] init];
-            locationManager.delegate = self;
-            [locationManager startUpdatingLocation];
-
+           
         }else{
             [self afterLoginSucess];
         }
     }else{
         [self afterLoginLogOut];
     }
-    [self getBanners];
     return YES;
 }
 
@@ -92,6 +156,34 @@ BOOL isBold(UIFontDescriptor * fontDescriptor)
 //    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
 //}
 
+- (void)onOSPermissionChanged:(OSPermissionStateChanges*)stateChanges {
+    
+    // Example of detecting anwsering the permission prompt
+    if (stateChanges.from.status == OSNotificationPermissionNotDetermined) {
+        if (stateChanges.to.status == OSNotificationPermissionAuthorized)
+            NSLog(@"Thanks for accepting notifications!");
+        else if (stateChanges.to.status == OSNotificationPermissionDenied)
+            NSLog(@"Notifications not accepted. You can turn them on later under your iOS settings.");
+    }
+    
+    // prints out all properties
+    NSLog(@"PermissionStateChanges:\n%@", stateChanges);
+}
+- (void)onOSSubscriptionChanged:(OSSubscriptionStateChanges*)stateChanges {
+    
+    // Example of detecting subscribing to OneSignal
+    if (!stateChanges.from.subscribed && stateChanges.to.subscribed) {
+        NSLog(@"Subscribed for OneSignal push notifications!");
+        // get player ID
+        
+        NSLog(@"player_id     -----> %@\n", stateChanges.to.userId);
+        [[NSUserDefaults standardUserDefaults] setValue:stateChanges.to.userId forKey:@"player_id"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
+    // prints out all properties
+    NSLog(@"SubscriptionStateChanges:\n%@", stateChanges);
+}
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
@@ -103,6 +195,8 @@ BOOL isBold(UIFontDescriptor * fontDescriptor)
 }
 
 - (void)afterLoginSucess {
+    locationManager.allowsBackgroundLocationUpdates=NO;
+    [locationManager stopUpdatingLocation];
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -113,10 +207,11 @@ BOOL isBold(UIFontDescriptor * fontDescriptor)
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
     
+    
 }
 - (void)afterDriverLoginSucess {
-    [locationManager stopUpdatingLocation];
-
+    locationManager.allowsBackgroundLocationUpdates=YES;
+    [locationManager startUpdatingLocation];
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -129,7 +224,9 @@ BOOL isBold(UIFontDescriptor * fontDescriptor)
     
 }
 - (void)afterLoginLogOut {
+    locationManager.allowsBackgroundLocationUpdates=NO;
     [locationManager stopUpdatingLocation];
+//    [locationManager stopUpdatingLocation];
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -146,13 +243,14 @@ BOOL isBold(UIFontDescriptor * fontDescriptor)
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     [locationManager startUpdatingLocation];
+    
 }
 
 //starts automatically with locationManager
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
   //  NSLog(@"Location: %f, %f", newLocation.coordinate.longitude, newLocation.coordinate.latitude);
     if([Utils loggedInUserId] != -1){
-        if([[Utils loggedInUserType]  isEqual: @"Driver"]){
+        if([[Utils loggedInUserType]  isEqual: @"Driver"]||[[Utils loggedInUserType]  isEqual: @"Lunchbox"]){
             [self updateToServer:newLocation.coordinate.latitude withlong:newLocation.coordinate.longitude];
         }
 }
@@ -231,5 +329,30 @@ BOOL isBold(UIFontDescriptor * fontDescriptor)
     } failure:^(NSURLSessionTask *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
+}
+
+- (void)downloadBanners {
+    NSData *data2 = [NSData dataWithContentsOfURL:[Utils createURLForPage:BANNERS withParameters:@{}]];
+    if(data2){
+        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data2 options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"%@",dictionary);
+//        [[NSUserDefaults standardUserDefaults] setObject:dictionary forKey:@"BANNERS"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+        NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dictionary];
+        [currentDefaults setObject:data forKey:@"BANNERS"];
+        NSData *data2 = [currentDefaults objectForKey:@"BANNERS"];
+        NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data2];
+        NSLog(@"1010101--->dict%@",dict);
+    }
+}
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
+    NSString* strDeviceToken = [[[[deviceToken description]
+                                  stringByReplacingOccurrencesOfString: @"<" withString: @""]
+                                 stringByReplacingOccurrencesOfString: @">" withString: @""]
+                                stringByReplacingOccurrencesOfString: @" " withString: @""] ;
+    NSLog(@"Device_Token     -----> %@\n", strDeviceToken);
+    [[NSUserDefaults standardUserDefaults] setValue:strDeviceToken forKey:@"TOKEN"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 @end

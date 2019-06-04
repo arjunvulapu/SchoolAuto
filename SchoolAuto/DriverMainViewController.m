@@ -14,12 +14,16 @@
 #import "AddChildVC.h"
 #import "DriverCardVC.h"
 #import "MyAccountVC.h"
-@interface DriverMainViewController ()<SBSliderDelegate>
+#import "LunchBoxListVC.h"
+#import "LunchBoxTripsListVC.h"
+@interface DriverMainViewController ()<SBSliderDelegate,CLLocationManagerDelegate>
 {
     NSMutableArray *mainCatList;
     NSMutableArray *mainCatImages;
     NSMutableArray *offersList;
     SBSliderView *slider;
+    CLLocationManager *locationManager;
+
 
 }
 @end
@@ -42,7 +46,7 @@
         [imagesArray addObject:[dict valueForKey:@"banner_image"]];
     }
     _homemainCollectionView.layer.cornerRadius=10;
-    _homemainCollectionView.clipsToBounds=YES;
+   _homemainCollectionView.clipsToBounds=YES;
 //    [_slider2 startAutoPlay];
 //    _slider2.delegate = self;
 //    [_slider2 createSliderWithImages:imagesArray WithAutoScroll:YES inView:self.bannerView];
@@ -61,7 +65,13 @@
     [slider createSliderWithImages:imagesArray WithAutoScroll:_AUTO_SCROLL_ENABLED inView:self.bannerView];
     
     mainCatList=[[NSMutableArray alloc] init];
-    [mainCatList addObject:@"TRIPS"];
+    if([[Utils loggedInUserType]  isEqual: @"Lunchbox"]){
+
+    [mainCatList addObject:@"ORDERS LIST"];
+    }else{
+        [mainCatList addObject:@"TRIPS"];
+
+    }
     [mainCatList addObject:@"MYPROFILE"];
   //  [mainCatList addObject:@"TARRIFS"];
     [mainCatList addObject:@"LOGOUT"];
@@ -78,7 +88,29 @@
     _adsCollectionView.backgroundColor=[UIColor clearColor];
     //_sliderheight.constant = self.view.frame.size.width*2/3;
     self.navigationController.navigationBar.hidden=YES;
+    
+    _mainBg.layer.cornerRadius=10;
 
+    [_mainBg.layer setShadowColor:[UIColor blackColor].CGColor];
+    [_mainBg.layer setShadowOpacity:0.2];
+    [_mainBg.layer setShadowRadius:5.0];
+    [_mainBg.layer setShadowOffset:CGSizeMake(0.0, 0.0)];
+    NSString *deviceToken = [[NSUserDefaults standardUserDefaults] valueForKey:@"TOKEN"]?[[NSUserDefaults standardUserDefaults] valueForKey:@"TOKEN"]:@"";
+    NSString *playerID = [[NSUserDefaults standardUserDefaults] valueForKey:@"player_id"]?[[NSUserDefaults standardUserDefaults] valueForKey:@"player_id"]:@"";
+    if([[Utils loggedInUserType]  isEqual: @"Lunchbox"]){
+
+    [self makePostCallForPageNEWNoProgess:PAGE_REGISTER_TOKEN withParams:@{@"device_token":deviceToken,@"player_id":playerID,@"dev_type":@"ios",@"type":@"lunchbox",@"member_id":[Utils loggedInUserIdStr]}
+                          withRequestCode:1001];
+    }else{
+        [self makePostCallForPageNEWNoProgess:PAGE_REGISTER_TOKEN withParams:@{@"device_token":deviceToken,@"player_id":playerID,@"dev_type":@"ios",@"type":@"driver",@"member_id":[Utils loggedInUserIdStr]}
+                              withRequestCode:1001];
+    }
+    
+}
+-(void)parseResult:(id)result withCode:(int)reqeustCode{
+    if(reqeustCode==1001){
+        NSLog(@"Push Register%@",result);
+    }
 }
 -(void)viewWillAppear:(BOOL)animated{
   //  _sliderheight.constant = self.view.frame.size.width*2/3;
@@ -152,10 +184,12 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
 {
     if(collectionView==_homemainCollectionView){
+        if([[Utils loggedInUserType]  isEqual: @"Lunchbox"]){
 
     if(indexPath.row==0){
-        TripsListVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"TripsListVC"];
+        LunchBoxTripsListVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"LunchBoxTripsListVC"];
         [self PushToVc:vc];
+    
     }
     else  if(indexPath.row==1){
         DriverCardVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"DriverCardVC"];
@@ -171,6 +205,28 @@
     TarrifsVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"TarrifsVC"];
     [self PushToVc:vc];
     }
+        }else{
+            
+            if(indexPath.row==0){
+                TripsListVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"TripsListVC"];
+                [self PushToVc:vc];
+                
+            }
+            else  if(indexPath.row==1){
+                DriverCardVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"DriverCardVC"];
+                [self PushToVc:vc];
+            } else  if(indexPath.row==2){
+                //        [Utils logoutUser];
+                //        [APP_DELEGATE afterLoginLogOut];
+                //        MyAccountVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"MyAccountVC"];
+                //        [self PushToVc:vc];
+                [self logoutButtonPressed];
+            }
+            else{
+                TarrifsVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"TarrifsVC"];
+                [self PushToVc:vc];
+            }
+        }
     }else{
         NSDictionary *dict = [offersList objectAtIndex:indexPath.row];
         
@@ -180,11 +236,16 @@
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(collectionView==_adsCollectionView){
+        return CGSizeMake((CGRectGetWidth(collectionView.frame)/2)-16, (CGRectGetHeight(collectionView.frame)/2)-16);
+
+    }else{
     if(indexPath.row==2){
         return CGSizeMake((CGRectGetWidth(collectionView.frame))-16, (CGRectGetHeight(collectionView.frame)/2)-16);
 
     }else{
         return CGSizeMake((CGRectGetWidth(collectionView.frame)/2)-16, (CGRectGetHeight(collectionView.frame)/2)-16);
+    }
     }
  
 }
@@ -234,9 +295,27 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 -(void)clearAllData{
-    
-    
     [Utils logoutUser];
+
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    [defaults setObject:nil forKey:@"USERINFO"];
+    [defaults synchronize];
+    
+    NSString *deviceToken = [[NSUserDefaults standardUserDefaults] valueForKey:@"TOKEN"]?[[NSUserDefaults standardUserDefaults] valueForKey:@"TOKEN"]:@"";
+    NSString *playerID = [[NSUserDefaults standardUserDefaults] valueForKey:@"player_id"]?[[NSUserDefaults standardUserDefaults] valueForKey:@"player_id"]:@"";
+    [self makePostCallForPageNEW:PAGE_REGISTER_TOKEN withParams:@{@"device_token":deviceToken,@"player_id":playerID,@"dev_type":@"ios",@"type":@"",@"member_id":[Utils loggedInUserIdStr]} withRequestCode:1001];
+    
     [APP_DELEGATE afterLoginLogOut];
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [locationManager requestWhenInUseAuthorization];
+    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [locationManager requestWhenInUseAuthorization];
+    }
+    
+}
+- (IBAction)poweredbyBtnAction:(id)sender;
+{
+     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",@"https://www.develappsolutions.com"]]];
 }
 @end

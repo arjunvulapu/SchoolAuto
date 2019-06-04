@@ -48,7 +48,12 @@
     _mapView.layer.cornerRadius=10;
     _mapView.clipsToBounds=YES;
     
-    self.title = @"Children Track";
+    self.title = @"Id Card";
+    if([[Utils loggedInUserType] isEqualToString:@"Lunchbox"]){
+        self.headingLbl.text = @"Driver Id Card";
+    }else{
+        self.headingLbl.text = @"Carrier Id Card";
+    }
     
     // drop shadow
     _driverImageBg.layer.cornerRadius=10;

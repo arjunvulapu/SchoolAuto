@@ -240,6 +240,8 @@
             [string appendFormat:@"%@=%@&", key, value];
         }
     }
+    NSLog(@"URL : %@", string);
+
     return string;
 }
 

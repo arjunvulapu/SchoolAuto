@@ -124,14 +124,20 @@
         }else{
             pinView.image = [UIImage imageNamed:@"home"];
         }
-        //            pinView.calloutOffset = CGPointMake(-80, 0);
+        UIButton *rightButton   =   [UIButton buttonWithType:UIButtonTypeCustom];
+        rightButton.frame       =   CGRectMake(0, 0, 30, 30);
+        // [rightButton setTitle:@"Info!" forState:UIControlStateNormal];
+        [rightButton setBackgroundImage:[UIImage imageNamed:@"call"] forState:UIControlStateNormal];
+        rightButton.showsTouchWhenHighlighted   =   YES;
+        [rightButton addTarget:self action:@selector(rightAcccoryViewButtonCLicked:) forControlEvents:UIControlEventTouchUpInside]; //rightAcccoryViewButtonCLicked is a function
         
-        //        } else {
-        //            pinView.annotation = annotation;
-        //        }
+        pinView.rightCalloutAccessoryView = rightButton;
         return pinView;
     }
     return nil;
+}
+-(void)rightAcccoryViewButtonCLicked:(UIButton *)sender{
+    
 }
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
@@ -315,7 +321,7 @@
                   
                   
                   // _City.text=[placemark.addressDictionary objectForKey:@"City"];
-                  [locationManager stopUpdatingLocation];
+                 // [locationManager stopUpdatingLocation];
               }
      
      ];
@@ -440,7 +446,7 @@
                   
                   
                   // _City.text=[placemark.addressDictionary objectForKey:@"City"];
-                  [locationManager stopUpdatingLocation];
+                 // [locationManager stopUpdatingLocation];
               }
      
      ];
@@ -887,5 +893,15 @@ UIImage *user_uiimage;
 - (IBAction)selectCommentBtnAction:(id)sender {
     [self makePostCallForPageNEWGET:TRIP_EXIST_MESSAGES withParams:nil withRequestCode:113];
 
+}
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+    for(NSMutableDictionary *dic in childList){
+        if([[dic valueForKey:@"kid_name"] isEqualToString:view.annotation.title]){
+            NSString *phoneNumber = [dic valueForKey:@"parent_phone"];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",phoneNumber]]];
+            break;
+        }
+    }
 }
 @end

@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *detailsView;
 @property (weak, nonatomic) IBOutlet UIImageView *manImage;
 @property (weak, nonatomic) IBOutlet UIView *driverImageBg;
+@property (weak, nonatomic) IBOutlet UILabel *headingLbl;
 
 @property(strong,nonatomic)NSDictionary *resultDic;
 @end

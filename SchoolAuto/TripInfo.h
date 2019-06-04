@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *addNewBtn;
 - (IBAction)addNewBtnAction:(id)sender;
 @property(weak,nonatomic) NSString *student_id;
+@property(weak,nonatomic) NSString *from;
+@property (weak, nonatomic) IBOutlet UILabel *emptyLbl;
 
 @end
 

@@ -8,7 +8,7 @@
 
 #import "AddChildVC.h"
 #import "FTPopOverMenu.h"
-#import <GoogleMaps/GoogleMaps.h>
+//#import <GoogleMaps/GoogleMaps.h>
 #import "SubSucessVC.h"
 @interface AddChildVC ()<CLLocationManagerDelegate>
 {
@@ -45,6 +45,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self->locationManager requestWhenInUseAuthorization];
+    if ([self->locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self->locationManager requestWhenInUseAuthorization];
+    }
     numberofDays=0;
     // Do any additional setup after loading the view.
     classList=[[NSMutableArray alloc] initWithObjects:@"U.K.G",@"L.K.G",@"1 Class",@"2 Class",@"3 Class",@"4 Class",@"5 Class",@"6 Class",@"7 Class",@"8 Class",@"9 Class",@"10 Class",nil];
@@ -58,7 +62,7 @@
     self.title = @"SUBSCRIPTION";
     _mapView.delegate=self;
     // [self getDirections];
-   // [_mapView setShowsUserLocation:YES];
+    [_mapView setShowsUserLocation:YES];
     [self.mapView setDelegate:self];
     [self.mapView setShowsUserLocation:YES];
     schoolsList=[[NSMutableArray alloc] init];
@@ -77,29 +81,24 @@
     
     rupee=@"\u20B9";
     _priceLbl.text=[NSString stringWithFormat:@"%@ %@",rupee,@"000.00"];
+    self->locationManager = [[CLLocationManager alloc]init];
+    self->locationManager.delegate = self;
+    [locationManager startUpdatingLocation];
     
 }
-- (void)mapView:(GMSMapView *)mapView idleAtCameraPosition:(GMSCameraPosition *)position;
 
-{
-    NSLog(@"In willMove");
-    //NSLog(@"%@",[mapView.camera target]);
-    CLLocationCoordinate2D center = [mapView.camera target];
-    clocation = center;
-    _latLbl.text= [NSString stringWithFormat:@"%f",clocation.latitude];
-    _logLbl.text= [NSString stringWithFormat:@"%f",clocation.longitude];
-    [self getupdatedList];
-    MKUserTrackingBarButtonItem *buttonItem = [[MKUserTrackingBarButtonItem alloc] initWithMapView:self.mapView];
-    self.navigationItem.rightBarButtonItem = buttonItem;
-//    txtLatitude = center.latitude;
-//    txtLongitude = center.longitude;
-//    [self getGoogleAdrressFromLatLong:txtLatitude lon:txtLongitude];
-}
 -(void)viewWillAppear:(BOOL)animated{
 //    clocation = self.mapView.userLocation.coordinate;
 //    [self addpinAtCurrentLocation];
 //    CLLocation *location2 = [[CLLocation alloc] initWithLatitude:clocation.latitude longitude:clocation.longitude];
 //    [self getAddressFromLocation:location2];
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [self->locationManager requestWhenInUseAuthorization];
+    if ([self->locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self->locationManager requestWhenInUseAuthorization];
+    }
+   
 }
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
     NSLog(@"---- %@",userLocation);
@@ -459,6 +458,7 @@ didChangeDragState:(MKAnnotationViewDragState)newState
                                NSLog(@"done block. do something. selectedIndex : %ld", (long)selectedIndex);
                                self->selectedPrices =[self->pricesList objectAtIndex:selectedIndex];
                                self->_selectPkgTxtField.text =[NSString stringWithFormat:@"%@ Sharing-%@/-",[self->selectedPrices valueForKey:@"share_count"],[self->selectedPrices valueForKey:@"price"]];
+                               self.selectdurationTxtField.text=@"";
                                [self getupdatedList];
                                //                           NSDictionary *LtypeDic=[leaveTypes objectAtIndex:selectedIndex];
                                //                           [self makePostCallForPage:HRLEAVEACTION withParams:@{@"employee_id":[Utils loggedInUserIdStr],@"leave_id":self->cancelStr,@"status":@"1",@"leave_type":[NSString stringWithFormat:@"%@",[LtypeDic valueForKey:@"id"]]} withRequestCode:11];
@@ -501,7 +501,7 @@ didChangeDragState:(MKAnnotationViewDragState)newState
         [self showErrorAlertWithMessage:@"Please Select Package"];
     }else{
      //   parent_id, school_id, price_id, kid_name, kid_age, kid_class, pickup_address, pickup_latitude, pickup_longitude
-        [self makePostCallForPageNEW:ADDSUBSCRIPTIONS withParams:@{@"parent_id":[userDic valueForKey:@"pa_id"],@"school_id":[selectedSchool valueForKey:@"sch_id"],@"price_id":[selectedPrices valueForKey:@"price_id"],@"kid_name":_kidNameTxtField.text,@"kid_age":_ageTxtField.text,@"kid_class":_classTxtField.text,@"pickup_address":_enterAddressTxtView.text,@"pickup_latitude":[NSString stringWithFormat:@"%f",clocation.latitude],@"pickup_longitude":[NSString stringWithFormat:@"%f",clocation.longitude],@"subscription_duration": [NSString stringWithFormat:@"%d",numberofDays],@"amount_paid":[NSString stringWithFormat:@"%.2f",price]} withRequestCode:118];
+        [self makePostCallForPageNEW:ADDSUBSCRIPTIONS withParams:@{@"parent_id":[userDic valueForKey:@"pa_id"],@"school_id":[selectedSchool valueForKey:@"sch_id"],@"price_id":[selectedPrices valueForKey:@"price_id"],@"kid_name":_kidNameTxtField.text,@"kid_age":_ageTxtField.text,@"kid_class":_classTxtField.text,@"pickup_address":_enterAddressTxtView.text,@"pickup_latitude":[NSString stringWithFormat:@"%f",clocation.latitude],@"pickup_longitude":[NSString stringWithFormat:@"%f",clocation.longitude],@"subscription_duration": [NSString stringWithFormat:@"%d",numberofDays],@"amount_paid":[NSString stringWithFormat:@"%.2f",price],@"subscription_type":[_selectTripTypeTxtField.text lowercaseString]} withRequestCode:118];
     }
 
     
@@ -528,7 +528,7 @@ didChangeDragState:(MKAnnotationViewDragState)newState
 //            for(NSDictionary *LDic in pricesList){
 //                [Item addObject:[NSString stringWithFormat:@"%@ Sharing-%@/-",[LDic valueForKey:@"share_count"],[LDic valueForKey:@"price"]]];
 //            }
-                    [Item addObject:@"1Month"];
+                    [Item addObject:@"2Month"];
                     [Item addObject:@"3Months"];
                     [Item addObject:@"5Months"];
             
@@ -540,19 +540,35 @@ didChangeDragState:(MKAnnotationViewDragState)newState
                                    //self->selectedPrices =[self->pricesList objectAtIndex:selectedIndex];
                                    self->_selectdurationTxtField.text =[NSString stringWithFormat:@"%@",[Item objectAtIndex:selectedIndex]];
                                    
-                                   price =0;
+                                   self->price =0;
+                                   if([selectedTrip  isEqual:@"0"]||[selectedTrip isEqual:@"1"]){
                                    if(selectedIndex==0){
-                                       self->numberofDays=30;
-                                       price =[[self->selectedPrices valueForKey:@"price_1mon"] floatValue];
+                                       self->numberofDays=60;
+                                       price =[[self->selectedPrices valueForKey:@"price_oneway_months_2"] floatValue];
                                    }else if(selectedIndex==1){
                                        self->numberofDays=90;
-                                       price =[[self->selectedPrices valueForKey:@"price_3mon"] floatValue];
+                                       price =[[self->selectedPrices valueForKey:@"price_oneway_months_3"] floatValue];
 
                                    }else if(selectedIndex==2){
                                        self->numberofDays=150;
-                                       price =[[self->selectedPrices valueForKey:@"price_5mon"] floatValue];
+                                       price =[[self->selectedPrices valueForKey:@"price_oneway_months_5"] floatValue];
 
 
+                                   }
+                                   }else{
+                                       if(selectedIndex==0){
+                                           self->numberofDays=60;
+                                           price =[[self->selectedPrices valueForKey:@"price_roundtrip_months_2"] floatValue];
+                                       }else if(selectedIndex==1){
+                                           self->numberofDays=90;
+                                           price =[[self->selectedPrices valueForKey:@"price_roundtrip_months_3"] floatValue];
+                                           
+                                       }else if(selectedIndex==2){
+                                           self->numberofDays=150;
+                                           price =[[self->selectedPrices valueForKey:@"price_roundtrip_months_5"] floatValue];
+                                           
+                                           
+                                       }
                                    }
                                    self->_priceLbl.text=[NSString stringWithFormat:@"%@%.2f",rupee,price];
 
@@ -596,6 +612,7 @@ didChangeDragState:(MKAnnotationViewDragState)newState
     [Item addObject:@"SCHOOL TO HOME"];
     [Item addObject:@"ROUND TRIP"];
     
+    
     [FTPopOverMenu showForSender:_tripBtn
                    withMenuArray:Item
                        doneBlock:^(NSInteger selectedIndex) {
@@ -603,8 +620,9 @@ didChangeDragState:(MKAnnotationViewDragState)newState
                            NSLog(@"done block. do something. selectedIndex : %ld", (long)selectedIndex);
                    
                            self.selectTripTypeTxtField.text=[Item objectAtIndex:selectedIndex];
-                           
-                           
+                           self->selectedTrip = [NSString stringWithFormat:@"%ld",(long)selectedIndex];
+                           self.selectPkgTxtField.text=@"";
+                           self.selectdurationTxtField.text=@"";
                            
                        } dismissBlock:^{
                            

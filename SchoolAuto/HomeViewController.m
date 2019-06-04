@@ -9,8 +9,13 @@
 #import "HomeViewController.h"
 #import "ParentLoginVC.h"
 #import "DriverLoginVC.h"
-@interface HomeViewController ()
+#import "LunchBoxLoginVC.h"
+#import <CoreLocation/CoreLocation.h>
+@interface HomeViewController ()<CLLocationManagerDelegate>
+{
+    CLLocationManager *locationManager;
 
+}
 @end
 
 @implementation HomeViewController
@@ -23,10 +28,19 @@
     _parentbtn.clipsToBounds=YES;
     _driverBtn.layer.cornerRadius=_driverBtn.frame.size.height/2;
     _driverBtn.clipsToBounds=YES;
+    _lunchBoxBtn.layer.cornerRadius=_driverBtn.frame.size.height/2;
+    _lunchBoxBtn.clipsToBounds=YES;
     
 }
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBar.hidden=YES;
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [self->locationManager requestWhenInUseAuthorization];
+    if ([self->locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self->locationManager requestWhenInUseAuthorization];
+    }
+    
 }
 /*
 #pragma mark - Navigation
@@ -47,5 +61,15 @@
 - (IBAction)driverbtnAction:(id)sender {
     DriverLoginVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"DriverLoginVC"];
     [self PushToVc:vc];
+}
+- (IBAction)lunchboxBtnAction:(id)sender {
+    
+    LunchBoxLoginVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"LunchBoxLoginVC"];
+    [self PushToVc:vc];
+}
+
+- (IBAction)poweredbyBtnAction:(id)sender;
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",@"https://www.develappsolutions.com"]]];
 }
 @end
