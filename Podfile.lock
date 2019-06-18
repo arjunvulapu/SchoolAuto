@@ -1,16 +1,46 @@
 PODS:
+  - BFRImageViewer (1.2.6):
+    - PINRemoteImage (~> 3.0.0-beta.14)
   - OneSignal (2.10.0)
+  - PINCache (3.0.1-beta.7):
+    - PINCache/Arc-exception-safe (= 3.0.1-beta.7)
+    - PINCache/Core (= 3.0.1-beta.7)
+  - PINCache/Arc-exception-safe (3.0.1-beta.7):
+    - PINCache/Core
+  - PINCache/Core (3.0.1-beta.7):
+    - PINOperation (~> 1.1.1)
+  - PINOperation (1.1.1)
+  - PINRemoteImage (3.0.0-beta.14):
+    - PINRemoteImage/PINCache (= 3.0.0-beta.14)
+  - PINRemoteImage/Core (3.0.0-beta.14):
+    - PINOperation
+  - PINRemoteImage/PINCache (3.0.0-beta.14):
+    - PINCache (= 3.0.1-beta.7)
+    - PINRemoteImage/Core
+  - razorpay-pod (1.1.2)
 
 DEPENDENCIES:
+  - BFRImageViewer
   - OneSignal (< 3.0, >= 2.6.2)
+  - razorpay-pod (= 1.1.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - BFRImageViewer
     - OneSignal
+    - PINCache
+    - PINOperation
+    - PINRemoteImage
+    - razorpay-pod
 
 SPEC CHECKSUMS:
+  BFRImageViewer: 63e8288277379936cc403adb652245364771c8fc
   OneSignal: 0f5ff711d9f25da54885e4ab06ef0abc221a46ef
+  PINCache: 7cb9ae068c8f655717f7c644ef1dff9fd573e979
+  PINOperation: a6219e6fc9db9c269eb7a7b871ac193bcf400aac
+  PINRemoteImage: 81bbff853acc71c6de9e106e9e489a791b8bbb08
+  razorpay-pod: bd7b4bfedd59002e7c30d96dd71fe31e740f2bcf
 
-PODFILE CHECKSUM: d46ca8e892867a12a575b29422e2bd559a91218d
+PODFILE CHECKSUM: b32a7b0d4a79c3225b79013e744e5c2d70f9b55c
 
 COCOAPODS: 1.6.0

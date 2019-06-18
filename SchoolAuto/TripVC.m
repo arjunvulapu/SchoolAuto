@@ -37,7 +37,7 @@
     NSDictionary *selectedCommnetDict;
     
     NSMutableArray *preExistMessagesList;
-    NSMutableDictionary *preExistMessagesDict;
+    NSDictionary *preExistMessagesDict;
 
     NSUInteger selectedStatusIndex;
     
@@ -72,8 +72,25 @@
 //    [_kidsTableView setAllowsSelection:YES];
     [self.mapView setShowsUserLocation:YES];
     _mapView.hidden = YES;
+    _userlocation.hidden=YES;
     _kidsTableView.hidden=NO;
 //    [self makePostCallForPageNEWGET:ADDSUBSCRIPTIONS withParams:@{@"pid":[NSString stringWithFormat:@"%@",[Utils loggedInUserIdStr]]} withRequestCode:109];
+
+    if([[APP_DELEGATE fromPushNotification] isEqual:@"YES"]){
+        NSDictionary *pushDic=[APP_DELEGATE pushDict];
+        
+//        [self makePostCallForPageNEWGET:GETTRIPSTATUS_FROMPUSH withParams:@{@"trip_id":[NSString stringWithFormat:@"%@",[pushDic valueForKey:@"type_id"]],@"pid":[NSString stringWithFormat:@"%@",[Utils loggedInUserIdStr]]} withRequestCode:109];
+        [self makePostCallForPageNEWGET:TRIPSLIST withParams:@{@"auto_id":[NSString stringWithFormat:@"%@",[Utils loggedInUserIdStr]],@"id":[NSString stringWithFormat:@"%@",[pushDic valueForKey:@"type_id"]]} withRequestCode:119];
+
+        
+    }else{
+        [self loadChildrensList];
+    [self makePostCallForPageNEWGET:STATUSLIST withParams:nil withRequestCode:12];
+    }
+    _userlocation.layer.cornerRadius=10;
+    _userlocation.clipsToBounds=YES;
+}
+-(void)loadChildrensList{
     childList=[[_tripDict valueForKey:@"subscriptions"] mutableCopy];
     if([[_tripDict valueForKey:@"today_trip_status"] isEqual:@"ended"]){
         _endTripBtn.hidden=YES;
@@ -81,11 +98,11 @@
     }else{
         _endTripBtn.hidden=NO;
         _addMessageBtn.hidden=NO;
-
-
+        
+        
     }
     [self addallPins];
-
+    
     self->locationManager = [[CLLocationManager alloc]init];
     self->locationManager.delegate = self;
     [locationManager startUpdatingLocation];
@@ -95,11 +112,7 @@
     
     _submitBtn.layer.cornerRadius=10;
     _submitBtn.clipsToBounds=YES;
-    
-    [self makePostCallForPageNEWGET:STATUSLIST withParams:nil withRequestCode:12];
-
 }
-
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
     // If it's the user location, just return nil.
@@ -192,8 +205,12 @@
 
 -(void)parseResult:(id)result withCode:(int)reqeustCode{
     NSLog(@"Result--%@",result);
-
-    if(reqeustCode==109){
+    if(reqeustCode==119){
+        _tripDict = result;
+        [self loadChildrensList];
+        [_kidsTableView reloadData];
+    }
+    else if(reqeustCode==109){
 //        NSLog(@"Result--%@",result);
         childList=result;
         [_kidsTableView reloadData];
@@ -347,27 +364,34 @@
     TripCC *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     NSDictionary *dic =[childList objectAtIndex:indexPath.row];
    
-    cell.kidNameLbl.text = [NSString stringWithFormat:@"%@",[dic valueForKey:@"kid_name"]];
+    cell.kidNameLbl.text = [NSString stringWithFormat:@"%@\n%@",[dic valueForKey:@"kid_name"],[dic valueForKey:@"pickup_address"]];
     NSDictionary *statusdic =[[NSDictionary alloc] init];
     if([[dic valueForKey:@"today_pickup_status"] intValue]==0){
-   statusdic =[statusList objectAtIndex:[[dic valueForKey:@"today_pickup_status"] intValue]];
+//   statusdic =[statusList objectAtIndex:[[dic valueForKey:@"today_pickup_status"] intValue]];
+        [cell.driverBtn setTitle:@"Start" forState:UIControlStateNormal];
+
     }else{
         statusdic =[statusList objectAtIndex:[[dic valueForKey:@"today_pickup_status"] intValue]-1];
+        [cell.driverBtn setTitle:[statusdic valueForKey:@"status_name"] forState:UIControlStateNormal];
 
     }
-    [cell.driverBtn setTitle:[statusdic valueForKey:@"status_name"] forState:UIControlStateNormal];
+    cell.driverBtn.titleLabel.numberOfLines=0;
     cell.driverAction = ^{
+      //  if([[dic valueForKey:@"today_trip_status"] isEqual:@"in progress"]){
         selectedStatusIndex = indexPath.row;
         selectedKid =[childList objectAtIndex:indexPath.row];
         //[self addCaptureViewFrom:@"kid"];
         [self changeStatus:cell.driverBtn];
+//        }else{
+//            [Utils showErrorAlertWithMessage:@"Trip Not in Progress"];
+//        }
     };
     return cell;
     
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    return 60;
+    return UITableViewAutomaticDimension;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -393,9 +417,13 @@
 - (IBAction)tripSegementAction:(id)sender {
     if(_tripSegment.selectedSegmentIndex==0){
         _mapView.hidden = YES;
+        _userlocation.hidden=YES;
+
         _kidsTableView.hidden=NO;
     }else{
         _mapView.hidden = NO;
+        _userlocation.hidden=NO;
+
         _kidsTableView.hidden=YES;
     }
 }
@@ -551,14 +579,36 @@ UIImage *user_uiimage;
 //}
 
 -(void)uploadFile2{
+    
+    
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", SERVER_URL,TRIP_STATUS]];
-    NSDictionary *parameters = [[NSDictionary  alloc] init];;
+    NSDictionary *parameters = [[NSDictionary  alloc] init];
+    NSString *comment =@"";
+    if([selectedStatusDict valueForKey:@"status_name"]){
+        comment = [NSString stringWithFormat:@"%@",[selectedStatusDict valueForKey:@"status_name"]];
+    }
+    if([preExistMessagesDict valueForKey:@"title"]){
+        if(comment.length==0){
+        comment = [NSString stringWithFormat:@"%@",[preExistMessagesDict valueForKey:@"title"]];
+        }else{
+            comment = [NSString stringWithFormat:@"%@-%@",comment,[preExistMessagesDict valueForKey:@"title"]];
+        }
+
+    }
+        if(comment.length==0){
+            comment = [NSString stringWithFormat:@"%@",_commnetView.text];
+        }else{
+            comment = [NSString stringWithFormat:@"%@-%@",comment,_commnetView.text];
+        } 
+    
+    
+    
     if([pushingFrom isEqualToString:@"end"]){
-        parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",[_tripDict valueForKey:@"trip_id"]],@"comment":[NSString stringWithFormat:@"%@",_commnetView.text],@"dt_status_id":[NSString stringWithFormat:@"%@",[preExistMessagesDict valueForKey:@"id"]?[preExistMessagesDict valueForKey:@"id"]:@""],@"end":@"true",@"latitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.latitude],@"longitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.longitude]};
+        parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",[_tripDict valueForKey:@"trip_id"]],@"comment":comment,@"dt_status_id":[NSString stringWithFormat:@"%@",[preExistMessagesDict valueForKey:@"id"]?[preExistMessagesDict valueForKey:@"id"]:@""],@"end":@"true",@"latitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.latitude],@"longitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.longitude]};
     }else if([pushingFrom isEqualToString:@"kid"]){
-        parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",[_tripDict valueForKey:@"trip_id"]],@"subscription_id":[NSString stringWithFormat:@"%@",[selectedKid valueForKey:@"subscription_id"]],@"pickup_status":[NSString stringWithFormat:@"%@",[selectedStatusDict valueForKey:@"status_id"]],@"comment":[NSString stringWithFormat:@"%@",_commnetView.text],@"dt_status_id":[NSString stringWithFormat:@"%@",[preExistMessagesDict valueForKey:@"id"]?[preExistMessagesDict valueForKey:@"id"]:@""],@"latitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.latitude],@"longitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.longitude]};
+        parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",[_tripDict valueForKey:@"trip_id"]],@"subscription_id":[NSString stringWithFormat:@"%@",[selectedKid valueForKey:@"subscription_id"]],@"pickup_status":[NSString stringWithFormat:@"%@",[selectedStatusDict valueForKey:@"status_id"]],@"comment":comment,@"dt_status_id":[NSString stringWithFormat:@"%@",[preExistMessagesDict valueForKey:@"id"]?[preExistMessagesDict valueForKey:@"id"]:@""],@"latitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.latitude],@"longitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.longitude]};
     }else {
-        parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",[_tripDict valueForKey:@"trip_id"]],@"comment":[NSString stringWithFormat:@"%@",_commnetView.text],@"latitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.latitude],@"longitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.longitude]};
+        parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",[_tripDict valueForKey:@"trip_id"]],@"comment":comment,@"latitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.latitude],@"longitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.longitude]};
     }
     
     
@@ -719,9 +769,12 @@ UIImage *user_uiimage;
 -(void)addCaptureViewFrom:(NSString *)from{
     pushingFrom = from;
     _imagePlaceHolder.hidden =NO;
+    selectedCommnetDict = @{};
+    preExistMessagesDict = @{};
 
     _captureImage.image = nil;
     _commnetView.text=@"";
+    [_selectCommentBtn setTitle:@"Select Comment" forState:UIControlStateNormal];
     if (!UIAccessibilityIsReduceTransparencyEnabled()) {
         self.view.backgroundColor = [UIColor clearColor];
 
@@ -760,13 +813,35 @@ UIImage *user_uiimage;
 }
 -(void)uploadWithOutImage{
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", SERVER_URL,TRIP_STATUS]];
-    NSDictionary *parameters = [[NSDictionary  alloc] init];;
+    NSDictionary *parameters = [[NSDictionary  alloc] init];
+    NSString *comment =@"";
+    if([selectedStatusDict valueForKey:@"status_name"]){
+        comment = [NSString stringWithFormat:@"%@",[selectedStatusDict valueForKey:@"status_name"]];
+    }
+    if([preExistMessagesDict valueForKey:@"title"]){
+        if(comment.length==0){
+            comment = [NSString stringWithFormat:@"%@",[preExistMessagesDict valueForKey:@"title"]];
+        }else{
+            comment = [NSString stringWithFormat:@"%@-%@",comment,[preExistMessagesDict valueForKey:@"title"]];
+        }
+        
+    }
+    if(comment.length==0){
+        comment = [NSString stringWithFormat:@"%@",_commnetView.text];
+    }else if(_commnetView.text.length==0){
+        //comment = [NSString stringWithFormat:@"%@",_commnetView.text];
+
+    }else{
+        comment = [NSString stringWithFormat:@"%@-%@",comment,_commnetView.text];
+
+    }
+    
     if([pushingFrom isEqualToString:@"end"]){
-        parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",[_tripDict valueForKey:@"trip_id"]],@"end":@"true",@"comment":[NSString stringWithFormat:@"%@",_commnetView.text],@"dt_status_id":[NSString stringWithFormat:@"%@",[preExistMessagesDict valueForKey:@"id"]?[preExistMessagesDict valueForKey:@"id"]:@""],@"latitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.latitude],@"longitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.longitude]};
+        parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",[_tripDict valueForKey:@"trip_id"]],@"end":@"true",@"comment":comment,@"dt_status_id":[NSString stringWithFormat:@"%@",[preExistMessagesDict valueForKey:@"id"]?[preExistMessagesDict valueForKey:@"id"]:@""],@"latitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.latitude],@"longitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.longitude]};
     }else if([pushingFrom isEqualToString:@"kid"]){
-        parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",[_tripDict valueForKey:@"trip_id"]],@"subscription_id":[NSString stringWithFormat:@"%@",[selectedKid valueForKey:@"subscription_id"]],@"pickup_status":[NSString stringWithFormat:@"%@",[selectedStatusDict valueForKey:@"status_id"]],@"comment":[NSString stringWithFormat:@"%@",_commnetView.text],@"dt_status_id":[NSString stringWithFormat:@"%@",[preExistMessagesDict valueForKey:@"id"]?[preExistMessagesDict valueForKey:@"id"]:@""],@"latitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.latitude],@"longitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.longitude]};
+        parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",[_tripDict valueForKey:@"trip_id"]],@"subscription_id":[NSString stringWithFormat:@"%@",[selectedKid valueForKey:@"subscription_id"]],@"pickup_status":[NSString stringWithFormat:@"%@",[selectedStatusDict valueForKey:@"status_id"]],@"comment":comment,@"dt_status_id":[NSString stringWithFormat:@"%@",[preExistMessagesDict valueForKey:@"id"]?[preExistMessagesDict valueForKey:@"id"]:@""],@"latitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.latitude],@"longitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.longitude]};
     }else {
-        parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",[_tripDict valueForKey:@"trip_id"]],@"comment":[NSString stringWithFormat:@"%@",_commnetView.text],@"dt_status_id":[NSString stringWithFormat:@"%@",[preExistMessagesDict valueForKey:@"id"]?[preExistMessagesDict valueForKey:@"id"]:@""],@"latitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.latitude],@"longitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.longitude]};
+        parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",[_tripDict valueForKey:@"trip_id"]],@"comment":comment,@"dt_status_id":[NSString stringWithFormat:@"%@",[preExistMessagesDict valueForKey:@"id"]?[preExistMessagesDict valueForKey:@"id"]:@""],@"latitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.latitude],@"longitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.longitude]};
     }
     
     
@@ -902,6 +977,27 @@ UIImage *user_uiimage;
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",phoneNumber]]];
             break;
         }
+    }
+}
+- (void)zoomToUserLocation {
+    // create a region object with the user's location as the center coordinate, and some
+    // arbitrary value you'd like as the region span (.005 is one I use regularly)
+//    MKCoordinateRegion region = MKCoordinateRegionMake(self.mapView.userLocation.coordinate, MKCoordinateSpanMake(0.005, 0.005));
+//    [_mapView setRegion:region animated:TRUE];
+//    
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(self.mapView.userLocation.coordinate, 3000, 3000);
+    MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];
+    [_mapView setRegion:adjustedRegion animated:TRUE];
+
+}
+- (IBAction)userlocationbtnAction:(id)sender {
+    [self zoomToUserLocation];
+}
+-(void)back{
+    if([[APP_DELEGATE fromPushNotification] isEqual:@"YES"]){
+        [APP_DELEGATE setIntialViewController];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 @end

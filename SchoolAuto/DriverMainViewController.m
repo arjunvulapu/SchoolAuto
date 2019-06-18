@@ -296,6 +296,7 @@
 }
 -(void)clearAllData{
     [Utils logoutUser];
+    [[UNUserNotificationCenter currentNotificationCenter] removeAllDeliveredNotifications];
 
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     [defaults setObject:nil forKey:@"USERINFO"];

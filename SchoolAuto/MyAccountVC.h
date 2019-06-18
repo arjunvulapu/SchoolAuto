@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MyAccountVC : BaseViewController
 @property (weak, nonatomic) IBOutlet UITableView *listTableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
 
 @end
 

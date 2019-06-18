@@ -11,6 +11,8 @@ target 'SchoolAuto' do
 	#pod "Pulsator"
 	#pod 'MWPhotoBrowser'
 	#pod 'FSImageViewer'
+	pod 'BFRImageViewer'
+	pod 'razorpay-pod', '1.1.2'
 
 
 	pod 'OneSignal', '>= 2.6.2', '< 3.0'

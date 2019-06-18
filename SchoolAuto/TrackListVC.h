@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TrackListVC : BaseViewController
 @property (weak, nonatomic) IBOutlet UITableView *listTableView;
 @property (weak, nonatomic) IBOutlet UIImageView *emptyImage;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *statusSegment;
+- (IBAction)statusSegmentAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *emptyLbl;
 
 @end
 

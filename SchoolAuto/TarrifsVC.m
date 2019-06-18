@@ -10,6 +10,8 @@
 #import "PriceTC.h"
 #import "PlanTC.h"
 #import "AdsCC.h"
+#import "AddChildVC.h"
+#import "AddLunchBoxVC.h"
 @interface TarrifsVC ()
 {
     NSMutableDictionary *resultDict;
@@ -40,6 +42,12 @@
     _plansTableView.layer.cornerRadius=10.0;
     _plansTableView.clipsToBounds=YES;
     [self makePostCallForPageNEWGET:TARRIFS withParams:nil withRequestCode:200];
+    
+    _addChildBtn.layer.cornerRadius=10;
+    _addChildBtn.clipsToBounds=YES;
+    
+    _addLunchBoxBtn.layer.cornerRadius=10;
+    _addLunchBoxBtn.clipsToBounds=YES;
 }
 -(void)parseResult:(id)result withCode:(int)reqeustCode{
     if(reqeustCode==200){
@@ -90,7 +98,8 @@
     PriceTC *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
             NSDictionary *dict =[pricesList objectAtIndex:indexPath.row-1];
             cell.sharingTypeLbl.text=[NSString stringWithFormat:@"%@ Sharing",[dict valueForKey:@"count"]];
-            cell.minChargeLbl.text=[NSString stringWithFormat:@"%@/-",[[[dict valueForKey:@"prices"] objectAtIndex:0] valueForKey:@"price"]];
+            
+            cell.minChargeLbl.text=[NSString stringWithFormat:@"%@/-",[dict valueForKey:@"min_price"]];
             cell.upto5kmLbl.text=[NSString stringWithFormat:@"%@/-",[[[dict valueForKey:@"prices"] objectAtIndex:1] valueForKey:@"price"]];
             cell.upto6kmLbl.text=[NSString stringWithFormat:@"%@/-",[[[dict valueForKey:@"prices"] objectAtIndex:2] valueForKey:@"price"]];
             cell.upto7kmLbl.text=[NSString stringWithFormat:@"%@/-",[[[dict valueForKey:@"prices"] objectAtIndex:3] valueForKey:@"price"]];
@@ -188,5 +197,14 @@
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
     return UIEdgeInsetsMake(12, 12, 12, 12);
+}
+- (IBAction)addchildBtnAction:(id)sender {
+    AddChildVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"AddChildVC"];
+    [self PushToVc:vc];
+    
+}
+- (IBAction)addLunchBoxBtnAction:(id)sender {
+    AddLunchBoxVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"AddLunchBoxVC"];
+    [self PushToVc:vc];
 }
 @end

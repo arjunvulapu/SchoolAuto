@@ -17,7 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *planTableViewheight;
 @property (weak, nonatomic) IBOutlet UICollectionView *adsCollectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *adsCollectionViewHeight;
-
+@property (weak, nonatomic) IBOutlet UIButton *addChildBtn;
+- (IBAction)addchildBtnAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *addLunchBoxBtn;
+- (IBAction)addLunchBoxBtnAction:(id)sender;
 @end
 
 NS_ASSUME_NONNULL_END

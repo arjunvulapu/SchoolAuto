@@ -31,4 +31,9 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)clickonimageAction:(id)sender {
+    if(self.zoomImage){
+        self.zoomImage();
+    }
+}
 @end

@@ -37,7 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *selectCommentBtn;
 - (IBAction)selectCommentBtnAction:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIButton *userlocation;
 
+- (IBAction)userlocationbtnAction:(id)sender;
 @end
 
 NS_ASSUME_NONNULL_END

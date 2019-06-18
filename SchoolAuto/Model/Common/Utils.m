@@ -219,10 +219,10 @@
 
 
 + (void) showErrorAlertWithMessage:(NSString *) message {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[MCLocalization stringForKey:@"error"]
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[MCLocalization stringForKey:@"Error"]
                                                     message:message
                                                    delegate:nil
-                                          cancelButtonTitle:[MCLocalization stringForKey:@"ok"]
+                                          cancelButtonTitle:[MCLocalization stringForKey:@"OK"]
                                           otherButtonTitles:nil];
     
     [alert show];

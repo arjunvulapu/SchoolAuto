@@ -145,7 +145,7 @@
 -(void)uploadStatusWith:(NSString *)trip{
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", SERVER_URL,LUNCHBOX_TRIP_STATUS]];
    
-    NSDictionary *parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",trip],@"start":@"true"};
+    NSDictionary *parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",trip],@"start":@"true",@"comment":@"Trip Started"};
     
     
    

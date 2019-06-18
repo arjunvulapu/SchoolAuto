@@ -15,7 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIImageView *tripImage;
 @property (weak, nonatomic) IBOutlet UIView *tripBgView;
 @property (weak, nonatomic) IBOutlet UILabel *createdDateInfoLbl;
-
+@property (weak, nonatomic) IBOutlet UIButton *clickonimagebtn;
+@property (nonatomic) void (^zoomImage)();
+- (IBAction)clickonimageAction:(id)sender;
 @end
 
 NS_ASSUME_NONNULL_END

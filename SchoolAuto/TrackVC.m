@@ -11,9 +11,9 @@
 #import "AnnotationView.h"
 #import "SDImageCache.h"
 #import "MWCommon.h"
-#import "MWPhotoBrowser.h"
-
-@interface TrackVC ()<MWPhotoBrowserDelegate>
+#import <BFRImageViewer/BFRImageViewController.h>
+#import <BFRImageViewer/BFRImageTransitionAnimator.h>
+@interface TrackVC ()
 {
     CLLocationCoordinate2D annotationViewCoordinate ;
     CLLocationCoordinate2D autoCoordinate ;
@@ -26,7 +26,7 @@
     UIVisualEffectView *blurEffectView;
     NSMutableArray *photos ;
     NSMutableArray *thumbs ;
-
+    BFRImageTransitionAnimator *imageViewAnimator;
     
     BOOL zoomed;
 }
@@ -45,7 +45,7 @@
     // [self getDirections];
    // [_mapView setShowsUserLocation:YES];
     zoomed = NO;
-    annotationViewCoordinate = CLLocationCoordinate2DMake([[[_resultDic valueForKey:@"school_info"] valueForKey:@"sch_latitude"] floatValue], [[[_resultDic valueForKey:@"school_info"] valueForKey:@"sch_longitude"] floatValue]);
+    annotationViewCoordinate = CLLocationCoordinate2DMake([[[[_resultDic valueForKey:@"kid_info"] valueForKey:@"school_info"] valueForKey:@"sch_latitude"] floatValue], [[[[_resultDic valueForKey:@"kid_info"] valueForKey:@"school_info"] valueForKey:@"sch_longitude"] floatValue]);
     //[self GetDirections:annotationViewCoordinate];
     
     // rounded corneres
@@ -100,7 +100,7 @@
     [_imgBgView.layer setShadowRadius:5.0];
     [_imgBgView.layer setShadowOffset:CGSizeMake(0.0, 0.0)];
     
-    auto_info =[_resultDic valueForKey:@"auto_info"];
+    auto_info =[_resultDic valueForKey:@"auto_info"];;
 
     if(![[_resultDic valueForKey:@"auto_info"]  isEqual: @""]&&[_resultDic valueForKey:@"auto_info"] != (id)[NSNull null]){
     [self makePostCallForPageNEWGETNoProgess:UPDATEAUTOINFO withParams:@{@"id":[NSString stringWithFormat:@"%@",[auto_info valueForKey:@"auto_id"]]} withRequestCode:109];
@@ -138,7 +138,7 @@
         
        
     }
-    _childrenStatusLbl.text=[NSString stringWithFormat:@"Status:%@",[_resultDic valueForKey:@"today_trip_status"]];
+    _childrenStatusLbl.text=[NSString stringWithFormat:@"Status:%@",[_resultDic valueForKey:@"today_trip_status_txt"]];
 
    
 }
@@ -218,7 +218,7 @@
     
     //annotation1 = [[MKPointAnnotation alloc] init];
     annotation1.coordinate = locationCoordinate;
-    annotation1.title = [[_resultDic valueForKey:@"school_info"] valueForKey:@"sch_name"];
+    annotation1.title = [[[_resultDic valueForKey:@"kid_info"] valueForKey:@"school_info"] valueForKey:@"sch_name"];
     
     //[self.mapView addAnnotation:annotation1];
     
@@ -337,7 +337,7 @@
             pinView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomPinAnnotationView"];
             //pinView.animatesDrop = YES;
             pinView.canShowCallout = YES;
-            if(annotation.title==[[_resultDic valueForKey:@"school_info"] valueForKey:@"sch_name"]){
+            if(annotation.title==[[[_resultDic valueForKey:@"kid_info"] valueForKey:@"school_info"] valueForKey:@"sch_name"]){
                 pinView.image = [UIImage imageNamed:@"schoola"];
             }else{
                 pinView.image = [UIImage imageNamed:@"autotrack"];
@@ -353,7 +353,7 @@
         [rightButton setBackgroundImage:[UIImage imageNamed:@"call"] forState:UIControlStateNormal];
         rightButton.showsTouchWhenHighlighted   =   YES;
         [rightButton addTarget:self action:@selector(rightAcccoryViewButtonCLicked:) forControlEvents:UIControlEventTouchUpInside]; //rightAcccoryViewButtonCLicked is a function
-        if(annotation.title==[[_resultDic valueForKey:@"school_info"] valueForKey:@"sch_name"]){
+        if(annotation.title==[[[_resultDic valueForKey:@"kid_info"] valueForKey:@"school_info"] valueForKey:@"sch_name"]){
         rightButton.tag = 1;
         }else{
             rightButton.tag = 2;
@@ -370,7 +370,7 @@
     NSInteger check =(long)[sender tag];
     if(check == 0){
         
-        NSString *phoneNumber = [[_resultDic valueForKey:@"school_info"] valueForKey:@"sch_phone"];
+        NSString *phoneNumber = [[[_resultDic valueForKey:@"kid_info"] valueForKey:@"school_info"] valueForKey:@"sch_phone"];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",phoneNumber]]];
 
     }else{
@@ -482,6 +482,14 @@
 
 }
 - (IBAction)imagesViewBtnAction:(id)sender {
+    // In viewDidLoad...
+
+    NSArray *imagesList = [auto_info valueForKey:@"auto_images"];
+    if(imagesList.count>0){
+    BFRImageViewController *imageVC = [[BFRImageViewController alloc] initWithImageSource:imagesList];
+    
+    [self presentViewController:imageVC animated:YES completion:nil];
+    }
     
 }
 

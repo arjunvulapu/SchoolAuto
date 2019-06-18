@@ -16,6 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *amountView;
 @property (weak, nonatomic) IBOutlet UILabel *priceLbl;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *stableHeight;
+@property (weak, nonatomic)  NSString *type;
+
+
+@property (weak, nonatomic) IBOutlet UIImageView *mainImage;
 
 @end
 

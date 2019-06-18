@@ -11,6 +11,8 @@
 @interface SubScriptionDetailVC ()
 {
     NSMutableArray *ItemList;
+    NSMutableArray *ItemList2;
+
 }
 @end
 
@@ -20,7 +22,9 @@
     [super viewDidLoad];
     self.navigationItem.title=@"SUBSCRIPTIONS";
 
-    ItemList=[[NSMutableArray alloc] initWithObjects:@"KID NAME",@"AGE",@"CLASS",@"SCHOOL",@"HOME",@"SHARING",@"KMS", nil];
+    ItemList=[[NSMutableArray alloc] initWithObjects:@"SUBSCRIPTION ID",@"KID NAME",@"AGE",@"CLASS",@"SCHOOL",@"HOME",@"SHARING",@"KMS",@"SUBSCRIPTION TYPE",@"DURATION", nil];
+    ItemList2=[[NSMutableArray alloc] initWithObjects:@"SUBSCRIPTION ID",@"KID NAME",@"AGE",@"CLASS",@"SCHOOL",@"HOME",@"KMS",@"DURATION", nil];
+
     // Do any additional setup after loading the view.
     NSLog(@"DIC-->%@",_subResult);
     
@@ -38,10 +42,10 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(_kidorNot==0){
-    return 7;
+    if([_kidorNot isEqual:@"0"]){
+    return 10;
     }else{
-        return 6;
+        return 8;
     }
 }
 
@@ -55,28 +59,58 @@
     static NSString *MyIdentifier = @"ChildrenTC";
     
     ChildrenTC *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    cell.studentNameLbl.text=[NSString stringWithFormat:@"%@",[ItemList objectAtIndex:indexPath.row]];
-    if(indexPath.row==0){
-    cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"kid_name"]];
-    }else if(indexPath.row==1){
-        cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"kid_age"]];
-    }else if(indexPath.row==2){
-        cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"kid_class"]];
-    }else if(indexPath.row==3){
-        NSDictionary *s_dic=[_subResult valueForKey:@"school_info"];
-        cell.statusLbl.text=[NSString stringWithFormat:@"%@,%@",[s_dic valueForKey:@"sch_address"],[s_dic valueForKey:@"sch_city"]];
-    }else if(indexPath.row==4){
-        cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"pickup_address"]];
-    }else if(indexPath.row==5){
-        if(_kidorNot==0){
-        cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"share_count"]];
-        }else{
-              cell.statusLbl.text=[NSString stringWithFormat:@"%.2f",[[_subResult valueForKey:@"distance"] floatValue]];
+    if([_kidorNot isEqual:@"0"]){
+        cell.studentNameLbl.text=[NSString stringWithFormat:@"%@",[ItemList objectAtIndex:indexPath.row]];
+        if(indexPath.row==0){
+            cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"kid_id"]];
         }
+    else if(indexPath.row==1){
+    cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"kid_name"]];
+    }else if(indexPath.row==2){
+        cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"kid_age"]];
+    }else if(indexPath.row==3){
+        cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"kid_class"]];
+    }else if(indexPath.row==4){
+        NSDictionary *s_dic=[_subResult valueForKey:@"school_info"];
+        cell.statusLbl.text=[NSString stringWithFormat:@"%@\n%@,%@",[s_dic valueForKey:@"sch_name"],[s_dic valueForKey:@"sch_address"],[s_dic valueForKey:@"sch_city"]];
+    }else if(indexPath.row==5){
+        cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"pickup_address"]];
     }else if(indexPath.row==6){
+        cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"share_count"]];
+    }else if(indexPath.row==7){
         cell.statusLbl.text=[NSString stringWithFormat:@"%.2f",[[_subResult valueForKey:@"distance"] floatValue]];
     }
+    else if(indexPath.row==8){
+        cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"subscription_type"] ];
+    }else if(indexPath.row==9){
+        cell.statusLbl.text=[NSString stringWithFormat:@"%@ Days",[_subResult valueForKey:@"subscription_duration"]];
+    }
+    }else{
+        cell.studentNameLbl.text=[NSString stringWithFormat:@"%@",[ItemList2 objectAtIndex:indexPath.row]];
 
+        if(indexPath.row==0){
+            cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"carriage_id"]];
+        }else if(indexPath.row==1){
+            cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"kid_age"]];
+        }else if(indexPath.row==2){
+            cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"kid_age"]];
+        }else if(indexPath.row==3){
+            cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"kid_class"]];
+        }else if(indexPath.row==4){
+            NSDictionary *s_dic=[_subResult valueForKey:@"school_info"];
+            cell.statusLbl.text=[NSString stringWithFormat:@"%@\n%@,%@",[s_dic valueForKey:@"sch_name"],[s_dic valueForKey:@"sch_address"],[s_dic valueForKey:@"sch_city"]];
+        }else if(indexPath.row==5){
+            cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"pickup_address"]];
+        }else if(indexPath.row==6){
+          
+                cell.statusLbl.text=[NSString stringWithFormat:@"%.2f",[[_subResult valueForKey:@"distance"] floatValue]];
+        }
+        else if(indexPath.row==7){
+            cell.statusLbl.text=[NSString stringWithFormat:@"%@ Days",[_subResult valueForKey:@"subscription_duration"]];
+        }
+    }
+        
+    
     return cell;
     
     

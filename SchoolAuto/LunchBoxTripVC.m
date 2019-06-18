@@ -72,6 +72,8 @@
 //    [_kidsTableView setAllowsSelection:YES];
     [self.mapView setShowsUserLocation:YES];
     _mapView.hidden = YES;
+    _userlocation.hidden=YES;
+
     _kidsTableView.hidden=NO;
 //    [self makePostCallForPageNEWGET:ADDSUBSCRIPTIONS withParams:@{@"pid":[NSString stringWithFormat:@"%@",[Utils loggedInUserIdStr]]} withRequestCode:109];
     childList=[[_tripDict valueForKey:@"subscriptions"] mutableCopy];
@@ -97,7 +99,8 @@
     _submitBtn.clipsToBounds=YES;
     
     [self makePostCallForPageNEWGET:LUNCHBOX_STATUSLIST withParams:nil withRequestCode:12];
-
+    _userlocation.layer.cornerRadius=10;
+    _userlocation.clipsToBounds=YES;
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
@@ -341,15 +344,18 @@
     TripCC *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     NSDictionary *dic =[childList objectAtIndex:indexPath.row];
    
-    cell.kidNameLbl.text = [NSString stringWithFormat:@"%@",[dic valueForKey:@"kid_name"]];
+    cell.kidNameLbl.text = [NSString stringWithFormat:@"%@\n%@",[dic valueForKey:@"kid_name"],[dic valueForKey:@"pickup_address"]];
     NSDictionary *statusdic =[[NSDictionary alloc] init];
     if([[dic valueForKey:@"today_pickup_status"] intValue]==0){
-   statusdic =[statusList objectAtIndex:[[dic valueForKey:@"today_pickup_status"] intValue]];
+//   statusdic =[statusList objectAtIndex:[[dic valueForKey:@"today_pickup_status"] intValue]];
+        [cell.driverBtn setTitle:@"Start" forState:UIControlStateNormal];
+
     }else{
         statusdic =[statusList objectAtIndex:[[dic valueForKey:@"today_pickup_status"] intValue]-1];
+        [cell.driverBtn setTitle:[statusdic valueForKey:@"status_name"] forState:UIControlStateNormal];
+
 
     }
-    [cell.driverBtn setTitle:[statusdic valueForKey:@"status_name"] forState:UIControlStateNormal];
     cell.driverAction = ^{
         selectedStatusIndex = indexPath.row;
         selectedKid =[childList objectAtIndex:indexPath.row];
@@ -361,7 +367,7 @@
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    return 60;
+    return UITableViewAutomaticDimension;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -387,9 +393,13 @@
 - (IBAction)tripSegementAction:(id)sender {
     if(_tripSegment.selectedSegmentIndex==0){
         _mapView.hidden = YES;
+        _userlocation.hidden=YES;
+
         _kidsTableView.hidden=NO;
     }else{
         _mapView.hidden = NO;
+        _userlocation.hidden=NO;
+
         _kidsTableView.hidden=YES;
     }
 }
@@ -548,7 +558,7 @@ UIImage *user_uiimage2;
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", SERVER_URL,LUNCHBOX_TRIP_STATUS]];
     NSDictionary *parameters = [[NSDictionary  alloc] init];;
     if([pushingFrom isEqualToString:@"end"]){
-        parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",[_tripDict valueForKey:@"trip_id"]],@"end":@"true",@"latitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.latitude],@"longitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.longitude]};
+        parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",[_tripDict valueForKey:@"trip_id"]],@"end":@"true",@"latitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.latitude],@"longitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.longitude],@"comment":@"Trip Ended"};
     }else if([pushingFrom isEqualToString:@"kid"]){
         parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",[_tripDict valueForKey:@"trip_id"]],@"subscription_id":[NSString stringWithFormat:@"%@",[selectedKid valueForKey:@"subscription_id"]],@"pickup_status":[NSString stringWithFormat:@"%@",[selectedStatusDict valueForKey:@"status_id"]],@"latitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.latitude],@"longitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.longitude]};
     }else {
@@ -759,7 +769,7 @@ UIImage *user_uiimage2;
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", SERVER_URL,LUNCHBOX_TRIP_STATUS]];
     NSDictionary *parameters = [[NSDictionary  alloc] init];;
     if([pushingFrom isEqualToString:@"end"]){
-        parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",[_tripDict valueForKey:@"trip_id"]],@"end":@"true",@"latitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.latitude],@"longitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.longitude]};
+        parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",[_tripDict valueForKey:@"trip_id"]],@"end":@"true",@"latitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.latitude],@"longitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.longitude],@"comment":@"Trip Ended"};
     }else if([pushingFrom isEqualToString:@"kid"]){
         parameters = @{@"trip_id":[NSString stringWithFormat:@"%@",[_tripDict valueForKey:@"trip_id"]],@"subscription_id":[NSString stringWithFormat:@"%@",[selectedKid valueForKey:@"subscription_id"]],@"pickup_status":[NSString stringWithFormat:@"%@",[selectedStatusDict valueForKey:@"status_id"]],@"comment":[NSString stringWithFormat:@"%@",[selectedStatusDict valueForKey:@"status_name"]],@"latitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.latitude],@"longitude":[NSString stringWithFormat:@"%f",_mapView.userLocation.coordinate.longitude]};
     }else {
@@ -892,5 +902,26 @@ UIImage *user_uiimage2;
 - (IBAction)selectCommentBtnAction:(id)sender {
     [self makePostCallForPageNEWGET:TRIP_EXIST_MESSAGES withParams:nil withRequestCode:113];
 
+}
+- (void)zoomToUserLocation {
+    // create a region object with the user's location as the center coordinate, and some
+    // arbitrary value you'd like as the region span (.005 is one I use regularly)
+    //    MKCoordinateRegion region = MKCoordinateRegionMake(self.mapView.userLocation.coordinate, MKCoordinateSpanMake(0.005, 0.005));
+    //    [_mapView setRegion:region animated:TRUE];
+    //
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(self.mapView.userLocation.coordinate, 3000, 3000);
+    MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];
+    [_mapView setRegion:adjustedRegion animated:TRUE];
+    
+}
+- (IBAction)userlocationbtnAction:(id)sender {
+    [self zoomToUserLocation];
+}
+-(void)back{
+    if([[APP_DELEGATE fromPushNotification] isEqual:@"YES"]){
+        [APP_DELEGATE setIntialViewController];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 @end

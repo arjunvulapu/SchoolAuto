@@ -10,6 +10,7 @@
 #import "FTPopOverMenu.h"
 //#import <GoogleMaps/GoogleMaps.h>
 #import "SubSucessVC.h"
+#import "PaymentViewController.h"
 @interface AddChildVC ()<CLLocationManagerDelegate>
 {
     CLLocationCoordinate2D clocation;
@@ -38,6 +39,10 @@
     
     int numberofDays;
     float price;
+    Razorpay *razorpay;
+    
+    NSDictionary *ResultDict;
+
 }
 @end
 
@@ -83,8 +88,48 @@
     _priceLbl.text=[NSString stringWithFormat:@"%@ %@",rupee,@"000.00"];
     self->locationManager = [[CLLocationManager alloc]init];
     self->locationManager.delegate = self;
-    [locationManager startUpdatingLocation];
+//    [locationManager startUpdatingLocation];
     
+    
+    if( locationManager == nil )
+    {
+        locationManager = [[CLLocationManager alloc] init];
+        locationManager.delegate = self;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        [locationManager startUpdatingLocation];
+    }
+    
+    [self checkLocationAccess];
+    
+    NSUserDefaults *currentDefaults2 = [NSUserDefaults standardUserDefaults];
+    NSData *data2 = [currentDefaults2 objectForKey:@"SETTINGS"];
+    NSArray *infoarr = [NSKeyedUnarchiver unarchiveObjectWithData:data2];
+    
+    NSString *paymentUrl = @"";
+    for (NSDictionary *dic in infoarr) {
+        if([[dic valueForKey:@"content_type"] isEqual:@"paymenturl"]){
+            paymentUrl = [dic valueForKey:@"content_matter"];
+            break;
+        }
+    }
+    
+    razorpay = [Razorpay initWithKey:paymentUrl andDelegate:self];
+
+}
+-(void)checkLocationAccess{
+if ([CLLocationManager locationServicesEnabled]){
+    
+    NSLog(@"Location Services Enabled");
+    
+    if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied){
+       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"App Permission Denied"
+                                           message:@"To re-enable, please go to Settings and turn on Location Service for this app."
+                                          delegate:nil
+                                 cancelButtonTitle:@"OK"
+                                 otherButtonTitles:nil];
+        [alert show];
+    }
+}
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -94,17 +139,18 @@
 //    [self getAddressFromLocation:location2];
 }
 -(void)viewDidAppear:(BOOL)animated{
-    [self->locationManager requestWhenInUseAuthorization];
-    if ([self->locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self->locationManager requestWhenInUseAuthorization];
-    }
-   
+//    [self->locationManager requestWhenInUseAuthorization];
+//    if ([self->locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+//        [self->locationManager requestWhenInUseAuthorization];
+//    }
+//
 }
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
     NSLog(@"---- %@",userLocation);
     if(clocation.latitude == 0.00){
         clocation = userLocation.coordinate;
         [self addpinAtCurrentLocation];
+        [self getAddress];
         MKCoordinateRegion region;
         MKCoordinateSpan span;
         span.latitudeDelta = 0.005;
@@ -117,8 +163,6 @@
         [_mapView setRegion:region animated:YES];
        
     }
-    CLLocation *location2 = [[CLLocation alloc] initWithLatitude:clocation.latitude longitude:clocation.longitude];
-    [self getAddressFromLocation:location2];
     MKAnnotationView *userLocationView = [mapView viewForAnnotation:userLocation];
     userLocationView.hidden = YES;
 }
@@ -141,19 +185,19 @@
 //    [self addpinAtCurrentLocation];
 //
 //}
-- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated;
-{
-    CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(_mapView.centerCoordinate.latitude, _mapView.centerCoordinate.longitude);
-    CGFloat txtLatitude = coord.latitude;
-    CGFloat txtLongitude = coord.longitude;
-    NSLog(@"Latitude is===>>>%f",txtLatitude);
-    NSLog(@"Longitude is===>>>%f",txtLongitude);
-    clocation=coord;
-    _latLbl.text= [NSString stringWithFormat:@"%f",txtLatitude];
-    _logLbl.text= [NSString stringWithFormat:@"%f",txtLongitude];
-    [self addpinAtCurrentLocation];
-    
-}
+//- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated;
+//{
+//    CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(_mapView.centerCoordinate.latitude, _mapView.centerCoordinate.longitude);
+//    CGFloat txtLatitude = coord.latitude;
+//    CGFloat txtLongitude = coord.longitude;
+//    NSLog(@"Latitude is===>>>%f",txtLatitude);
+//    NSLog(@"Longitude is===>>>%f",txtLongitude);
+//    clocation=coord;
+//    _latLbl.text= [NSString stringWithFormat:@"%f",txtLatitude];
+//    _logLbl.text= [NSString stringWithFormat:@"%f",txtLongitude];
+//    [self addpinAtCurrentLocation];
+//
+//}
 -(void)addpinAtCurrentLocation{
 
 //     clocation = self.mapView.userLocation.coordinate;
@@ -234,13 +278,25 @@ didChangeDragState:(MKAnnotationViewDragState)newState
         _latLbl.text= [NSString stringWithFormat:@"%f",clocation.latitude];
         _logLbl.text= [NSString stringWithFormat:@"%f",clocation.longitude];
         [self getupdatedList];
+        CLLocation *location2 = [[CLLocation alloc] initWithLatitude:clocation.latitude longitude:clocation.longitude];
+        [self getAddressFromLocation:location2];
+         [self getAddress];
+
     }
 }
 -(void)getupdatedList{
    // school_id, latitude, longitude (of pickup points)
+    
+   // _selectPkgTxtField.text=@"";
     if(_selectSchoolTxtField.text.length!=0){
+        _selectdurationTxtField.text =@"";
+        _selectPkgTxtField.text=@"";
+        _priceLbl.text=[NSString stringWithFormat:@"%@ %@",rupee,@"000.00"];
     [self makePostCallForPageNEWNoProgess:SAHRING_OPTIONS withParams:@{@"school_id":[selectedSchool valueForKey:@"sch_id"],@"latitude":[NSString stringWithFormat:@"%f",clocation.latitude],@"longitude":[NSString stringWithFormat:@"%f",clocation.longitude]} withRequestCode:108];
     }
+   
+}
+-(void)getAddress{
     CLLocation *location = [[CLLocation alloc] initWithLatitude:clocation.latitude longitude:clocation.longitude];
     [self getAddressFromLocation:location];
 }
@@ -250,6 +306,8 @@ didChangeDragState:(MKAnnotationViewDragState)newState
         priceResult = result;
         pricesList=[priceResult valueForKey:@"prices"];
        
+        
+       
     }else if(reqeustCode==118){
         NSLog(@"%@",result);
         if ([[result valueForKey:@"status"] isEqual:@0]) {
@@ -257,14 +315,58 @@ didChangeDragState:(MKAnnotationViewDragState)newState
             [self showErrorAlertWithMessage:Localized(str)];
         } else {
             NSString *str=[result valueForKey:@"message"];
+        NSMutableArray *suddata =[result valueForKey:@"subscription_data"];
+             ResultDict =suddata[0];
+
             //[self showSuccessMessage:str];
 //            [self.navigationController popViewControllerAnimated:YES];
 //            [self showSuccessMessage:str];
-            SubSucessVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"SubSucessVC"];
-            NSMutableArray *suddata =[result valueForKey:@"subscription_data"];
-            vc.subResult =suddata[0];
-            [self PushToVc:vc];
+            
+//            SubSucessVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"SubSucessVC"];
+//            NSMutableArray *suddata =[result valueForKey:@"subscription_data"];
+//            vc.subResult =suddata[0];
+//            [self PushToVc:vc];
+            
+            
+            
+            /*
+         
+                PaymentViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"PaymentViewController"];
+            
+                vc.completionBlock = ^(NSString *status) {
+                    [self hideHUD];
+                    if ([status isEqualToString:@"success"]) {
+                        //[self placeOrder:json];
+                        
+                
+                       // [self showSuccessMessage:Localized(@"Payment SucessFully")];
+                        // to move to home page
+                        //                        self.tabBarController.selectedIndex=0;
+                        
+                        SubSucessVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"SubSucessVC"];
+                        NSMutableArray *suddata =[result valueForKey:@"subscription_data"];
+                        vc.subResult =suddata[0];
+                        vc.type = @"success";
+                        [self PushToVc:vc];
+                        
+                    } else {
+                        SubSucessVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"SubSucessVC"];
+                        NSMutableArray *suddata =[result valueForKey:@"subscription_data"];
+                        vc.subResult =suddata[0];
+                        vc.type = @"fail";
+                        [self PushToVc:vc];
+                        
+                    }
+                };
+                
+                [self.navigationController pushViewController:vc animated:YES];
+            
+            
+            
+           */
+            [self showPaymentForm];
         }
+        
             
         
     }
@@ -354,6 +456,20 @@ didChangeDragState:(MKAnnotationViewDragState)newState
                                
                            }];
         
+    }else if(reqeustCode==1118){
+        NSLog(@"%@",result);
+            SubSucessVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"SubSucessVC"];
+            vc.subResult = ResultDict;
+            vc.type = @"success";
+            [self PushToVc:vc];
+
+    }else if(reqeustCode==1119){
+        NSLog(@"%@",result);
+
+            SubSucessVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"SubSucessVC"];
+            vc.subResult =ResultDict;
+            vc.type = @"fail";
+            [self PushToVc:vc];
     }
 }
 
@@ -444,7 +560,9 @@ didChangeDragState:(MKAnnotationViewDragState)newState
         NSMutableArray *Item=[[NSMutableArray alloc] init];
         
         for(NSDictionary *LDic in pricesList){
-            [Item addObject:[NSString stringWithFormat:@"%@ Sharing-%@/-",[LDic valueForKey:@"share_count"],[LDic valueForKey:@"price"]]];
+//            [Item addObject:[NSString stringWithFormat:@"%@ Sharing-%@/-",[LDic valueForKey:@"share_count"],[LDic valueForKey:@"price"]]];
+            [Item addObject:[NSString stringWithFormat:@"%@ Sharing",[LDic valueForKey:@"share_count"]]];
+
         }
         //        [Item addObject:@"t1"];
         //        [Item addObject:@"t2"];
@@ -457,9 +575,11 @@ didChangeDragState:(MKAnnotationViewDragState)newState
                                
                                NSLog(@"done block. do something. selectedIndex : %ld", (long)selectedIndex);
                                self->selectedPrices =[self->pricesList objectAtIndex:selectedIndex];
-                               self->_selectPkgTxtField.text =[NSString stringWithFormat:@"%@ Sharing-%@/-",[self->selectedPrices valueForKey:@"share_count"],[self->selectedPrices valueForKey:@"price"]];
+//                               self->_selectPkgTxtField.text =[NSString stringWithFormat:@"%@ Sharing-%@/-",[self->selectedPrices valueForKey:@"share_count"],[self->selectedPrices valueForKey:@"price"]];
+                               self->_selectPkgTxtField.text =[NSString stringWithFormat:@"%@ Sharing",[self->selectedPrices valueForKey:@"share_count"]];
+
                                self.selectdurationTxtField.text=@"";
-                               [self getupdatedList];
+                             //  [self getupdatedList];
                                //                           NSDictionary *LtypeDic=[leaveTypes objectAtIndex:selectedIndex];
                                //                           [self makePostCallForPage:HRLEAVEACTION withParams:@{@"employee_id":[Utils loggedInUserIdStr],@"leave_id":self->cancelStr,@"status":@"1",@"leave_type":[NSString stringWithFormat:@"%@",[LtypeDic valueForKey:@"id"]]} withRequestCode:11];
                                //
@@ -493,15 +613,18 @@ didChangeDragState:(MKAnnotationViewDragState)newState
         [self showErrorAlertWithMessage:@"Please Select Class"];
     }else if(_selectSchoolTxtField.text.length==0){
         [self showErrorAlertWithMessage:@"Please Select School"];
-    }else if(_selectTripTypeTxtField.text.length==0){
-        [self showErrorAlertWithMessage:@"Please Select TripType"];
+//    }else if(_selectTripTypeTxtField.text.length==0){
+//        [self showErrorAlertWithMessage:@"Please Select TripType"];
     }else if(_enterAddressTxtView.text.length==0){
         [self showErrorAlertWithMessage:@"Please Enter Address"];
     }else if(_selectPkgTxtField.text.length==0){
         [self showErrorAlertWithMessage:@"Please Select Package"];
     }else{
+        
      //   parent_id, school_id, price_id, kid_name, kid_age, kid_class, pickup_address, pickup_latitude, pickup_longitude
-        [self makePostCallForPageNEW:ADDSUBSCRIPTIONS withParams:@{@"parent_id":[userDic valueForKey:@"pa_id"],@"school_id":[selectedSchool valueForKey:@"sch_id"],@"price_id":[selectedPrices valueForKey:@"price_id"],@"kid_name":_kidNameTxtField.text,@"kid_age":_ageTxtField.text,@"kid_class":_classTxtField.text,@"pickup_address":_enterAddressTxtView.text,@"pickup_latitude":[NSString stringWithFormat:@"%f",clocation.latitude],@"pickup_longitude":[NSString stringWithFormat:@"%f",clocation.longitude],@"subscription_duration": [NSString stringWithFormat:@"%d",numberofDays],@"amount_paid":[NSString stringWithFormat:@"%.2f",price],@"subscription_type":[_selectTripTypeTxtField.text lowercaseString]} withRequestCode:118];
+//        [self makePostCallForPageNEW:ADDSUBSCRIPTIONS withParams:@{@"parent_id":[userDic valueForKey:@"pa_id"],@"school_id":[selectedSchool valueForKey:@"sch_id"],@"price_id":[selectedPrices valueForKey:@"price_id"],@"kid_name":_kidNameTxtField.text,@"kid_age":_ageTxtField.text,@"kid_class":_classTxtField.text,@"pickup_address":_enterAddressTxtView.text,@"pickup_latitude":[NSString stringWithFormat:@"%f",clocation.latitude],@"pickup_longitude":[NSString stringWithFormat:@"%f",clocation.longitude],@"subscription_duration": [NSString stringWithFormat:@"%d",numberofDays],@"amount_paid":[NSString stringWithFormat:@"%.2f",price],@"subscription_type":[_selectTripTypeTxtField.text lowercaseString]} withRequestCode:118];
+        [self makePostCallForPageNEW:ADDSUBSCRIPTIONS withParams:@{@"parent_id":[userDic valueForKey:@"pa_id"],@"school_id":[selectedSchool valueForKey:@"sch_id"],@"price_id":[selectedPrices valueForKey:@"price_id"],@"kid_name":_kidNameTxtField.text,@"kid_age":_ageTxtField.text,@"kid_class":_classTxtField.text,@"pickup_address":_enterAddressTxtView.text,@"pickup_latitude":[NSString stringWithFormat:@"%f",clocation.latitude],@"pickup_longitude":[NSString stringWithFormat:@"%f",clocation.longitude],@"subscription_duration": [NSString stringWithFormat:@"%d",numberofDays],@"amount_paid":[NSString stringWithFormat:@"%.2f",price],@"subscription_type":@"round trip"} withRequestCode:118];
+
     }
 
     
@@ -528,7 +651,8 @@ didChangeDragState:(MKAnnotationViewDragState)newState
 //            for(NSDictionary *LDic in pricesList){
 //                [Item addObject:[NSString stringWithFormat:@"%@ Sharing-%@/-",[LDic valueForKey:@"share_count"],[LDic valueForKey:@"price"]]];
 //            }
-                    [Item addObject:@"2Month"];
+                    [Item addObject:@"1Month"];
+                    [Item addObject:@"2Months"];
                     [Item addObject:@"3Months"];
                     [Item addObject:@"5Months"];
             
@@ -541,35 +665,40 @@ didChangeDragState:(MKAnnotationViewDragState)newState
                                    self->_selectdurationTxtField.text =[NSString stringWithFormat:@"%@",[Item objectAtIndex:selectedIndex]];
                                    
                                    self->price =0;
-                                   if([selectedTrip  isEqual:@"0"]||[selectedTrip isEqual:@"1"]){
-                                   if(selectedIndex==0){
-                                       self->numberofDays=60;
-                                       price =[[self->selectedPrices valueForKey:@"price_oneway_months_2"] floatValue];
-                                   }else if(selectedIndex==1){
-                                       self->numberofDays=90;
-                                       price =[[self->selectedPrices valueForKey:@"price_oneway_months_3"] floatValue];
-
-                                   }else if(selectedIndex==2){
-                                       self->numberofDays=150;
-                                       price =[[self->selectedPrices valueForKey:@"price_oneway_months_5"] floatValue];
-
-
-                                   }
-                                   }else{
+//                                   if([selectedTrip  isEqual:@"0"]||[selectedTrip isEqual:@"1"]){
+//                                   if(selectedIndex==0){
+//                                       self->numberofDays=30;
+//                                       price =[[self->selectedPrices valueForKey:@"price_oneway_months_1"] floatValue];
+//                                   }else if(selectedIndex==1){
+//                                       self->numberofDays=90;
+//                                       price =[[self->selectedPrices valueForKey:@"price_oneway_months_3"] floatValue];
+//
+//                                   }else if(selectedIndex==2){
+//                                       self->numberofDays=150;
+//                                       price =[[self->selectedPrices valueForKey:@"price_oneway_months_5"] floatValue];
+//
+//
+//                                   }
+//                                   }else{
                                        if(selectedIndex==0){
-                                           self->numberofDays=60;
-                                           price =[[self->selectedPrices valueForKey:@"price_roundtrip_months_2"] floatValue];
+                                           self->numberofDays=30;
+                                           price =[[self->selectedPrices valueForKey:@"one_month_price"] floatValue];
                                        }else if(selectedIndex==1){
-                                           self->numberofDays=90;
-                                           price =[[self->selectedPrices valueForKey:@"price_roundtrip_months_3"] floatValue];
+                                           self->numberofDays=60;
+                                           price =[[self->selectedPrices valueForKey:@"two_month_price"] floatValue];
                                            
                                        }else if(selectedIndex==2){
+                                           self->numberofDays=90;
+                                           price =[[self->selectedPrices valueForKey:@"three_month_price"] floatValue];
+                                           
+                                           
+                                       }else if(selectedIndex==3){
                                            self->numberofDays=150;
-                                           price =[[self->selectedPrices valueForKey:@"price_roundtrip_months_5"] floatValue];
+                                           price =[[self->selectedPrices valueForKey:@"five_month_price"] floatValue];
                                            
                                            
                                        }
-                                   }
+                                  // }
                                    self->_priceLbl.text=[NSString stringWithFormat:@"%@%.2f",rupee,price];
 
                                    //                           NSDictionary *LtypeDic=[leaveTypes objectAtIndex:selectedIndex];
@@ -632,5 +761,98 @@ didChangeDragState:(MKAnnotationViewDragState)newState
                            //                           configuration.allowRoundedArrow = !configuration.allowRoundedArrow;
                            
                        }];
+}
+
+//- (void)checkLocationAccess {
+//    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+//    switch (status) {
+//
+//            // custom methods after each case
+//
+//        case kCLAuthorizationStatusDenied:
+//            [self allowLocationAccess]; // custom method
+//            break;
+//        case kCLAuthorizationStatusRestricted:
+//            [self allowLocationAccess]; // custom method
+//            break;
+//        case kCLAuthorizationStatusNotDetermined:
+//            break;
+//        case kCLAuthorizationStatusAuthorizedAlways:
+//            break;
+//        case kCLAuthorizationStatusAuthorizedWhenInUse:
+//            break;
+//    }
+//}
+//-(void)allowLocationAccess{
+//
+//    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@""
+//                                      message:@"The app doesn't work without the Background App Refresh enabled. To turn it on, go to Settings > General > Background App Refresh"
+//                                     delegate:nil
+//                            cancelButtonTitle:@"Ok"
+//                            otherButtonTitles:nil, nil];
+//    [alert show];
+//
+//}
+//-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+//    UIAlertView *errorAlert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"There was an error retrieving your location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//    [errorAlert show];
+//    NSLog(@"Error: %@",error.description);
+//}
+//- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+//    if (status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+//        NSLog(@"allowed"); // allowed
+//    }
+//    else if (status == kCLAuthorizationStatusDenied) {
+//        NSLog(@"denied"); // denied
+//    }
+//}
+
+
+- (void)showPaymentForm { // called by your app
+    
+    NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
+    NSData *data = [currentDefaults objectForKey:@"SETTINGS"];
+    NSArray *infoarr = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    NSString *imageUrl = @"";
+    for (NSDictionary *dic in infoarr) {
+        if([[dic valueForKey:@"content_type"] isEqual:@"logo"]){
+            imageUrl = [dic valueForKey:@"url"];
+            break;
+        }
+    }
+    NSDictionary *options = @{
+                              @"amount": [NSString stringWithFormat:@"%d",(int)(price*100)], // mandatory, in paise
+                              // all optional other than amount.
+                              @"image": imageUrl,
+                              @"name": @"SCHOOL AUTO",
+                              @"description": [NSString stringWithFormat:@"Payment For %@",_kidNameTxtField.text],
+                              @"prefill" : @{
+                                      @"email": [NSString stringWithFormat:@"%@",[userDic valueForKey:@"pa_email"]],
+                                      @"contact": [NSString stringWithFormat:@"%@",[userDic valueForKey:@"pa_phone"]]
+                                      },
+                              @"theme": @{
+                                      @"color": @"#D59E44"
+                                      }
+                              };
+    [razorpay open:options];
+}
+- (void)onPaymentSuccess:(nonnull NSString*)payment_id {
+//    [[[UIAlertView alloc] initWithTitle:@"Payment Successful" message:payment_id delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+//    SubSucessVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"SubSucessVC"];
+//    vc.subResult = ResultDict;
+//    vc.type = @"success";
+//    [self PushToVc:vc];
+    
+     [self makePostCallForPageNEWNoProgess:PAYMENT_UPDATE withParams:@{@"subscription_id":[ResultDict valueForKey:@"subscription_id"],@"payment_id":[NSString stringWithFormat:@"%@",payment_id],@"status":[NSString stringWithFormat:@"%@",@"success"],@"entity":[NSString stringWithFormat:@"%@",@"kid"]} withRequestCode:1118];
+}
+
+- (void)onPaymentError:(int)code description:(nonnull NSString *)str {
+//    [[[UIAlertView alloc] initWithTitle:@"Error" message:str delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+//    SubSucessVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"SubSucessVC"];
+//    vc.subResult =ResultDict;
+//    vc.type = @"fail";
+//    [self PushToVc:vc];
+     [self makePostCallForPageNEWNoProgess:PAYMENT_UPDATE withParams:@{@"subscription_id":[ResultDict valueForKey:@"subscription_id"],@"status":[NSString stringWithFormat:@"%@",@"failure"],@"entity":[NSString stringWithFormat:@"%@",@"kid"]} withRequestCode:1119];
 }
 @end

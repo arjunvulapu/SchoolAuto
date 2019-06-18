@@ -9,10 +9,14 @@
 #import "TripInfo.h"
 #import "TripInfoTC.h"
 #import "Utils.h"
+#import <BFRImageViewer/BFRImageViewController.h>
 @interface TripInfo ()
 {
     UIButton *addButton;
-    NSMutableArray *subList;
+    
+    NSMutableDictionary *resultDic;
+    NSMutableArray *statusList;
+    
 }
 @end
 
@@ -21,23 +25,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    subList=[[NSMutableArray alloc] init];
+    _subList=[[NSMutableArray alloc] init];
     self.navigationItem.title=@"TRIP INFO";
     _emptyImage.hidden=YES;
     _addNewBtn.hidden=YES;
     _emptyLbl.hidden=YES;
+    self.navigationController.navigationBar.hidden=NO;
 
-    
-    
-
-    
 }
 -(void)viewWillAppear:(BOOL)animated{
     _emptyImage.hidden=YES;
     _addNewBtn.hidden=YES;
     _listTableView.hidden = NO;
     _emptyLbl.hidden=YES;
+    if([[APP_DELEGATE fromPushNotification] isEqual:@"YES"]){
+        NSDictionary *pushDic=[APP_DELEGATE pushDict];
 
+        [self makePostCallForPageNEWGET:GETTRIPSTATUS_FROMPUSH withParams:@{@"trip_id":[NSString stringWithFormat:@"%@",[pushDic valueForKey:@"type_id"]],@"pid":[NSString stringWithFormat:@"%@",[Utils loggedInUserIdStr]]} withRequestCode:109];
+
+
+    }else
     if([_from isEqualToString:@"Lunchbox"]){
     [self makePostCallForPageNEWGET:LUNCHBOX_GETTRIPSTATUS withParams:@{@"id":[NSString stringWithFormat:@"%@",_student_id]} withRequestCode:109];
     }else{
@@ -51,16 +58,18 @@
             NSString *str=[result valueForKey:@"message"];
             [self showErrorAlertWithMessage:Localized(str)];
         } else {
-        subList=[result valueForKey:@"data"];
+        _subList=[result valueForKey:@"data"];
         [_listTableView reloadData];
         }
-        if(subList.count==0){
+        if(_subList.count==0){
             _emptyImage.hidden=NO;
             _addNewBtn.hidden=NO;
             _emptyLbl.hidden=NO;
 
             _listTableView.hidden = YES;
         }else{
+            resultDic = [_subList objectAtIndex:0];
+
             _emptyImage.hidden=YES;
             _addNewBtn.hidden=YES;
             _emptyLbl.hidden=YES;
@@ -68,19 +77,26 @@
         }
     }
 }
-
+-(void)back{
+    if([[APP_DELEGATE fromPushNotification] isEqual:@"YES"]){
+        [APP_DELEGATE setIntialViewController];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return subList.count;    //count of section
+//    return _subList.count>0?1:0;    //count of section
+    return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    NSArray *arr = [subList valueForKey:@"trip_status"];
+//    NSArray *arr = [_subList valueForKey:@"trip_status"];
 //    return arr.count;
-    NSMutableDictionary *sdic =[subList objectAtIndex:section];
-    NSMutableArray *sList =[sdic valueForKey:@"trip_status"];
-    return sList.count;
+    NSMutableDictionary *sdic =[_subList objectAtIndex:0];
+    statusList =[sdic valueForKey:@"trip_status"];
+    return statusList.count;
 }
 
 
@@ -89,10 +105,10 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSMutableDictionary *sdic =[subList objectAtIndex:indexPath.section];
-    NSMutableArray *sList =[sdic valueForKey:@"trip_status"];
-    NSMutableDictionary *dic =[sList objectAtIndex:indexPath.row];
-
+//    NSMutableDictionary *sdic =[_subList objectAtIndex:0];
+//    NSMutableArray *sList =[sdic valueForKey:@"trip_status"];
+    NSMutableDictionary *dic =[statusList objectAtIndex:indexPath.row];
+    
     if([[dic valueForKey:@"dts_img"] isEqualToString:@""]){
     static NSString *MyIdentifier = @"TripInfoTCFirst";
     
@@ -130,7 +146,12 @@
 
         [cell.tripImage setImageWithURL:[dic valueForKey:@"dts_img"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         
-        
+        cell.zoomImage = ^{
+            BFRImageViewController *imageVC = [[BFRImageViewController alloc] initWithImageSource:@[[dic valueForKey:@"dts_img"] ]];
+                
+                [self presentViewController:imageVC animated:YES completion:nil];
+            
+        };
         return cell;
     }
     
@@ -140,23 +161,24 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     return UITableViewAutomaticDimension;
 }
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 44)];
-    /* Create custom view to display section header... */
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.frame.size.width, 44)];
-    [label setFont:[UIFont boldSystemFontOfSize:12]];
-    NSDictionary *sdic =[subList objectAtIndex:section];
-    /* Section header is in 0th index... */
-    [label setText:[sdic valueForKey:@"date"]];
-    [view addSubview:label];
-    [view setBackgroundColor:[UIColor clearColor]]; //your background color...
-    return view;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
-{
-    return 44;
-}
+//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 44)];
+//    /* Create custom view to display section header... */
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.frame.size.width, 44)];
+//    [label setFont:[UIFont boldSystemFontOfSize:12]];
+//    NSDictionary *sdic =[_subList objectAtIndex:section];
+//    /* Section header is in 0th index... */
+//    [label setText:[sdic valueForKey:@"date"]];
+//    [view addSubview:label];
+//    [view setBackgroundColor:[UIColor clearColor]]; //your background color...
+//    return view;
+//}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
+//{
+//    return 44;
+//}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
    
     

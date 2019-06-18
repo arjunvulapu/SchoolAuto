@@ -20,8 +20,10 @@
     [super viewDidLoad];
     self.navigationItem.title=@"SUBSCRIPTIONS";
 
-    ItemList=[[NSMutableArray alloc] initWithObjects:@"KID NAME",@"AGE",@"CLASS",@"SCHOOL",@"HOME",@"SHARING",@"KMS", nil];
+//    ItemList=[[NSMutableArray alloc] initWithObjects:@"KID NAME",@"AGE",@"CLASS",@"SCHOOL",@"HOME",@"SHARING",@"KMS", nil];
     // Do any additional setup after loading the view.
+    ItemList=[[NSMutableArray alloc] initWithObjects:@"SUBSCRIPTION ID",@"KID NAME",@"AGE",@"CLASS",@"SCHOOL",@"HOME",@"SHARING",@"KMS",@"SUBSCRIPTION TYPE",@"DURATION", nil];
+
     NSLog(@"DIC-->%@",_subResult);
     
    NSString *rupee=@"\u20B9";
@@ -30,6 +32,13 @@
     _amountView.layer.cornerRadius=10;
     _amountView.clipsToBounds=YES;
     
+    if([_type  isEqual: @"success"])
+    {
+        _mainImage.image=[UIImage imageNamed:@"success"];
+    }else{
+        _mainImage.image=[UIImage imageNamed:@"failed"];
+
+    }
 }
 //    if(_subResult.count==0){
 //        [self makePostCallForPageNEWGET:ADDSUBSCRIPTIONS withParams:@{@"id":[NSString stringWithFormat:@"%@",[Utils loggedInUserIdStr]]} withRequestCode:109];
@@ -52,7 +61,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 7;
+    return ItemList.count;
 }
 
 
@@ -66,22 +75,33 @@
     
     ChildrenTC *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     cell.studentNameLbl.text=[NSString stringWithFormat:@"%@",[ItemList objectAtIndex:indexPath.row]];
-    if(indexPath.row==0){
-    cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"kid_name"]];
-    }else if(indexPath.row==1){
-        cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"kid_age"]];
-    }else if(indexPath.row==2){
-        cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"kid_class"]];
-    }else if(indexPath.row==3){
-        NSDictionary *s_dic=[_subResult valueForKey:@"school_info"];
-        cell.statusLbl.text=[NSString stringWithFormat:@"%@,%@",[s_dic valueForKey:@"sch_address"],[s_dic valueForKey:@"sch_city"]];
-    }else if(indexPath.row==4){
-        cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"pickup_address"]];
-    }else if(indexPath.row==5){
-        cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"share_count"]];
-    }else if(indexPath.row==6){
-        cell.statusLbl.text=[NSString stringWithFormat:@"%.2f",[[_subResult valueForKey:@"distance"] floatValue]];
-    }
+    
+        cell.studentNameLbl.text=[NSString stringWithFormat:@"%@",[ItemList objectAtIndex:indexPath.row]];
+        if(indexPath.row==0){
+            cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"kid_id"]];
+        }
+        else if(indexPath.row==1){
+            cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"kid_name"]];
+        }else if(indexPath.row==2){
+            cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"kid_age"]];
+        }else if(indexPath.row==3){
+            cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"kid_class"]];
+        }else if(indexPath.row==4){
+            NSDictionary *s_dic=[_subResult valueForKey:@"school_info"];
+            cell.statusLbl.text=[NSString stringWithFormat:@"%@\n%@,%@",[s_dic valueForKey:@"sch_name"],[s_dic valueForKey:@"sch_address"],[s_dic valueForKey:@"sch_city"]];
+        }else if(indexPath.row==5){
+            cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"pickup_address"]];
+        }else if(indexPath.row==6){
+            cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"share_count"]];
+        }else if(indexPath.row==7){
+            cell.statusLbl.text=[NSString stringWithFormat:@"%.2f",[[_subResult valueForKey:@"distance"] floatValue]];
+        }
+        else if(indexPath.row==8){
+            cell.statusLbl.text=[NSString stringWithFormat:@"%@",[_subResult valueForKey:@"subscription_type"] ];
+        }else if(indexPath.row==9){
+            cell.statusLbl.text=[NSString stringWithFormat:@"%@ Days",[_subResult valueForKey:@"subscription_duration"]];
+        }
+    
 
     return cell;
     

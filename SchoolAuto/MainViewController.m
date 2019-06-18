@@ -15,6 +15,7 @@
 #import "SubScriptionList.h"
 #import "MyAccountVC.h"
 #import "LunchBoxListVC.h"
+#import "OfferDetailVC.h"
 @interface MainViewController ()<SBSliderDelegate,CLLocationManagerDelegate>
 {
     NSMutableArray *mainCatList;
@@ -203,7 +204,11 @@
     }else{
         NSDictionary *dict = [offersList objectAtIndex:indexPath.row];
 
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[dict valueForKey:@"offer_url"]]]];
+       // [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[dict valueForKey:@"offer_url"]]]];
+        OfferDetailVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"OfferDetailVC"];
+//        NSDictionary *dict = [offersList objectAtIndex:indexPath.row];
+        vc.offerDetials = dict;
+        [self PushToVc:vc];
 
     }
 }

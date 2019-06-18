@@ -48,6 +48,10 @@
 	<string>Acess to get CurrentLocation of the Driver&amp;Parent</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Acess to get CurrentLocation of the Driver&amp;Parent</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Acess to get CurrentLocation of the Driver&amp;Parent</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Acess to get CurrentLocation of the Driver&amp;Parent</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Need Camera To take image of childrens</string>
 	<key>UIAppFonts</key>

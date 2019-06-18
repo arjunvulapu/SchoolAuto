@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(weak,nonatomic) NSString *student_id;
 @property(weak,nonatomic) NSString *from;
 @property (weak, nonatomic) IBOutlet UILabel *emptyLbl;
+@property (weak, nonatomic) NSMutableArray *subList;
 
 @end
 

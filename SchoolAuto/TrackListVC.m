@@ -13,6 +13,10 @@
 @interface TrackListVC ()
 {
     NSMutableArray *subList;
+    
+    NSMutableArray *listRunning;
+    NSMutableArray *listUpcomming;
+    NSMutableArray *listEnded;
 
 }
 @end
@@ -23,10 +27,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _emptyImage.hidden=YES;
+    _emptyLbl.hidden=YES;
     self.navigationItem.title=@"LIVE TRACKING";
     subList=[[NSMutableArray alloc] init];
+    listRunning=[[NSMutableArray alloc] init];
+    listUpcomming=[[NSMutableArray alloc] init];
+    listEnded=[[NSMutableArray alloc] init];
 
-    [self makePostCallForPageNEWGET:ADDSUBSCRIPTIONS withParams:@{@"pid":[NSString stringWithFormat:@"%@",[Utils loggedInUserIdStr]]} withRequestCode:109];
+    [self makePostCallForPageNEWGET:PARENT_TRIPLIST withParams:@{@"pid":[NSString stringWithFormat:@"%@",[Utils loggedInUserIdStr]],@"status":@"2"} withRequestCode:109];
 
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -38,8 +46,11 @@
         subList=result;
         [_listTableView reloadData];
         if(subList.count==0){
-            _emptyImage.hidden=NO;
+            _emptyLbl.hidden=NO;
             _listTableView.hidden=YES;
+        }else{
+            _emptyLbl.hidden=YES;
+            _listTableView.hidden=NO;
         }
     }
 }
@@ -64,7 +75,9 @@
             
             ChildrenTC *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     
+//    NSDictionary *dic =[subList objectAtIndex:indexPath.row];
     NSDictionary *dic =[subList objectAtIndex:indexPath.row];
+
     
 //    if([[dic valueForKey:@"today_trip_status"] isEqual:@"not started"]){
 //        cell.bgView.backgroundColor =[UIColor blueColor];
@@ -82,18 +95,20 @@
 //        cell.userInteractionEnabled = false;
 //
 //    }
-    if([[dic valueForKey:@"today_trip_status"] isEqual:@"not started"]){
+    
+    if([[dic valueForKey:@"today_trip_status_txt"] isEqual:@"trip not started"]){
         cell.bgView.backgroundColor =[UIColor colorWithRed:8/255.0f green:102/255.0f blue:198/255.0f alpha:1];
-    }else if([[dic valueForKey:@"today_trip_status"] isEqual:@"in progress"]){
+    }else if([[dic valueForKey:@"today_trip_status_txt"] isEqual:@"in progress"]){
         cell.bgView.backgroundColor =[UIColor colorWithRed:244/255.0f green:153/255.0f blue:23/255.0f alpha:1];
         
-    }else if([[dic valueForKey:@"today_trip_status"] isEqual:@"ended"]){
+    }else if([[dic valueForKey:@"today_trip_status_txt"] isEqual:@"trip ended"]){
         cell.bgView.backgroundColor =[UIColor colorWithRed:35/255.0f green:191/255.0f blue:8/255.0f alpha:1];
         
-    }else if([[dic valueForKey:@"today_trip_status"] isEqual:@"not assigned"]){
+    }else if([[dic valueForKey:@"today_trip_status_txt"] isEqual:@"not assigned"]){
         cell.bgView.backgroundColor =[UIColor colorWithRed:134/255.0f green:142/255.0f blue:150/255.0f alpha:1];
         
     }
+     /*
     cell.studentNameLbl.text = [NSString stringWithFormat:@"%@",[dic valueForKey:@"kid_name"]];
     cell.statusLbl.text = [NSString stringWithFormat:@"%@",@""];
     cell.infoBtnPressed = ^{
@@ -102,6 +117,23 @@
         vc.from = @"Driver";
 
         [self PushToVc:vc];
+    };
+    */
+//    cell.bgView.backgroundColor =[UIColor colorWithRed:244/255.0f green:153/255.0f blue:23/255.0f alpha:1];
+
+    cell.studentNameLbl.text =[NSString stringWithFormat:@"%@\n%@\n%@ \nTripStartTime:%@",[[dic valueForKey:@"kid_info"] valueForKey:@"kid_name"],[dic valueForKey:@"trip_name"],[dic valueForKey:@"trip_type"],[dic valueForKey:@"trip_start_time"]];
+   // cell.statusLbl.text = [NSString stringWithFormat:@"%@",@""];
+    cell.infoBtnPressed = ^{
+        if(![[dic valueForKey:@"today_trip_status_txt"] isEqual:@"trip not started"]){
+
+        TripInfo *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"TripInfo"];
+        vc.student_id=[[dic  valueForKey:@"kid_info"] valueForKey:@"subscription_id"];
+        vc.from = @"Driver";
+        
+        [self PushToVc:vc];
+        }else{
+            [Utils showErrorAlertWithMessage:@"Trip Not Started"];
+        }
     };
             return cell;
     
@@ -114,20 +146,35 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *dic =[subList objectAtIndex:indexPath.row];
 
-    if([[dic valueForKey:@"today_trip_status"] isEqual:@"not started"]){
-        [self showErrorAlertWithMessage:@"Trip Not Started"];
-    }else if([[dic valueForKey:@"today_trip_status"] isEqual:@"in progress"]){
-        TrackVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"TrackVC"];
-        vc.resultDic=[subList objectAtIndex:indexPath.row];
-        [self PushToVc:vc];
-    }else if([[dic valueForKey:@"today_trip_status"] isEqual:@"ended"]){
-        [self showErrorAlertWithMessage:@"Trip Ended"];
+//    if([[dic valueForKey:@"today_trip_status"] isEqual:@"not started"]){
+//        [self showErrorAlertWithMessage:@"Trip Not Started"];
+//    }else if([[dic valueForKey:@"today_trip_status"] isEqual:@"in progress"]){
+//        TrackVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"TrackVC"];
+//        vc.resultDic=[subList objectAtIndex:indexPath.row];
+//        [self PushToVc:vc];
+//    }else if([[dic valueForKey:@"today_trip_status"] isEqual:@"ended"]){
+//        [self showErrorAlertWithMessage:@"Trip Ended"];
+//
+//    }else if([[dic valueForKey:@"today_trip_status"] isEqual:@"not assigned"]){
+//        [self showErrorAlertWithMessage:@"Trip Not Assigned"];
+//
+//    }
+    TrackVC *vc =[self.storyboard instantiateViewControllerWithIdentifier:@"TrackVC"];
+    vc.resultDic=[subList objectAtIndex:indexPath.row];
+    [self PushToVc:vc];
+    
+}
+- (IBAction)statusSegmentAction:(id)sender {
+    if(_statusSegment.selectedSegmentIndex==0){
+        [self makePostCallForPageNEWGET:PARENT_TRIPLIST withParams:@{@"pid":[NSString stringWithFormat:@"%@",[Utils loggedInUserIdStr]],@"status":@"2"} withRequestCode:109];
 
-    }else if([[dic valueForKey:@"today_trip_status"] isEqual:@"not assigned"]){
-        [self showErrorAlertWithMessage:@"Trip Not Assigned"];
-
+    }else if(_statusSegment.selectedSegmentIndex==1){
+        [self makePostCallForPageNEWGET:PARENT_TRIPLIST withParams:@{@"pid":[NSString stringWithFormat:@"%@",[Utils loggedInUserIdStr]],@"status":@"1"} withRequestCode:109];
+        
+    }else if(_statusSegment.selectedSegmentIndex==2){
+        [self makePostCallForPageNEWGET:PARENT_TRIPLIST withParams:@{@"pid":[NSString stringWithFormat:@"%@",[Utils loggedInUserIdStr]],@"status":@"3"} withRequestCode:109];
+        
     }
-   
     
 }
 @end

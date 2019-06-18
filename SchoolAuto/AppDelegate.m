@@ -59,6 +59,8 @@ BOOL isBold(UIFontDescriptor * fontDescriptor)
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self downloadBanners];
+    [self downloadSettings];
+
     [OneSignal initWithLaunchOptions:launchOptions
                                appId:@"a9eb3689-17ab-4d68-8275-2b9119f7ce4c"
             handleNotificationAction:nil
@@ -135,6 +137,7 @@ BOOL isBold(UIFontDescriptor * fontDescriptor)
         }
     }else{
         [self afterLoginLogOut];
+       // [self RefreshUI];
     }
     return YES;
 }
@@ -231,9 +234,27 @@ BOOL isBold(UIFontDescriptor * fontDescriptor)
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-    UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+//    UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+    UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"IntroductionViewController"];
+    
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
 
+    self.window.rootViewController = navController;
+    [self.window makeKeyAndVisible];
+    
+}
+- (void)RefreshUI {
+    locationManager.allowsBackgroundLocationUpdates=NO;
+    [locationManager stopUpdatingLocation];
+    //    [locationManager stopUpdatingLocation];
+    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
     
@@ -346,6 +367,22 @@ BOOL isBold(UIFontDescriptor * fontDescriptor)
         NSLog(@"1010101--->dict%@",dict);
     }
 }
+
+- (void)downloadSettings {
+    NSData *data2 = [NSData dataWithContentsOfURL:[Utils createURLForPage:CONTENTINFO withParameters:@{}]];
+    if(data2){
+        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data2 options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"%@",dictionary);
+        //        [[NSUserDefaults standardUserDefaults] setObject:dictionary forKey:@"BANNERS"];
+        //        [[NSUserDefaults standardUserDefaults] synchronize];
+        NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dictionary];
+        [currentDefaults setObject:data forKey:@"SETTINGS"];
+        NSData *data2 = [currentDefaults objectForKey:@"SETTINGS"];
+        NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data2];
+        NSLog(@"1010101--->dict%@",dict);
+    }
+}
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
     NSString* strDeviceToken = [[[[deviceToken description]
                                   stringByReplacingOccurrencesOfString: @"<" withString: @""]
@@ -354,5 +391,56 @@ BOOL isBold(UIFontDescriptor * fontDescriptor)
     NSLog(@"Device_Token     -----> %@\n", strDeviceToken);
     [[NSUserDefaults standardUserDefaults] setValue:strDeviceToken forKey:@"TOKEN"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+////Called when a notification is delivered to a foreground app.
+//-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler{
+//    NSLog(@"User Info : %@",notification.request.content.userInfo);
+//    completionHandler(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge);
+//}
+//
+////Called to let your app know which action was selected by the user for a given notification.
+//-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler{
+//    NSLog(@"User Info : %@",response.notification.request.content.userInfo);
+//    completionHandler();
+//}
+
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo
+fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler {
+    NSLog(@"application:didReceiveRemoteNotification:fetchCompletionHandler: %@", userInfo);
+    if([[UIApplication sharedApplication] applicationState]!=UIApplicationStateActive){
+        NSLog(@"application:didReceiveRemoteNotification:fetchCompletionHandler: %@", userInfo);
+        //        _fromPushOrNot=@"Push";
+        if([[[[userInfo valueForKey:@"custom"] valueForKey:@"a"] valueForKey:@"type"] isEqual:@"trip"]){
+            self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+            
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            
+            UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"TripInfo"];
+            _fromPushNotification=@"YES";
+            _pushDict=[[userInfo valueForKey:@"custom"] valueForKey:@"a"];
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+
+            self.window.rootViewController = navController;
+            [self.window makeKeyAndVisible];
+        }
+    }
+    
+    completionHandler(nil);
+}
+
+-(void)setIntialViewController{
+    _fromPushNotification = @"";
+    if([Utils loggedInUserId] != -1){
+        if([[Utils loggedInUserType]  isEqual: @"Driver"]||[[Utils loggedInUserType]  isEqual: @"Lunchbox"]){
+            [self afterDriverLoginSucess];
+            //create new CLLocationManager
+            
+        }else{
+            [self afterLoginSucess];
+        }
+    }else{
+        [self afterLoginLogOut];
+    }
 }
 @end

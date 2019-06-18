@@ -10,9 +10,10 @@
 #import "BaseViewController/BaseViewController.h"
 #import <MapKit/MapKit.h>
 #import "SZTextView.h"
+#import <Razorpay/Razorpay-Swift.h>
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AddChildVC : BaseViewController
+@interface AddChildVC : BaseViewController <RazorpayPaymentCompletionProtocol>
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet JVFloatLabeledTextField *NameTxtField;
 @property (weak, nonatomic) IBOutlet JVFloatLabeledTextField *kidNameTxtField;
